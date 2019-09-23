@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_Qb2.-170832568.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="ArrowCollider.cs" t="Include" />
+          <e p="Collider.cs" t="Include" />
+          <e p="DontDestroyOnLoad.cs" t="Include" />
+          <e p="FadeInOut.cs" t="Include" />
+          <e p="GameController.cs" t="Include" />
+          <e p="GameRotator.cs" t="Include" />
+          <e p="KeyCollider.cs" t="Include" />
+          <e p="LockCollider.cs" t="Include" />
+          <e p="MoveAlongSpoke.cs" t="Include" />
+          <e p="PedestalCollider.cs" t="Include" />
+          <e p="RotateSpoke.cs" t="Include" />
+          <e p="Rotator.cs" t="Include" />
+          <e p="RotatorCollider.cs" t="Include" />
+          <e p="SpokeCollider.cs" t="Include" />
+          <e p="Teleporter.cs" t="Include" />
+          <e p="TeleporterCollider.cs" t="Include" />
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="DepthTransparent.shader" t="Include" />
+          <e p="UnlitTransparent.shader" t="Include" />
+        </e>
+      </e>
+      <e p="Qb2.sln" t="IncludeFlat" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
