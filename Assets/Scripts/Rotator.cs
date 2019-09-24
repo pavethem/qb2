@@ -65,6 +65,10 @@ public class Rotator : MonoBehaviour {
     }
 
     IEnumerator Rotate(bool reverse = false) {
+        
+        if (GameController.debug && reverse) {
+            GameController.lastrotations.Pop();
+        }
 
         if(!hasBeenRotated)
             GameObject.Find("Canvas").transform.GetComponentInChildren<Button>(true).gameObject.SetActive(true);
