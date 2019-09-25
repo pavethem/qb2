@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="" />
+    <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Thing.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Thing.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level10_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level10_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level1_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level1_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level2_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level2_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level3_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level3_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level4_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level4_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level5_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level5_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level6_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level6_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level7_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level7_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level8_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level8_final.unity" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,11 +28,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Teleporter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Rotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level0.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -27,11 +46,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1RFDNUdx6rpUNIOXeWG7u0MZ3kU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
@@ -83,7 +107,8 @@
       <workItem from="1569253917069" duration="21000" />
       <workItem from="1569254121136" duration="5051000" />
       <workItem from="1569269379329" duration="1767000" />
-      <workItem from="1569356762756" duration="295000" />
+      <workItem from="1569356762756" duration="458000" />
+      <workItem from="1569421226469" duration="3052000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -99,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569356852242</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="small fix for debug mode">
+      <created>1569357203020</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569357203020</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,16 +144,20 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
     <MESSAGE value="level 10 (yeah before level 9)" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 10 (yeah before level 9)" />
+    <MESSAGE value="small fix for debug mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fix for debug mode" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

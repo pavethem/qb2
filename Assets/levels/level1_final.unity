@@ -827,18 +827,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!168 &2377038851396258971
-AudioEchoFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6816120682397651936}
-  m_Enabled: 1
-  m_Delay: 200
-  m_DecayRatio: 0.5
-  m_WetMix: 1
-  m_DryMix: 1
 --- !u!4 &5596516538081446237
 Transform:
   m_ObjectHideFlags: 0
@@ -944,58 +932,58 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5276045628376427627, guid: a8cb080b970ece01f87520f72d4871fd,
         type: 2}
+    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: BypassListenerEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 5276045628376427627, guid: a8cb080b970ece01f87520f72d4871fd,
+        type: 2}
+    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: BypassListenerEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 5276045628376427627, guid: a8cb080b970ece01f87520f72d4871fd,
+        type: 2}
     - target: {fileID: 4334766329463634608, guid: 31dd724f6aa84328e815dca2f0e4d52d,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: BypassEffects
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: BypassListenerEffects
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: BypassReverbZones
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3951282133382057014, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 5276045628376427627, guid: a8cb080b970ece01f87520f72d4871fd,
-        type: 2}
     - target: {fileID: 1379125600329358030, guid: 31dd724f6aa84328e815dca2f0e4d52d,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: BypassEffects
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: BypassListenerEffects
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: BypassReverbZones
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3994642770572788743, guid: 31dd724f6aa84328e815dca2f0e4d52d,
-        type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 5276045628376427627, guid: a8cb080b970ece01f87520f72d4871fd,
-        type: 2}
     - target: {fileID: 6405294182148584383, guid: 31dd724f6aa84328e815dca2f0e4d52d,
         type: 3}
       propertyPath: m_Enabled
@@ -1098,7 +1086,6 @@ GameObject:
   - component: {fileID: 5596516538081446237}
   - component: {fileID: 7897630290097204417}
   - component: {fileID: 2215477107160563499}
-  - component: {fileID: 2377038851396258971}
   m_Layer: 0
   m_Name: Empty
   m_TagString: Untagged

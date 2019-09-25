@@ -1472,18 +1472,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!168 &2454374141719994719
-AudioEchoFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6657720886832430628}
-  m_Enabled: 1
-  m_Delay: 200
-  m_DecayRatio: 0.5
-  m_WetMix: 1
-  m_DryMix: 1
 --- !u!1001 &4611190657402648013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1757,7 +1745,6 @@ GameObject:
   - component: {fileID: 5717762113580606617}
   - component: {fileID: 8028023252490305797}
   - component: {fileID: 2039484986776195823}
-  - component: {fileID: 2454374141719994719}
   m_Layer: 0
   m_Name: Empty
   m_TagString: Untagged

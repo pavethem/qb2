@@ -651,8 +651,8 @@ Transform:
   - {fileID: 9087177751220984727}
   - {fileID: 1760361623}
   - {fileID: 1239022288}
-  - {fileID: 165674381}
   - {fileID: 964242532}
+  - {fileID: 165674381}
   m_Father: {fileID: 5548139083170268712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -667,7 +667,6 @@ GameObject:
   - component: {fileID: 95738025550421052}
   - component: {fileID: 2406320771535501728}
   - component: {fileID: 5926745532181457482}
-  - component: {fileID: 7782786559628630522}
   m_Layer: 0
   m_Name: Empty
   m_TagString: Untagged
@@ -980,18 +979,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009e643fa9eeac8878c873188a014313, type: 3}
---- !u!168 &7782786559628630522
-AudioEchoFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326673738415916673}
-  m_Enabled: 1
-  m_Delay: 200
-  m_DecayRatio: 0.5
-  m_WetMix: 1
-  m_DryMix: 1
 --- !u!1001 &8211062796273782120
 PrefabInstance:
   m_ObjectHideFlags: 0
