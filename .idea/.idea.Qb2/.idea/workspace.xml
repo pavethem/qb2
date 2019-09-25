@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Thing.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Thing.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level10_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level10_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level1_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level1_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level2_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level2_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level3_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level3_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level4_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level4_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level5_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level5_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level6_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level6_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level7_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level7_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level8_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level8_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level9_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/mixer.mixer" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/mixer.mixer" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +97,7 @@
       <workItem from="1569254121136" duration="5051000" />
       <workItem from="1569269379329" duration="1767000" />
       <workItem from="1569356762756" duration="458000" />
-      <workItem from="1569421226469" duration="3052000" />
+      <workItem from="1569421226469" duration="4278000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -131,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569357203020</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="level 10">
+      <created>1569426705704</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569426705704</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +153,8 @@
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
     <MESSAGE value="level 10 (yeah before level 9)" />
     <MESSAGE value="small fix for debug mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fix for debug mode" />
+    <MESSAGE value="level 10" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 10" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
