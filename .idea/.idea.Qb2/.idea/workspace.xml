@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Blender/joint.blend" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Blender/joint.blend.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Blender/joint.mtl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Blender/joint.mtl.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Blender/joint.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Blender/joint.obj.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Node.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level9_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Blender/spoke_end.blend" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/spoke_end.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Blender/spoke_end.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/spoke_end.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level5.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level5.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/mixer.mixer" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/mixer.mixer" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,6 +30,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Teleporter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Rotator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -26,6 +39,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -36,6 +50,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
       </list>
     </option>
   </component>
@@ -97,7 +112,8 @@
       <workItem from="1569254121136" duration="5051000" />
       <workItem from="1569269379329" duration="1767000" />
       <workItem from="1569356762756" duration="458000" />
-      <workItem from="1569421226469" duration="4278000" />
+      <workItem from="1569421226469" duration="4361000" />
+      <workItem from="1569519267573" duration="359000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -127,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569426705704</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="slightly less grating teleporter sound">
+      <created>1569435406606</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569435406606</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +177,8 @@
     <MESSAGE value="level 10 (yeah before level 9)" />
     <MESSAGE value="small fix for debug mode" />
     <MESSAGE value="level 10" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 10" />
+    <MESSAGE value="slightly less grating teleporter sound" />
+    <option name="LAST_COMMIT_MESSAGE" value="slightly less grating teleporter sound" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
