@@ -13,7 +13,7 @@ public class MoveAlongSpoke : MonoBehaviour {
 
         float timeCount = 0;
         
-        while (transform.position != goal) {
+        while (transform.position.normalized != goal.normalized) {
 
             GameController.moving = true;
             transform.position = Vector3.Lerp(pos, goal, timeCount);
@@ -23,6 +23,8 @@ public class MoveAlongSpoke : MonoBehaviour {
         }
 
         transform.position = goal;
+        transform.position.Normalize();
+        transform.rotation.Normalize();
         GameController.moving = false;
 
         transform.parent = transform.parent.parent.parent;

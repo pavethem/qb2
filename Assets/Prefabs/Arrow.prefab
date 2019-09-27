@@ -56,8 +56,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.7495823, y: 0.52577144, z: 6.7826552}
-  m_Center: {x: 0.085637726, y: 0.007873853, z: 0.107375465}
+  m_Size: {x: 5.7495823, y: 1.2091866, z: 6.7826552}
+  m_Center: {x: 0.08563781, y: 0.020529658, z: 0.10737538}
 --- !u!23 &6001804756567384110
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -83,6 +83,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 1
