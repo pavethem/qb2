@@ -14,16 +14,20 @@ public class ArrowCollider : MonoBehaviour {
     
     private void OnTriggerStay(UnityEngine.Collider other) {
         
-        if (other.gameObject.CompareTag("joint") && !GameController.rotating && goal == Vector3.zero) {
+        if (other.gameObject.CompareTag("joint") && !GameController.rotating && !GameController.moving && goal == Vector3.zero) {
 
-            Transform parent = TraverseParents(other.gameObject.transform);
-            
-            //search for parents in the direction of the arrow first
-            Vector3 spoke = parent.position - other.gameObject.transform.position;
-            if (Compare(spoke.normalized,gameObject.transform.forward) && !GameController.moving) {
-                goal = parent.position;
+            Transform parent = null;
+            Vector3 spoke = new Vector3();
+            if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.name != "Empty") {
+                parent = TraverseParents(other.gameObject.transform);
+
+                //search for parents in the direction of the arrow first
+                spoke = parent.position - other.gameObject.transform.position;
+                if (Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
+                    goal = parent.position;
+                }
             }
-            
+
             //now search for children if no parents where found
             if (other.gameObject.transform.childCount > 0 && !GameController.rotating && goal == Vector3.zero && !traversed) {
 
@@ -40,7 +44,7 @@ public class ArrowCollider : MonoBehaviour {
         }
 
         //if a joint was found as a parent or child, go there
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && goal != Vector3.zero) {
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving  && goal != Vector3.zero) {
             other.gameObject.GetComponent<MoveAlongSpoke>().StartCoroutine(nameof(MoveAlongSpoke.MoveIt), goal);
             gameObject.GetComponent<AudioSource>().Play();
         }

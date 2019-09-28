@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/LockedCube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/LockedCube.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level13.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +23,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DontDestroyOnLoad.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level13.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level11_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
@@ -44,6 +44,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
       </list>
@@ -110,7 +111,7 @@
       <workItem from="1569421226469" duration="4361000" />
       <workItem from="1569519267573" duration="597000" />
       <workItem from="1569605799708" duration="7430000" />
-      <workItem from="1569678373520" duration="9042000" />
+      <workItem from="1569678373520" duration="16771000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -161,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569622634394</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="reworked moving of bubs">
+      <created>1569687498351</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1569687498351</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +199,8 @@
     <MESSAGE value="slightly less grating teleporter sound" />
     <MESSAGE value="level 11" />
     <MESSAGE value="level 13 concept" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 13 concept" />
+    <MESSAGE value="reworked moving of bubs" />
+    <option name="LAST_COMMIT_MESSAGE" value="reworked moving of bubs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
