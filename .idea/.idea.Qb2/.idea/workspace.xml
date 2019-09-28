@@ -5,14 +5,10 @@
       <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Arrow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Arrow.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Key.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Key.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/LockedCube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/LockedCube.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level11_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level11_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,9 +43,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" />
       </list>
     </option>
   </component>
@@ -89,10 +85,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="1717">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="9329">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1717" />
+      <option name="pid" value="9329" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -113,7 +109,8 @@
       <workItem from="1569356762756" duration="458000" />
       <workItem from="1569421226469" duration="4361000" />
       <workItem from="1569519267573" duration="597000" />
-      <workItem from="1569605799708" duration="7334000" />
+      <workItem from="1569605799708" duration="7430000" />
+      <workItem from="1569678373520" duration="9042000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -157,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569519847261</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="level 13 concept">
+      <created>1569622634394</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1569622634394</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +190,8 @@
     <MESSAGE value="level 10" />
     <MESSAGE value="slightly less grating teleporter sound" />
     <MESSAGE value="level 11" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 11" />
+    <MESSAGE value="level 13 concept" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 13 concept" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -197,10 +202,5 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
-        <watch expression="lastrotations" language="C#" custom="RiderImportsList:" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

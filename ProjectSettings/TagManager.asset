@@ -18,6 +18,7 @@ TagManager:
   - rotator
   - spoke
   - teleporter
+  - joint
   layers:
   - Default
   - TransparentFX
