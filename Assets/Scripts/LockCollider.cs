@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class LockCollider : MonoBehaviour {
     
@@ -24,8 +25,10 @@ public class LockCollider : MonoBehaviour {
                 foreach (Transform child in other.gameObject.transform.parent.transform) {
                     if (child.tag.Equals("key") && GameController.keys.Contains(child.gameObject)) {
                         GameController.RemoveLock(gameObject, child.gameObject);
+                        child.GetComponent<KeyCollider>().collisionkey.SetActive(false);
                         child.GetComponent<FadeInOut>().StartCoroutine("FadeOut", false);
                     }
+                    child.parent = null;
                 }
             }
             else
