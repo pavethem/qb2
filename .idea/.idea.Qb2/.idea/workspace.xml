@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/LockedCube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/LockedCube.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level13.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,11 +56,11 @@
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Library" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.updates" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -111,7 +107,10 @@
       <workItem from="1569421226469" duration="4361000" />
       <workItem from="1569519267573" duration="597000" />
       <workItem from="1569605799708" duration="7430000" />
-      <workItem from="1569678373520" duration="16771000" />
+      <workItem from="1569678373520" duration="16809000" />
+      <workItem from="1569710891036" duration="292000" />
+      <workItem from="1569760765595" duration="105000" />
+      <workItem from="1569760900337" duration="330000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -169,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569687498351</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="level 13 (not fixed yet)">
+      <created>1569710791177</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1569710791177</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +206,8 @@
     <MESSAGE value="level 11" />
     <MESSAGE value="level 13 concept" />
     <MESSAGE value="reworked moving of bubs" />
-    <option name="LAST_COMMIT_MESSAGE" value="reworked moving of bubs" />
+    <MESSAGE value="level 13 (not fixed yet)" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 13 (not fixed yet)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
