@@ -27,6 +27,7 @@ public class KeyCollider : MonoBehaviour {
             collisionkey = Instantiate(collisionkey,gameObject.transform.position,gameObject.transform.rotation,other.gameObject.transform);
             collisionkey.SetActive(true);
             GameController.keys.Add(collisionkey);
+            gameObject.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<BoxCollider>().enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             gameObject.GetComponent<HingeJoint>().autoConfigureConnectedAnchor = false;
