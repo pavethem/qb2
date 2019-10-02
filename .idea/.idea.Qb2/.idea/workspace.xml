@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key1.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key2.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key3.wav.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key4.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/key4.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Key.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Key.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,16 +48,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Shaders/OutlineShader.shader" />
         <option value="$PROJECT_DIR$/Assets/OutlineEffect/Outline.cs" />
         <option value="$PROJECT_DIR$/Assets/OutlineEffect/OutlineEffect.cs" />
         <option value="$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
       </list>
     </option>
   </component>
@@ -131,7 +127,8 @@
       <workItem from="1569760765595" duration="105000" />
       <workItem from="1569760900337" duration="330000" />
       <workItem from="1569769637759" duration="19976000" />
-      <workItem from="1569872841518" duration="436000" />
+      <workItem from="1569872841518" duration="522000" />
+      <workItem from="1570035688522" duration="7216000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -217,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569795562331</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added key sound">
+      <created>1569873343470</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1569873343470</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +255,8 @@
     <MESSAGE value="level 13 (not fixed yet)" />
     <MESSAGE value="level 13 final" />
     <MESSAGE value="reworked picking up keys" />
-    <option name="LAST_COMMIT_MESSAGE" value="reworked picking up keys" />
+    <MESSAGE value="added key sound" />
+    <option name="LAST_COMMIT_MESSAGE" value="added key sound" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

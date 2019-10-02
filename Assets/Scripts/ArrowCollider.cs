@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowCollider : MonoBehaviour {
 
-    //less "accurate" than unity's implementation
-    private const float EPSILON = 9.99999944E-5f;
     //goal to move to
-    private Vector3 goal = Vector3.zero;
+    private Vector3? goal;
     //traverse scene graph for children only once
     private bool traversed;
-    
+
     private void OnTriggerStay(UnityEngine.Collider other) {
-        
-        if (other.gameObject.CompareTag("joint") && !GameController.rotating && !GameController.moving && goal == Vector3.zero) {
+
+        if (GameController.rotating) {
+            goal = null;
+            traversed = false;
+        }
+
+        if (other.gameObject.CompareTag("joint") && !GameController.rotating && !GameController.moving && goal == null) {
 
             Transform parent = null;
             Vector3 spoke = new Vector3();
@@ -23,37 +24,38 @@ public class ArrowCollider : MonoBehaviour {
 
                 //search for parents in the direction of the arrow first
                 spoke = parent.position - other.gameObject.transform.position;
-                if (Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
+                if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
                     goal = parent.position;
                 }
             }
 
             //now search for children if no parents where found
-            if (other.gameObject.transform.childCount > 0 && !GameController.rotating && goal == Vector3.zero && !traversed) {
+            if (other.gameObject.transform.childCount > 0 && !GameController.rotating && goal == null && !traversed) {
 
                 traversed = true;
                 List<Transform> children = TraverseChildren(other.gameObject.transform);
                 foreach (Transform child in children) {
                     spoke = child.position - other.gameObject.transform.position;
-                    if (Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
+
+                    if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
                         goal = child.position;
                         break;
                     }
                 }
             }
         }
-
         //if a joint was found as a parent or child, go there
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving  && goal != Vector3.zero) {
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving  && goal != null) {
             other.gameObject.GetComponent<MoveAlongSpoke>().StartCoroutine(nameof(MoveAlongSpoke.MoveIt), goal);
             gameObject.GetComponent<AudioSource>().Play();
+            goal = null; 
         }
 		
     }
 
     private void OnTriggerExit(UnityEngine.Collider other) {
         if (other.gameObject.CompareTag("joint")) {
-            goal = Vector3.zero;
+            goal = null;
             traversed = false;
         }
     }
@@ -61,14 +63,13 @@ public class ArrowCollider : MonoBehaviour {
     //find next joint in parents
     private Transform TraverseParents(Transform trans) {
         Transform parent = null;
-        
         if (!trans.parent.CompareTag("joint")) {
             parent = TraverseParents(trans.parent);
         }
         else {
             parent = trans.parent;
         }
-        
+
         return parent;
     }
     
@@ -77,27 +78,20 @@ public class ArrowCollider : MonoBehaviour {
         List<Transform> children = new List<Transform>();
 
         foreach (Transform kid in trans) {
-
             if (kid.CompareTag("joint")) {
                 children.Add(kid);
             }
-
         }
 
         if (children.Count == 0) {
             foreach (Transform kid in trans) {
-
                 if (kid.childCount > 0)
                     children.AddRange(TraverseChildren(kid));
-
             }
         }
-        
+
         return children;
     }
 
-    private static bool Compare(Vector3 lhs, Vector3 rhs)
-    {
-        return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
-    }
+
 }

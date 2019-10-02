@@ -12,6 +12,9 @@ using Random = UnityEngine.Random;
 public class GameController : MonoBehaviour {
 
     public static GameController instance = null;
+    
+    //less "accurate" than unity's implementation
+    private const float EPSILON = 9.99999944E-5f;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -255,6 +258,12 @@ public class GameController : MonoBehaviour {
         }
         
     }
+    
+    public static bool Compare(Vector3 lhs, Vector3 rhs)
+    {
+        return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
+    }
+    
 }
 
 
