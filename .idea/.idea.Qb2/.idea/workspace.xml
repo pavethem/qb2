@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/tester.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/tester.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Joint.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level1_final.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level1_final.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/test.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,9 +56,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
     </option>
   </component>
@@ -128,7 +129,8 @@
       <workItem from="1569760900337" duration="330000" />
       <workItem from="1569769637759" duration="19976000" />
       <workItem from="1569872841518" duration="522000" />
-      <workItem from="1570035688522" duration="7216000" />
+      <workItem from="1570035688522" duration="7271000" />
+      <workItem from="1570052543295" duration="2948000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -221,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569873343470</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="reworked arrow collider, level 12 concept">
+      <created>1570050656490</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1570050656490</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +265,8 @@
     <MESSAGE value="level 13 final" />
     <MESSAGE value="reworked picking up keys" />
     <MESSAGE value="added key sound" />
-    <option name="LAST_COMMIT_MESSAGE" value="added key sound" />
+    <MESSAGE value="reworked arrow collider, level 12 concept" />
+    <option name="LAST_COMMIT_MESSAGE" value="reworked arrow collider, level 12 concept" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

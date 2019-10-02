@@ -58,7 +58,10 @@ public class GameController : MonoBehaviour {
     //use Z to go to last rotation
     #if DEBUG
     public static Stack<Quaternion> lastrotations;
-    #endif
+    private float solveTimeout = 0;
+    private List<string> inputs = new List<string>();
+    private List<string> solved = new List<string>();
+#endif
     public static bool debug;
 
     private void Awake() {
@@ -150,6 +153,11 @@ public class GameController : MonoBehaviour {
     }
 
     void LateUpdate() {
+
+        #if (DEBUG)
+        if(!rotating && !moving && !teleporting)
+//            Solve();
+        #endif
         
         //fade in Audio
         if (gameObject.GetComponent<AudioSource>().volume < 0.5f)
@@ -173,7 +181,7 @@ public class GameController : MonoBehaviour {
             GameOver();
 
         }
-        
+
     }
 
     void FixedUpdate() {
@@ -262,6 +270,92 @@ public class GameController : MonoBehaviour {
     public static bool Compare(Vector3 lhs, Vector3 rhs)
     {
         return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
+    }
+
+    private void Solve() {
+
+        int random = Random.Range(1, 7);
+        solveTimeout += Time.deltaTime;
+        if (solveTimeout >= 0.5f && !gameOver) {
+            switch (random) {
+                case 1: {
+                    GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
+                        90f;
+                    GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
+                        .StartCoroutine("Rotate", false);
+                    solveTimeout = 0;
+                    inputs.Add("a");
+                    break;
+                }
+                case 2: {
+                    GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
+                        -90f;
+                    GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
+                        .StartCoroutine("Rotate", false);
+                    solveTimeout = 0;
+                    inputs.Add("d");
+                    break;
+
+                }
+                case 3: {
+                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
+                        90f;
+                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                        .StartCoroutine("Rotate", false);
+                    solveTimeout = 0;
+                    inputs.Add("w");
+                    break;
+                }
+                case 4: {
+                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
+                        -90f;
+                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                        .StartCoroutine("Rotate", false);
+                    solveTimeout = 0;
+                    inputs.Add("s");
+                    break;
+                }
+                case 5: {
+                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
+                        90f;
+                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                        .StartCoroutine("Rotate", false);
+                    solveTimeout = 0;
+                    inputs.Add("e");
+                    break;
+                }
+                case 6: {
+                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
+                        -90f;
+                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                        .StartCoroutine("Rotate", false);
+                    solveTimeout = 0;
+                    inputs.Add("q");
+                    break;
+                }
+            }
+        }
+
+        if (inputs.Count > solved.Count && solved.Count > 0 && !gameOver) {
+            inputs.Clear();
+            Reset();
+        }
+
+        if (gameOver && !isLoadingNextLevel) {
+            string finishedinputs = "";
+            foreach (var entry in inputs) {
+                finishedinputs += entry + ", ";
+            }
+
+            if (solved.Count > inputs.Count || solved.Count == 0) {
+                finishedinputs += inputs.Count;
+                solved.Clear();
+                solved.AddRange(inputs);
+                Debug.Log(finishedinputs);
+            }
+            inputs.Clear();
+        }
+
     }
     
 }
