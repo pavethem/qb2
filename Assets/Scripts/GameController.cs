@@ -352,6 +352,7 @@ public class GameController : MonoBehaviour {
                 solved.Clear();
                 solved.AddRange(inputs);
                 Debug.Log(finishedinputs);
+                ScreenCapture.CaptureScreenshot("/media/Storage/" + solved.Count + " Moves " + Time.deltaTime + random);
             }
             inputs.Clear();
         }
