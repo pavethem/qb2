@@ -2,44 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.blend" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.blend.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.blend1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.blend1.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.mtl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.mtl.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat.obj.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.blend" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.blend.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.blend1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.blend1.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.mtl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.mtl.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_flat_small.obj.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.blend" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.blend.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.blend1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.blend1.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.mtl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.mtl.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Blender/spoke_threeway_small.obj.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_threeway_flat.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_threeway_flat.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_threeway_flat_small.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_threeway_flat_small.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_threeway_small.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_threeway_small.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/level15_final.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/level15_final.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/test.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/test.unity.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,9 +52,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
       </list>
     </option>
   </component>
@@ -129,10 +94,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="9329">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="41036">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="9329" />
+      <option name="pid" value="41036" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -162,7 +127,8 @@
       <workItem from="1569872841518" duration="522000" />
       <workItem from="1570035688522" duration="7271000" />
       <workItem from="1570052543295" duration="3121000" />
-      <workItem from="1570128543065" duration="1497000" />
+      <workItem from="1570128543065" duration="1685000" />
+      <workItem from="1570213941542" duration="1465000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -269,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570055629133</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="level 13">
+      <created>1570139511049</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1570139511049</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,7 +279,8 @@
     <MESSAGE value="added key sound" />
     <MESSAGE value="reworked arrow collider, level 12 concept" />
     <MESSAGE value="added brute force level solver" />
-    <option name="LAST_COMMIT_MESSAGE" value="added brute force level solver" />
+    <MESSAGE value="level 13" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 13" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
