@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/test.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +124,7 @@
       <workItem from="1570035688522" duration="7271000" />
       <workItem from="1570052543295" duration="3121000" />
       <workItem from="1570128543065" duration="1685000" />
-      <workItem from="1570213941542" duration="1465000" />
+      <workItem from="1570213941542" duration="1487000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -242,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570139511049</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="level 14 unfixed">
+      <created>1570221906311</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1570221906311</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +283,8 @@
     <MESSAGE value="reworked arrow collider, level 12 concept" />
     <MESSAGE value="added brute force level solver" />
     <MESSAGE value="level 13" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 13" />
+    <MESSAGE value="level 14 unfixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 14 unfixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
