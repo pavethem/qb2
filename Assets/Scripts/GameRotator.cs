@@ -9,6 +9,7 @@ public class GameRotator : MonoBehaviour, IDragHandler {
     public GameObject directionalLight;
     public GameObject spotLight;
     public GameObject pedestal;
+    public Camera reflectionCamera;
 //    public GameObject background;
 
     private void Start() {
@@ -33,6 +34,9 @@ public class GameRotator : MonoBehaviour, IDragHandler {
             
             pedestal.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
 //            pedestal.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+            reflectionCamera.transform.RotateAround(Vector3.zero,Vector3.up, eventData.delta.x / ADJUST_FACTOR);
+//            reflectionCamera.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
 
             Physics.gravity = -pedestal.transform.up * 70;
             

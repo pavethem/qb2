@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour {
     private static Vector3 directionalLightPosition;
     private static Quaternion cameraRotation;
     private static Vector3 cameraPosition;
+    private static Vector3 reflectionCameraPosition;
+    private static Quaternion reflectionCameraRotation;
     private static Vector3 gravity;
     
     public static bool gameOver;
@@ -77,6 +79,8 @@ public class GameController : MonoBehaviour {
             directionalLightRotation = GameObject.Find("Directional Light").transform.rotation;
             cameraPosition = Camera.main.transform.position;
             cameraRotation = Camera.main.transform.rotation;
+            reflectionCameraPosition = GameObject.Find("ReflectionCamera").transform.position;
+            reflectionCameraRotation = GameObject.Find("ReflectionCamera").transform.rotation;
             gravity = Physics.gravity;
             
             currentScene = 1;
@@ -140,6 +144,8 @@ public class GameController : MonoBehaviour {
         GameObject.Find("Spot Light").transform.position = spotlightPosition;
         GameObject.Find("Directional Light").transform.rotation = directionalLightRotation;
         GameObject.Find("Directional Light").transform.position = directionalLightPosition;
+        GameObject.Find("ReflectionCamera").transform.position = reflectionCameraPosition;
+        GameObject.Find("ReflectionCamera").transform.rotation = reflectionCameraRotation;
 //        GameObject.Find("Background").transform.rotation = backgroundRotation;
 //        GameObject.Find("Background").transform.position = backgroundPosition;
         Physics.gravity = gravity;
