@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/ReflectionMaterial.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/ReflectionMaterial.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Textures/ReflectionTexture.renderTexture" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Textures/ReflectionTexture.renderTexture.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level0.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level0.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level10_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level10_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level11_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level11_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level12_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level1_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level1_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level2_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level2_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level3_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level3_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level4_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level4_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level5_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level5_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level6_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level6_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level7_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level7_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level8_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level8_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level9_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +37,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DontDestroyOnLoad.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level1_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level11_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
@@ -59,8 +66,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
     </option>
@@ -137,7 +144,7 @@
       <workItem from="1570128543065" duration="1685000" />
       <workItem from="1570213941542" duration="1487000" />
       <workItem from="1570370431750" duration="3986000" />
-      <workItem from="1570472591697" duration="4298000" />
+      <workItem from="1570472591697" duration="4824000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -272,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570474035220</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="added fake reflection to painting in background">
+      <created>1570482341906</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1570482341906</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +327,8 @@
     <MESSAGE value="level 14 unfixed" />
     <MESSAGE value="debug fixes" />
     <MESSAGE value="fixed lighting after scene transition (in editor)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed lighting after scene transition (in editor)" />
+    <MESSAGE value="added fake reflection to painting in background" />
+    <option name="LAST_COMMIT_MESSAGE" value="added fake reflection to painting in background" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
