@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LockCollider : MonoBehaviour {
     
@@ -72,7 +71,7 @@ public class LockCollider : MonoBehaviour {
         if (collided) {
             if (shaketime < SHAKETIME_MAX) {
                 shaketime += Time.deltaTime;
-                float amount = 15 * (1+shaketime);
+                float amount = 8 * (1+shaketime);
                 gameObject.transform.Translate(0,0, Mathf.Sin(Mathf.Rad2Deg* shaketime) / amount);
             }
             else {

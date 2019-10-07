@@ -2,20 +2,99 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level10_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level10_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level10_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level10_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level10_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level11_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level11_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level11_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level11_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level11_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level13_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level13_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level13_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level13_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level13_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level14_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level14_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level14_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level14_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level14_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level1_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level1_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level1_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level1_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level1_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level2_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level2_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level2_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level2_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level2_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level3_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level3_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level3_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level3_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level3_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level4_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level4_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level4_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level4_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level4_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level5_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level5_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level5_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level5_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level5_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level6_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level7_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level7_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level7_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level7_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level7_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level8_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level8_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level8_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level8_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level8_final/ReflectionProbe-0.exr.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final/LightingData.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final/ReflectionProbe-0.exr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level9_final/ReflectionProbe-0.exr.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat_small.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat_small.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level10_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level10_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level11_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level11_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level12_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level15_final.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level15_final.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level1_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level1_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level2_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level2_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level3_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level3_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level4_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level4_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level5_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level5_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level6.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level6.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level6_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level6_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level7_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level7_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level8_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level8_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level9_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,11 +139,11 @@
         <option value="$PROJECT_DIR$/Assets/OutlineEffect/OutlineEffect.cs" />
         <option value="$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
@@ -142,7 +221,7 @@
       <workItem from="1570128543065" duration="1685000" />
       <workItem from="1570213941542" duration="1487000" />
       <workItem from="1570370431750" duration="3986000" />
-      <workItem from="1570472591697" duration="635000" />
+      <workItem from="1570472591697" duration="1422000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -263,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570221906311</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="debug fixes">
+      <created>1570473261795</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1570473261795</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +388,8 @@
     <MESSAGE value="added brute force level solver" />
     <MESSAGE value="level 13" />
     <MESSAGE value="level 14 unfixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 14 unfixed" />
+    <MESSAGE value="debug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

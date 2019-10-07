@@ -150,7 +150,7 @@ public class GameController : MonoBehaviour {
 
         #if (DEBUG)
         if(!rotating && !moving && !teleporting)
-            Solve();
+//            Solve();
         #endif
         
         //fade in Audio
@@ -252,7 +252,7 @@ public class GameController : MonoBehaviour {
         }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
-        
+
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
@@ -265,6 +265,7 @@ public class GameController : MonoBehaviour {
     {
         return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
     }
+    
 #if (DEBUG)
     private void Solve() {
 
