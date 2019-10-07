@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#define DEBUG
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ public class Rotator : MonoBehaviour {
     //angle of the desired rotation
     internal float signedAngle;
     
-    private const float ANGLEMIN = 5f;
+    private const float ANGLEMIN = 3f;
 
     private Color rotatorColor;
 
@@ -66,10 +67,12 @@ public class Rotator : MonoBehaviour {
 
     IEnumerator Rotate(bool reverse = false) {
         
-        if (GameController.debug && reverse) {
+        #if (DEBUG)
+        if (reverse) {
             if(GameController.lastrotations.Count > 0)
                 GameController.lastrotations.Pop();
         }
+        #endif
 
         if(!hasBeenRotated)
             GameObject.Find("Canvas").transform.GetComponentInChildren<Button>(true).gameObject.SetActive(true);
@@ -199,17 +202,17 @@ public class Rotator : MonoBehaviour {
                 keyPressed = true;
                 if (acceptedInputStrings[0] == Input.inputString) {
                     signedAngle = 90f;
-                    if (GameController.debug) {
+                    #if (DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
-                    }
+                    #endif
                     if(keyDownTime==0)
                         StartCoroutine(Rotate());
                 }
                 else if (acceptedInputStrings[1] == Input.inputString) {
                     signedAngle = -90f;
-                    if (GameController.debug) {
+                    #if (DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
-                    }
+                    #endif
                     if(keyDownTime==0)
                         StartCoroutine(Rotate());
                 }

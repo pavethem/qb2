@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="" />
+    <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat_small.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_corner_flat_small.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level15_final.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level15_final.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +53,6 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Teleporter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Shaders/OutlineShader.shader" />
@@ -49,8 +63,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
     </option>
   </component>
@@ -125,6 +141,8 @@
       <workItem from="1570052543295" duration="3121000" />
       <workItem from="1570128543065" duration="1685000" />
       <workItem from="1570213941542" duration="1487000" />
+      <workItem from="1570370431750" duration="3986000" />
+      <workItem from="1570472591697" duration="635000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>

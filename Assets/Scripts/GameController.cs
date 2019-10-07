@@ -1,12 +1,9 @@
 ﻿#define DEBUG
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour {
@@ -62,8 +59,6 @@ public class GameController : MonoBehaviour {
     private List<string> inputs = new List<string>();
     private List<string> solved = new List<string>();
 #endif
-    public static bool debug;
-
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -88,7 +83,6 @@ public class GameController : MonoBehaviour {
             #if (DEBUG)
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
-                debug = true;
             #else
                 SceneManager.LoadScene("level1_final");
             #endif
@@ -156,7 +150,7 @@ public class GameController : MonoBehaviour {
 
         #if (DEBUG)
         if(!rotating && !moving && !teleporting)
-//            Solve();
+            Solve();
         #endif
         
         //fade in Audio
@@ -271,8 +265,9 @@ public class GameController : MonoBehaviour {
     {
         return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
     }
-
+#if (DEBUG)
     private void Solve() {
+
 
         int random = Random.Range(1, 7);
         solveTimeout += Time.deltaTime;
@@ -283,6 +278,8 @@ public class GameController : MonoBehaviour {
                         90f;
                     GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
+                    lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
+                        .GetComponent<Rotator>();
                     solveTimeout = 0;
                     inputs.Add("a");
                     break;
@@ -292,6 +289,8 @@ public class GameController : MonoBehaviour {
                         -90f;
                     GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
+                    lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
+                        .GetComponent<Rotator>();
                     solveTimeout = 0;
                     inputs.Add("d");
                     break;
@@ -302,6 +301,8 @@ public class GameController : MonoBehaviour {
                         90f;
                     GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
+                    lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
+                        .GetComponent<Rotator>();
                     solveTimeout = 0;
                     inputs.Add("w");
                     break;
@@ -311,6 +312,8 @@ public class GameController : MonoBehaviour {
                         -90f;
                     GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
+                    lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
+                        .GetComponent<Rotator>();
                     solveTimeout = 0;
                     inputs.Add("s");
                     break;
@@ -320,6 +323,8 @@ public class GameController : MonoBehaviour {
                         90f;
                     GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
+                    lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
+                        .GetComponent<Rotator>();
                     solveTimeout = 0;
                     inputs.Add("e");
                     break;
@@ -329,6 +334,8 @@ public class GameController : MonoBehaviour {
                         -90f;
                     GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
+                    lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
+                        .GetComponent<Rotator>();
                     solveTimeout = 0;
                     inputs.Add("q");
                     break;
@@ -358,7 +365,7 @@ public class GameController : MonoBehaviour {
         }
 
     }
-    
+#endif
 }
 
 
