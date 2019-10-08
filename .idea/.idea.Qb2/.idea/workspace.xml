@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level10_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level10_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level10_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level10_final/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level11_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level11_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level11_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level11_final/LightingData.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_rotate_double_round.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_rotate_double_round.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_rotate_round.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Spokes/Spoke_rotate_round.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level_16_final.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/levels/level_16_final.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/levels/level12_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level12_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level12_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level12_final/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level13_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level13_final/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level14_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level14_final/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level15_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level15_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level8_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level8_final/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level9_final.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level9_final.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level9_final/LightingData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level9_final/LightingData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,28 +21,30 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level13_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Shaders/DepthTransparent.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DontDestroyOnLoad.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/levels/level1_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level11_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Teleporter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Rotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level0.unity" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A3ACC929-D602-4E3F-8E89-2CA6636AE123/08/22c038da/SceneManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Shaders/DepthTransparent.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level12_final.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level1_final.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -70,6 +65,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" />
       </list>
     </option>
   </component>
@@ -146,6 +143,7 @@
       <workItem from="1570213941542" duration="1487000" />
       <workItem from="1570370431750" duration="3986000" />
       <workItem from="1570472591697" duration="5605000" />
+      <workItem from="1570549189328" duration="1545000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
