@@ -97,7 +97,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: c40410c60308af61faf994b44b869e4c,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -648,7 +649,6 @@ MonoBehaviour:
   directionalLight: {fileID: 1760319549}
   spotLight: {fileID: 1971027746}
   pedestal: {fileID: 1393903446}
-  reflectionQuad: {fileID: 1557059916}
   reflectionCamera: {fileID: 24571163}
 --- !u!114 &708622156
 MonoBehaviour:

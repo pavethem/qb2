@@ -6,7 +6,7 @@ public class LockCollider : MonoBehaviour {
     private const float STAYTIME_THRESHOLD = 0.25f;
     private bool collided;
     private float shaketime;
-    private const float SHAKETIME_MAX = 1;
+    private const float SHAKETIME_MAX = 0.9f;
     private Vector3 originalPosition;
 
     private void Start() {
@@ -72,7 +72,7 @@ public class LockCollider : MonoBehaviour {
             if (shaketime < SHAKETIME_MAX) {
                 shaketime += Time.deltaTime;
                 float amount = 8 * (1+shaketime);
-                gameObject.transform.Translate(0,0, Mathf.Sin(Mathf.Rad2Deg* shaketime) / amount);
+                gameObject.transform.Translate(0,0, Mathf.Sin(Mathf.Rad2Deg * shaketime) / amount);
             }
             else {
                 shaketime = 0;
