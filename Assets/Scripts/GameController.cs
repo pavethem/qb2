@@ -1,4 +1,4 @@
-﻿#define DEBUG
+﻿#undef DEBUG
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -168,6 +168,11 @@ public class GameController : MonoBehaviour {
         //reset scene
         if (Input.GetKeyUp(KeyCode.R)) {
             Reset();
+        }
+        
+        //DELETE THIS EVENTUALLY
+        if (Input.GetKeyUp(KeyCode.L)) {
+            GameOver();
         }
         
         #if (DEBUG)

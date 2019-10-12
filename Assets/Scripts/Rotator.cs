@@ -1,4 +1,4 @@
-﻿#define DEBUG
+﻿#undef DEBUG
 using System.Collections;
 using System.Linq;
 using UnityEngine;
