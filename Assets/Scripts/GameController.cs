@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour {
@@ -82,7 +83,7 @@ public class GameController : MonoBehaviour {
             reflectionCameraPosition = GameObject.Find("ReflectionCamera").transform.position;
             reflectionCameraRotation = GameObject.Find("ReflectionCamera").transform.rotation;
             gravity = Physics.gravity;
-            
+
             currentScene = 1;
             #if (DEBUG)
                 SceneManager.LoadScene("test");
@@ -109,6 +110,15 @@ public class GameController : MonoBehaviour {
     void InitGame() {
 
         StopAllCoroutines();
+
+        if (Application.isMobilePlatform) {
+            foreach(var child in GameObject.Find("Canvas").transform.GetComponentsInChildren<Button>(true))
+            {
+                if(child.name == "RightButton" || child.name == "LeftButton")
+                    child.gameObject.SetActive(true);
+                
+            }
+        }
         
         cubeCount = 0;
         gameOver = false;

@@ -20,6 +20,7 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="ArrowCollider.cs" t="Include" />
+          <e p="ButtonRotation.cs" t="Include" />
           <e p="Collider.cs" t="Include" />
           <e p="DontDestroyOnLoad.cs" t="Include" />
           <e p="FadeInOut.cs" t="Include" />

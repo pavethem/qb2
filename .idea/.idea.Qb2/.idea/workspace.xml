@@ -2,19 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj.DotSettings" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ButtonRotation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/SelectorCube.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/SelectorCube.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/arrow.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/arrow.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/arrowCW.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/arrowCW.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/background.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/background.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/key.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/key.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/lock.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/lock.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/rotatorStrip.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/rotatorStrip.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/rotatorStripCollider.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/rotatorStripCollider.blend.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Blender/teleporter.blend.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Blender/teleporter.blend.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level0.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level0.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +28,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Rotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level0.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ButtonRotation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level12_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" root0="FORCE_HIGHLIGHTING" />
@@ -38,10 +38,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level13_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level1_final.unity" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Shaders/DepthTransparent.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Blender/arrow.blend.meta" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collider.cs" root0="FORCE_HIGHLIGHTING" />
@@ -61,16 +61,18 @@
         <option value="$PROJECT_DIR$/Assets/OutlineEffect/Outline.cs" />
         <option value="$PROJECT_DIR$/Assets/OutlineEffect/OutlineEffect.cs" />
         <option value="$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SliderRotation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ButtonRotation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
       </list>
     </option>
   </component>
@@ -149,7 +151,10 @@
       <workItem from="1570472591697" duration="5605000" />
       <workItem from="1570549189328" duration="1693000" />
       <workItem from="1570826381844" duration="1004000" />
-      <workItem from="1570884593373" duration="285000" />
+      <workItem from="1570884593373" duration="1176000" />
+      <workItem from="1570887123378" duration="941000" />
+      <workItem from="1570892581169" duration="6864000" />
+      <workItem from="1570912313194" duration="4895000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -312,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570552844175</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="skip  level button in lieu of a select screen">
+      <created>1570884987629</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1570884987629</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +369,8 @@
     <MESSAGE value="fixed lighting per level" />
     <MESSAGE value="new level 8" />
     <MESSAGE value="level 16" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 16" />
+    <MESSAGE value="skip  level button in lieu of a select screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="skip  level button in lieu of a select screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

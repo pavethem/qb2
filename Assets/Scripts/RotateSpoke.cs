@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.UIElements;
+﻿using System.Collections;
 using UnityEngine;
 
 public class RotateSpoke : MonoBehaviour
