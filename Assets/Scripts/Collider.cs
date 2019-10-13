@@ -7,6 +7,10 @@ public class Collider : MonoBehaviour {
 	private bool collided;
 	private const float STAYTIME_THRESHOLD = 0.2f;
 
+	private void Update() {
+		Debug.Log(collided + " " + stayTime + " " + GameController.cubeCount);
+	}
+
 	void OnTriggerStay(UnityEngine.Collider other) {
 		
 		if (other.gameObject.CompareTag("bub") && !gameObject.CompareTag("key") && !gameObject.CompareTag("lock")) {
@@ -26,7 +30,7 @@ public class Collider : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("bub"))
 		{
-			if(stayTime > STAYTIME_THRESHOLD)
+			if(collided)
 				GameController.cubeCount--;
 			Behaviour halo = (Behaviour) other.GetComponent("Halo");
 			halo.enabled = false;

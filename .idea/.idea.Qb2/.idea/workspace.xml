@@ -8,9 +8,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level7_final.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/levels/level7_final.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level6_final.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level6_final.unity.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,8 +66,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ButtonRotation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
       </list>
     </option>
@@ -152,7 +151,8 @@
       <workItem from="1570887123378" duration="941000" />
       <workItem from="1570892581169" duration="6864000" />
       <workItem from="1570912313194" duration="5086000" />
-      <workItem from="1570979682563" duration="1038000" />
+      <workItem from="1570979682563" duration="1718000" />
+      <workItem from="1570994631735" duration="233000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -329,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570917258809</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fixed bug with selectorcubes">
+      <created>1570980786887</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1570980786887</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +383,8 @@
     <MESSAGE value="level 16" />
     <MESSAGE value="skip  level button in lieu of a select screen" />
     <MESSAGE value="added simple button game rotation for mobile" />
-    <option name="LAST_COMMIT_MESSAGE" value="added simple button game rotation for mobile" />
+    <MESSAGE value="fixed bug with selectorcubes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed bug with selectorcubes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
