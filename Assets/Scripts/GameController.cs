@@ -203,7 +203,7 @@ public class GameController : MonoBehaviour {
 
         //turn on physics for all cubes in scene and add a small amount of velocity and torque
         if (cubeCount == cubes.Length && cubes.Length > 0 && !gameOver) {
-            
+
             foreach (var cube in cubes) {
                 
                 cube.GetComponent<Rigidbody>().useGravity = true;

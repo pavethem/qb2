@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Collider : MonoBehaviour {
 	
@@ -25,7 +26,8 @@ public class Collider : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("bub"))
 		{
-			GameController.cubeCount--;
+			if(stayTime > STAYTIME_THRESHOLD)
+				GameController.cubeCount--;
 			Behaviour halo = (Behaviour) other.GetComponent("Halo");
 			halo.enabled = false;
 			stayTime = 0f;
