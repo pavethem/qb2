@@ -1,15 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Collider : MonoBehaviour {
 	
 	private float stayTime;
 	private bool collided;
 	private const float STAYTIME_THRESHOLD = 0.2f;
-
-	private void Update() {
-		Debug.Log(collided + " " + stayTime + " " + GameController.cubeCount);
-	}
 
 	void OnTriggerStay(UnityEngine.Collider other) {
 		
