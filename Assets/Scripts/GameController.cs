@@ -89,7 +89,8 @@ public class GameController : MonoBehaviour {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
             #else
-                SceneManager.LoadScene("level1_final");
+                Load();
+                SceneManager.LoadScene("level" + currentScene + "_final");
             #endif
 
         }
@@ -184,6 +185,11 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.L)) {
             GameOver();
         }
+        if (Input.GetKeyUp(KeyCode.K)) {
+            if(currentScene > 1)
+                currentScene -= 2;
+            GameOver();
+        }
         
         #if (DEBUG)
         if (Input.GetKeyUp(KeyCode.Y)) {
@@ -257,6 +263,7 @@ public class GameController : MonoBehaviour {
         #if (DEBUG)
             StartCoroutine(nameof(LoadYourAsyncScene),"test");
         #else
+            Save();
             StartCoroutine(nameof(LoadYourAsyncScene),scene);
         #endif
 
@@ -285,6 +292,15 @@ public class GameController : MonoBehaviour {
     public static bool Compare(Vector3 lhs, Vector3 rhs)
     {
         return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
+    }
+
+    private static void Save() {
+        PlayerPrefs.SetInt("currentScene", currentScene);
+        PlayerPrefs.Save();
+    }
+    
+    private static void Load() {
+        currentScene = PlayerPrefs.GetInt("currentScene",1);
     }
     
 #if (DEBUG)
