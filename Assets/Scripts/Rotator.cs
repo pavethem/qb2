@@ -75,7 +75,7 @@ public class Rotator : MonoBehaviour {
         #endif
 
         if(!hasBeenRotated)
-            GameObject.Find("Canvas").transform.GetComponentInChildren<Button>(true).gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(true);
         
         hasBeenRotated = true;
 

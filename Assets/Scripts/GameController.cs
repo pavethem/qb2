@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour {
 
@@ -113,13 +111,19 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
 
         if (Application.isMobilePlatform) {
-            foreach(var child in GameObject.Find("Canvas").transform.GetComponentsInChildren<Button>(true))
-            {
-                if(child.name == "RightButton" || child.name == "LeftButton")
-                    child.gameObject.SetActive(true);
-                
-            }
+            GameObject.Find("Canvas").transform.Find("MobileImage").gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
+            
         }
+
+//        if (Application.isMobilePlatform) {
+//            foreach(var child in GameObject.Find("Canvas").transform.GetComponentsInChildren<Button>(true))
+//            {
+//                if(child.name == "RightButton" || child.name == "LeftButton")
+//                    child.gameObject.SetActive(true);
+//                
+//            }
+//        }
         
         cubeCount = 0;
         gameOver = false;

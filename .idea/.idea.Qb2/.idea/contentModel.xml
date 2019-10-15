@@ -38,8 +38,10 @@
           <e p="TeleporterCollider.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
+          <e p="Blur.shader" t="Include" />
           <e p="DepthTransparent.shader" t="Include" />
           <e p="UnlitTransparent.shader" t="Include" />
+          <e p="blur.cginc" t="Include" />
         </e>
       </e>
       <e p="Qb2.sln" t="IncludeFlat" />
