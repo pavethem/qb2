@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour {
 
     public static int currentScene;
     //last rotator to be used (needed to reverse rotations when hitting locks)
-    public static Rotator lastRotatorStrip;
+    public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
     public static bool rotatorClicked;
 
@@ -113,18 +113,15 @@ public class GameController : MonoBehaviour {
         if (Application.isMobilePlatform) {
             GameObject.Find("Canvas").transform.Find("MobileImage").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = true;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = true;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
             
         }
 
-//        if (Application.isMobilePlatform) {
-//            foreach(var child in GameObject.Find("Canvas").transform.GetComponentsInChildren<Button>(true))
-//            {
-//                if(child.name == "RightButton" || child.name == "LeftButton")
-//                    child.gameObject.SetActive(true);
-//                
-//            }
-//        }
-        
         cubeCount = 0;
         gameOver = false;
         isLoadingNextLevel = false;

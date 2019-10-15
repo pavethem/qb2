@@ -28,11 +28,13 @@
           <e p="GameRotator.cs" t="Include" />
           <e p="KeyCollider.cs" t="Include" />
           <e p="LockCollider.cs" t="Include" />
+          <e p="MobileRotator.cs" t="Include" />
           <e p="MoveAlongSpoke.cs" t="Include" />
           <e p="PedestalCollider.cs" t="Include" />
           <e p="RotateSpoke.cs" t="Include" />
           <e p="Rotator.cs" t="Include" />
           <e p="RotatorCollider.cs" t="Include" />
+          <e p="RotatorParent.cs" t="Include" />
           <e p="SpokeCollider.cs" t="Include" />
           <e p="Teleporter.cs" t="Include" />
           <e p="TeleporterCollider.cs" t="Include" />

@@ -51,7 +51,7 @@ public class LockCollider : MonoBehaviour {
             
             if (GameController.lastRotatorStrip != null && GameController.locks.Contains(gameObject)) {
                 
-                GameController.lastRotatorStrip.StopAllCoroutines();
+                GameController.lastRotatorStrip.StopRotating();
                 GameController.lastRotatorStrip.signedAngle *= -1;
                 GameController.lastRotatorStrip.StartCoroutine("Rotate", true);
             }

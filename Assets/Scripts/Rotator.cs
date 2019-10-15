@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Rotator : MonoBehaviour {
+public class Rotator : RotatorParent {
     
     public float rotationSpeed;
     
@@ -16,10 +16,8 @@ public class Rotator : MonoBehaviour {
     //basically ray hit position on mousedown
     private Vector3 helperDown;
     //plane of this rotatorStrip
-    private Plane plane;   
-    //angle of the desired rotation
-    internal float signedAngle;
-    
+    private Plane plane;
+
     private const float ANGLEMIN = 3f;
 
     private Color rotatorColor;
@@ -112,6 +110,8 @@ public class Rotator : MonoBehaviour {
 
     private IEnumerator OnMouseOver() {
 
+        if (!enabled) yield break;
+        
         isHovering = true;
         StopCoroutine(nameof(OnMouseExit));
 
@@ -130,6 +130,7 @@ public class Rotator : MonoBehaviour {
 
     private IEnumerator OnMouseExit() {
 
+        if (!enabled) yield break;
 
         if (!isClicked) {
             hoverTime = 0;
@@ -150,6 +151,8 @@ public class Rotator : MonoBehaviour {
     }
 
     private void OnMouseDown() {
+        
+        if (!enabled) return;
 
         isClicked = true;
         GameController.rotatorClicked = true;
@@ -169,6 +172,8 @@ public class Rotator : MonoBehaviour {
     }
     
     private void OnMouseUp() {
+        
+        if (!enabled) return;
 
         isClicked = false;
         GameController.rotatorClicked = false;
@@ -178,12 +183,14 @@ public class Rotator : MonoBehaviour {
         
         if (!GameController.rotating && !GameController.moving && !GameController.teleporting && Mathf.Abs(signedAngle) > ANGLEMIN) {
             GameController.lastRotatorStrip = this;
-            StartCoroutine(Rotate());
+            base.rotateRoutine = StartCoroutine(Rotate());
         }
     }
 
     private void OnMouseDrag() {  
-      
+        
+        if (!enabled) return;
+
         //update helper position along transform's plane and calculate angle between it and mousedown helper position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         plane.Raycast(ray, out var enter);
@@ -206,7 +213,7 @@ public class Rotator : MonoBehaviour {
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
                     #endif
                     if(keyDownTime==0)
-                        StartCoroutine(Rotate());
+                        base.rotateRoutine = StartCoroutine(Rotate());
                 }
                 else if (acceptedInputStrings[1] == Input.inputString) {
                     signedAngle = -90f;
@@ -214,7 +221,7 @@ public class Rotator : MonoBehaviour {
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
                     #endif
                     if(keyDownTime==0)
-                        StartCoroutine(Rotate());
+                        base.rotateRoutine = StartCoroutine(Rotate());
                 }
                 GameController.lastRotatorStrip = this;
             }

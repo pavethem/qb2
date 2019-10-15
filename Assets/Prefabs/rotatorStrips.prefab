@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 5983837570428058002}
   - component: {fileID: 5983837570428058000}
   - component: {fileID: 5983837570428058001}
+  - component: {fileID: 7275646584442255324}
   - component: {fileID: 6373544482168782516}
   m_Layer: 9
   m_Name: collider
@@ -149,6 +150,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55c96e528cb8167fda9a50eab58a6a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1.4
+  to: {fileID: 8300000, guid: 005eacd68c8914b7a97667d015d2d334, type: 3}
+  fro: {fileID: 8300000, guid: c67dc9d2576ceb224b7df23c2f7c7a52, type: 3}
+--- !u!114 &7275646584442255324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983837570428058003}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d9ee06ad8e8ef0ab204e728638cc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1.4
@@ -262,6 +278,7 @@ GameObject:
   - component: {fileID: 5983837570590812630}
   - component: {fileID: 5983837570590812628}
   - component: {fileID: 5983837570590812629}
+  - component: {fileID: 1450202915521511265}
   - component: {fileID: 3951282133382057014}
   m_Layer: 9
   m_Name: collider
@@ -308,6 +325,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55c96e528cb8167fda9a50eab58a6a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1.4
+  to: {fileID: 8300000, guid: e13d35d2c9d01fe9b89eb092be612bed, type: 3}
+  fro: {fileID: 8300000, guid: 319b5ffaa308e7ed0ae974cfbef3dcd7, type: 3}
+--- !u!114 &1450202915521511265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983837570590812631}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d9ee06ad8e8ef0ab204e728638cc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1.4
@@ -421,6 +453,7 @@ GameObject:
   - component: {fileID: 5983837570646503805}
   - component: {fileID: 5983837570646503795}
   - component: {fileID: 5983837570646503804}
+  - component: {fileID: 6196168908978066722}
   - component: {fileID: 3994642770572788743}
   m_Layer: 9
   m_Name: collider
@@ -467,6 +500,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55c96e528cb8167fda9a50eab58a6a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1.4
+  to: {fileID: 8300000, guid: 03e76bda12493dc8ebb5e11a95e06e11, type: 3}
+  fro: {fileID: 8300000, guid: df7b01dffc8991adb982e2e369e14194, type: 3}
+--- !u!114 &6196168908978066722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983837570646503806}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d9ee06ad8e8ef0ab204e728638cc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1.4
