@@ -138,7 +138,7 @@ public class MobileRotator : RotatorParent {
         if(!enabled) return;
 
         if (shrunk && fadedOut && !fadedIn && !grown) {
-            if (!clicked) {
+            if (!clicked && gameObject.GetComponentInParent<MeshRenderer>().material.color.a == 1.0f) {
                 if(fadeOutRoutine != null)
                     StopCoroutine(fadeOutRoutine);
                 if(shrinkRoutine != null)
@@ -155,33 +155,37 @@ public class MobileRotator : RotatorParent {
     }
 
     private IEnumerator Grow() {
-        float timeStep = 0;
-        while (!GameController.Compare(targetScale,transform.parent.transform.localScale)) {
-            float x = Mathf.Lerp(transform.parent.transform.localScale.x, targetScale.x, timeStep);
-            float y = Mathf.Lerp(transform.parent.transform.localScale.y, targetScale.y, timeStep);
-            float z = Mathf.Lerp(transform.parent.transform.localScale.z, targetScale.z, timeStep);
-            transform.parent.transform.localScale = new Vector3(x,y,z);
-            timeStep += Time.deltaTime;
-            yield return null;
+        if (gameObject.GetComponentInParent<MeshRenderer>().material.color.a == 1.0f) {
+            float timeStep = 0;
+            while (!GameController.Compare(targetScale, transform.parent.transform.localScale)) {
+                float x = Mathf.Lerp(transform.parent.transform.localScale.x, targetScale.x, timeStep);
+                float y = Mathf.Lerp(transform.parent.transform.localScale.y, targetScale.y, timeStep);
+                float z = Mathf.Lerp(transform.parent.transform.localScale.z, targetScale.z, timeStep);
+                transform.parent.transform.localScale = new Vector3(x, y, z);
+                timeStep += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.parent.localScale = targetScale;
+            grown = true;
         }
-        
-        transform.parent.localScale = targetScale;
-        grown = true;
     }
     
     private IEnumerator Shrink() {
-        float timeStep = 0;
-        while (!GameController.Compare(originalScale,transform.parent.transform.localScale)) {
-            float x = Mathf.Lerp(transform.parent.transform.localScale.x, originalScale.x, timeStep);
-            float y = Mathf.Lerp(transform.parent.transform.localScale.y, originalScale.y, timeStep);
-            float z = Mathf.Lerp(transform.parent.transform.localScale.z, originalScale.z, timeStep);
-            transform.parent.transform.localScale = new Vector3(x,y,z);
-            timeStep += Time.deltaTime;
-            yield return null;
-        }
+        if (gameObject.GetComponentInParent<MeshRenderer>().material.color.a == 1.0f) {
+            float timeStep = 0;
+            while (!GameController.Compare(originalScale, transform.parent.transform.localScale)) {
+                float x = Mathf.Lerp(transform.parent.transform.localScale.x, originalScale.x, timeStep);
+                float y = Mathf.Lerp(transform.parent.transform.localScale.y, originalScale.y, timeStep);
+                float z = Mathf.Lerp(transform.parent.transform.localScale.z, originalScale.z, timeStep);
+                transform.parent.transform.localScale = new Vector3(x, y, z);
+                timeStep += Time.deltaTime;
+                yield return null;
+            }
 
-        transform.parent.localScale = originalScale;
-        shrunk = true;
+            transform.parent.localScale = originalScale;
+            shrunk = true;
+        }
     }
 
     private IEnumerator FadeIn() {
