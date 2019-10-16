@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 1899725886}
   m_Layer: 5
   m_Name: MobileImage
-  m_TagString: Untagged
+  m_TagString: mobileimage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

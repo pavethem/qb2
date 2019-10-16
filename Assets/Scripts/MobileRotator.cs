@@ -49,7 +49,12 @@ public class MobileRotator : RotatorParent {
     }
 
     private void Update() {
-        if(Input.GetMouseButtonDown(0) && !mouseOverObject && clicked) {
+
+        if(Input.GetMouseButtonDown(0) && !mouseOverObject && clicked && 
+           Input.mousePosition.y > GameObject.FindWithTag("mobileimage").GetComponent<RectTransform>().rect.height) {
+            signedAngle = 0;
+            helper = Vector3.zero;
+            helperDown = Vector3.zero;
             clicked = false;
             if(fadeInRoutine != null)
                 StopCoroutine(fadeInRoutine);
@@ -83,11 +88,14 @@ public class MobileRotator : RotatorParent {
 
             plane = new Plane(transform.up, 0);
 
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, Mathf.Infinity,
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out var hit, Mathf.Infinity,
                 1 << LayerMask.NameToLayer("RotatorStrips"));
 
             //set helper to hitpoint
-            helper = Vector3.ProjectOnPlane(hit.point, transform.up);
+            plane.Raycast(ray, out var enter);
+            helper = ray.GetPoint(enter);
+//            helper = Vector3.ProjectOnPlane(hit.point, transform.up);
             helperDown = helper;
         }
 
@@ -99,7 +107,9 @@ public class MobileRotator : RotatorParent {
 
         if (grown && fadedIn) {
             GameController.rotatorClicked = false;
-
+            helper = Vector3.zero;
+            helperDown = Vector3.zero;
+            
             if (!GameController.rotating && !GameController.moving && !GameController.teleporting &&
                 Mathf.Abs(signedAngle) > ANGLEMIN) {
                 GameController.lastRotatorStrip = this;
@@ -116,10 +126,10 @@ public class MobileRotator : RotatorParent {
             //update helper position along transform's plane and calculate angle between it and mousedown helper position
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             plane.Raycast(ray, out var enter);
-
+            
             helper = ray.GetPoint(enter);
-
             signedAngle = Vector3.SignedAngle(helperDown, helper, transform.up);
+
         }
     }
 

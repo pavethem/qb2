@@ -162,11 +162,15 @@ public class Rotator : RotatorParent {
         signedAngle = 0f;
         
         plane = new Plane(transform.up, 0);
+        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out var hit, Mathf.Infinity,1<<LayerMask.NameToLayer("RotatorStrips"));
 
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit, Mathf.Infinity,1<<LayerMask.NameToLayer("RotatorStrips"));
+        plane.Raycast(ray, out var enter);
 
         //set helper to hitpoint
-        helper = Vector3.ProjectOnPlane(hit.point, transform.up);
+        helper= ray.GetPoint(enter);
+//        helper = Vector3.ProjectOnPlane(hit.point, transform.up);
         helperDown = helper;
 
     }

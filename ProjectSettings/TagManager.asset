@@ -19,6 +19,7 @@ TagManager:
   - spoke
   - teleporter
   - joint
+  - mobileimage
   layers:
   - Default
   - TransparentFX

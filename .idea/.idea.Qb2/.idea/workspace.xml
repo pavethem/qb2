@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f472f46a-df77-406a-8e6b-38180f5cbb3e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Collider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Qb2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MobileRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MobileRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/levels/level0.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/levels/level0.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,30 +19,35 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Rotator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/levels/level0.unity" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ButtonRotation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/levels/level12_final.unity" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Teleporter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/levels/level13_final.unity" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/levels/level1_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Shaders/DepthTransparent.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Blender/arrow.blend.meta" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A3ACC929-D602-4E3F-8E89-2CA6636AE123/7c/1ab75c29/Plane.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TeleporterCollider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DontDestroyOnLoad.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PedestalCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A3ACC929-D602-4E3F-8E89-2CA6636AE123/ac/3f534d70/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Teleporter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Rotator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level0.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Shaders/Blur.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Shaders/DepthTransparent.shader" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A3ACC929-D602-4E3F-8E89-2CA6636AE123/7a/9970cfe9/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level12_final.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotatorParent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MobileRotator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/levels/level1_final.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/QuickOutline/Scripts/Outline.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -55,15 +63,21 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/MoveAlongSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ArrowCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RotatorCollider.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RotateSpoke.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SliderRotation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ButtonRotation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PostprocessingBlur.cs" />
+        <option value="$PROJECT_DIR$/Assets/Shaders/Blur.shader" />
+        <option value="$PROJECT_DIR$/Assets/Shaders/Scissor.shader" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CameraScissor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LockCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RotatorParent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Rotator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/FadeInOut.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameRotator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Collider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MobileRotator.cs" />
       </list>
     </option>
   </component>
@@ -81,6 +95,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Library" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
@@ -148,6 +163,11 @@
       <workItem from="1570912313194" duration="5086000" />
       <workItem from="1570979682563" duration="1718000" />
       <workItem from="1570994631735" duration="862000" />
+      <workItem from="1571074745758" duration="1179000" />
+      <workItem from="1571076006461" duration="598000" />
+      <workItem from="1571084972188" duration="6785000" />
+      <workItem from="1571147779128" duration="21883000" />
+      <workItem from="1571219803335" duration="8270000" />
     </task>
     <task id="LOCAL-00001" summary="level 10 (yeah before level 9)">
       <created>1569356822924</created>
@@ -338,7 +358,35 @@
       <option name="project" value="LOCAL" />
       <updated>1570994971124</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added simple storage of current level via playerprefs&#10;also level back button">
+      <created>1571075770087</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1571075770087</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added blurry shader at the bottom of the screen for rotating on mobile plattforms">
+      <created>1571162261803</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1571162261803</updated>
+    </task>
+    <task id="LOCAL-00030" summary="mobile rotator">
+      <created>1571172586787</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1571172586787</updated>
+    </task>
+    <task id="LOCAL-00031" summary="reset button fix">
+      <created>1571222180429</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1571222180429</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,10 +410,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="level 10 (yeah before level 9)" />
-    <MESSAGE value="small fix for debug mode" />
-    <MESSAGE value="level 10" />
-    <MESSAGE value="slightly less grating teleporter sound" />
     <MESSAGE value="level 11" />
     <MESSAGE value="level 13 concept" />
     <MESSAGE value="reworked moving of bubs" />
@@ -387,7 +431,12 @@
     <MESSAGE value="added simple button game rotation for mobile" />
     <MESSAGE value="fixed bug with selectorcubes" />
     <MESSAGE value="actual fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="actual fix" />
+    <MESSAGE value="added simple storage of current level via playerprefs&#10;also level back button" />
+    <MESSAGE value="added blurry shader at the bottom of the screen for rotating on mobile plattforms" />
+    <MESSAGE value="mobile rotator" />
+    <MESSAGE value="reset button fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="reset button fix" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
