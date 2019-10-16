@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Image = UnityEngine.UI.Image;
 
 public class FadeInOut : MonoBehaviour {
 
@@ -11,11 +10,13 @@ public class FadeInOut : MonoBehaviour {
     private float alpha = 0;
     private float secondalpha = 0;
 
+    private bool fadingIn;
     private bool fadingOut;
     
     private void OnEnable() {
 
         fadingOut = false;
+        alpha = 0;
         
         if (gameObject.name.Equals("TeleporterParticles")) {
             ParticleSystem.Particle[] particles = new ParticleSystem.Particle[gameObject.GetComponent<ParticleSystem>().main.maxParticles];
@@ -25,7 +26,7 @@ public class FadeInOut : MonoBehaviour {
                 particles[i].startColor = new Color(color.r,color.g,color.b,alpha); 
             }
             gameObject.GetComponent<ParticleSystem>().SetParticles(particles);
-        } else if (gameObject.name.Equals("ResetButton") || gameObject.name.Equals("RightButton") || gameObject.name.Equals("LeftButton")) {
+        } else if (gameObject.name.Equals("ResetButton")) {
             color = gameObject.GetComponent<Image>().color;
             gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
             secondColor = gameObject.transform.GetChild(0).GetComponent<Text>().color;
@@ -46,7 +47,7 @@ public class FadeInOut : MonoBehaviour {
         }
         
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+
     }
     
     private void OnDisable() {
@@ -55,8 +56,8 @@ public class FadeInOut : MonoBehaviour {
         
     }
     
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (!isActiveAndEnabled) return;
         StartCoroutine(FadeIn());
     }
 
@@ -67,7 +68,7 @@ public class FadeInOut : MonoBehaviour {
             if (gameObject.name.Equals("TeleporterParticles")) {
                 color = gameObject.GetComponent<ParticleSystem>().main.startColor.color;
             }
-            else if (gameObject.name.Equals("ResetButton") || gameObject.name.Equals("RightButton") || gameObject.name.Equals("LeftButton")) {
+            else if (gameObject.name.Equals("ResetButton")) {
                 color = gameObject.GetComponent<Image>().color;
             } else if (gameObject.CompareTag("key")) {
                 color = gameObject.GetComponent<Outline>().OutlineColor;
@@ -83,7 +84,9 @@ public class FadeInOut : MonoBehaviour {
     }
 
     internal IEnumerator FadeIn() {
-        
+
+        fadingIn = true;
+
         float timeCount = 0;
 
         while (alpha < 1f) {
@@ -97,7 +100,7 @@ public class FadeInOut : MonoBehaviour {
                     particles[i].startColor = new Color(color.r,color.g,color.b,alpha);        
                 }
                 gameObject.GetComponent<ParticleSystem>().SetParticles(particles);
-            }else if (gameObject.name.Equals("ResetButton") || gameObject.name.Equals("RightButton") || gameObject.name.Equals("LeftButton")) {
+            }else if (gameObject.name.Equals("ResetButton")) {
                 gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
                 gameObject.transform.GetChild(0).GetComponent<Text>().color = new Color(secondColor.r, secondColor.g, secondColor.b, alpha);
             } else if (gameObject.CompareTag("key")) {
@@ -122,7 +125,7 @@ public class FadeInOut : MonoBehaviour {
                 particles[i].startColor = new Color(color.r,color.g,color.b,alpha);        
             }
             gameObject.GetComponent<ParticleSystem>().SetParticles(particles);
-        }else if (gameObject.name.Equals("ResetButton") || gameObject.name.Equals("RightButton") || gameObject.name.Equals("LeftButton")) {
+        }else if (gameObject.name.Equals("ResetButton")) {
             gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
             gameObject.transform.GetChild(0).GetComponent<Text>().color = new Color(secondColor.r, secondColor.g, secondColor.b, alpha);
         } else if (gameObject.CompareTag("key")) {
@@ -134,6 +137,8 @@ public class FadeInOut : MonoBehaviour {
             gameObject.GetComponent<Renderer>().material.color = new Color(color.r,color.g,color.b,alpha);
             
         }
+
+        fadingIn = false;
     }
     
     internal IEnumerator FadeOut(bool wait=true) {
@@ -154,7 +159,7 @@ public class FadeInOut : MonoBehaviour {
                 for (int i = 0; i < particleCount; i++) {
                     particles[i].startColor = new Color(color.r,color.g,color.b,alpha);        
                 }
-            }else if (gameObject.name.Equals("ResetButton") || gameObject.name.Equals("RightButton") || gameObject.name.Equals("LeftButton")) {
+            }else if (gameObject.name.Equals("ResetButton")) {
                 gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
                 gameObject.transform.GetChild(0).GetComponent<Text>().color = new Color(secondColor.r, secondColor.g, secondColor.b, alpha);
             } else if (gameObject.CompareTag("key")) {
@@ -178,7 +183,7 @@ public class FadeInOut : MonoBehaviour {
             for (int i = 0; i < particleCount; i++) {
                 particles[i].startColor = new Color(color.r,color.g,color.b,alpha);        
             }
-        }else if (gameObject.name.Equals("ResetButton") || gameObject.name.Equals("RightButton") || gameObject.name.Equals("LeftButton")) {
+        }else if (gameObject.name.Equals("ResetButton")) {
             gameObject.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
             gameObject.transform.GetChild(0).GetComponent<Text>().color = new Color(secondColor.r, secondColor.g, secondColor.b, alpha);
         } else if (gameObject.CompareTag("key")) {

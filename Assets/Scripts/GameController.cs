@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -111,7 +112,8 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
 
         if (Application.isMobilePlatform) {
-            GameObject.Find("Canvas").transform.Find("MobileImage").gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<Image>().enabled = true;
+            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
             GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
             GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
@@ -122,6 +124,8 @@ public class GameController : MonoBehaviour {
             
         }
 
+        GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(false);
+        
         cubeCount = 0;
         gameOver = false;
         isLoadingNextLevel = false;
