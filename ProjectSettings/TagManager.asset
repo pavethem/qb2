@@ -20,6 +20,7 @@ TagManager:
   - teleporter
   - joint
   - mobileimage
+  - curved
   layers:
   - Default
   - TransparentFX

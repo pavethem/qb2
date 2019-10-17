@@ -6,50 +6,43 @@ using UnityEngine.UI;
 public class MobileRotator : RotatorParent {
     
     public float rotationSpeed;
-    
-    //fade in resetButton when game has been rotated at least once
-    private bool hasBeenRotated;
-    
-    //helper to calculate angle between mouseDown and MouseUp
-    private Vector3 helper;
-    //basically ray hit position on mousedown
-    private Vector3 helperDown;
-    //plane of this rotatorStrip
-    private Plane plane;
-
-    private const float ANGLEMIN = 3f;
-
-    private Color rotatorColor;
-
-    private Quaternion reverseFrom;
 
     public AudioClip to;
     public AudioClip fro;
 
+    //if rotatorstrip is selected
     private bool clicked;
     private bool mouseOverObject;
+    //states of the rotatorstrip
     private bool grown;
     private bool shrunk = true;
     private bool fadedIn;
     private bool fadedOut = true;
     private Vector3 originalScale;
     private Vector3 targetScale;
+
+    private const float targetScaleXZ = 1.1f;
+    private const float targetScaleY = 4f;
+
+    //save routines so you can cancel them at any time
     private Coroutine fadeInRoutine;
     private Coroutine fadeOutRoutine;
     private Coroutine growRoutine;
     private Coroutine shrinkRoutine;
 
     private void Awake() {
-
-        rotatorColor = gameObject.GetComponentInParent<MeshRenderer>().material.color;
-        rotatorColor.a = 1.0f;
+        
         originalScale = transform.parent.transform.localScale;
-        targetScale = new Vector3(transform.parent.transform.localScale.x * 1.1f,
-            transform.parent.transform.localScale.y * 4, transform.parent.transform.localScale.z * 1.1f);
+        targetScale = new Vector3(transform.parent.transform.localScale.x * targetScaleXZ,
+            transform.parent.transform.localScale.y * targetScaleY, transform.parent.transform.localScale.z * targetScaleXZ);
+        
+        base.Setup();
     }
 
     private void Update() {
 
+        //if rotatorstrip is selected but mouse clicks anywhere else on the screen (excluding the game rotation area on the bottom)
+        //shrink rotatorstrip again
         if(Input.GetMouseButtonDown(0) && !mouseOverObject && clicked && 
            Input.mousePosition.y > GameObject.FindWithTag("mobileimage").GetComponent<RectTransform>().rect.height) {
             signedAngle = 0;
@@ -81,22 +74,10 @@ public class MobileRotator : RotatorParent {
         
         if (!enabled) return;
 
+        //set up rotation when rotatorstrip is grown
         if (grown && fadedIn) {
-            GameController.rotatorClicked = true;
-
-            signedAngle = 0f;
-
-            plane = new Plane(transform.up, 0);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out var hit, Mathf.Infinity,
-                1 << LayerMask.NameToLayer("RotatorStrips"));
-
-            //set helper to hitpoint
-            plane.Raycast(ray, out var enter);
-            helper = ray.GetPoint(enter);
-//            helper = Vector3.ProjectOnPlane(hit.point, transform.up);
-            helperDown = helper;
+            
+            base.ResetValues();
         }
 
     }
@@ -105,13 +86,19 @@ public class MobileRotator : RotatorParent {
         
         if (!enabled) return;
 
+        //start rotation when rotatorstrip is grown
         if (grown && fadedIn) {
             GameController.rotatorClicked = false;
             helper = Vector3.zero;
             helperDown = Vector3.zero;
             
-            if (!GameController.rotating && !GameController.moving && !GameController.teleporting &&
-                Mathf.Abs(signedAngle) > ANGLEMIN) {
+            if (!curved.gameObject.GetComponent<MeshRenderer>().enabled) {
+                lineIndex = 0;
+                lr.positionCount = 0;
+            }
+            
+            if (!GameController.rotating && !GameController.moving && !GameController.teleporting && 
+                curved.gameObject.GetComponent<MeshRenderer>().enabled) {
                 GameController.lastRotatorStrip = this;
                 base.rotateRoutine = StartCoroutine(Rotate());
             }
@@ -123,20 +110,17 @@ public class MobileRotator : RotatorParent {
         if (!enabled) return;
 
         if (grown && fadedIn) {
-            //update helper position along transform's plane and calculate angle between it and mousedown helper position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            plane.Raycast(ray, out var enter);
-            
-            helper = ray.GetPoint(enter);
-            signedAngle = Vector3.SignedAngle(helperDown, helper, transform.up);
+           
+            DragMouse();
 
         }
     }
 
+    //used only when rotatorstrip is NOT grown
     private void OnMouseUpAsButton() {
 
         if(!enabled) return;
-
+        
         if (shrunk && fadedOut && !fadedIn && !grown) {
             if (!clicked && gameObject.GetComponentInParent<MeshRenderer>().material.color.a == 1.0f) {
                 if(fadeOutRoutine != null)

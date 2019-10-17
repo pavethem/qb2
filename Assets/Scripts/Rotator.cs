@@ -8,27 +8,11 @@ public class Rotator : RotatorParent {
     
     public float rotationSpeed;
     
-    //fade in resetButton when game has been rotated at least once
-    private bool hasBeenRotated;
-    
-    //helper to calculate angle between mouseDown and MouseUp
-    private Vector3 helper;
-    //basically ray hit position on mousedown
-    private Vector3 helperDown;
-    //plane of this rotatorStrip
-    private Plane plane;
-
-    private const float ANGLEMIN = 3f;
-
-    private Color rotatorColor;
-
     //needed for fading to white while hovering over rotatorStrip
     private float hoverTime;
     private bool isClicked;
     private bool isHovering;
-
-    private Quaternion reverseFrom;
-
+    
     public AudioClip to;
     public AudioClip fro;
 
@@ -36,7 +20,6 @@ public class Rotator : RotatorParent {
     private string[] acceptedInputStrings;
     //wait a bit before you can rotate with keys again
     private float keyDownTime;
-    private const float MINKEYDOWNTIME = 0.9f;
     private bool keyPressed;
 
     private void Awake() {
@@ -55,12 +38,9 @@ public class Rotator : RotatorParent {
                 acceptedInputStrings = new [] {"q", "e"};
                 break;
             }
-
         }
 
-        rotatorColor = gameObject.GetComponentInParent<MeshRenderer>().material.color;
-        rotatorColor.a = 1.0f;
-
+        base.Setup();
     }
 
     IEnumerator Rotate(bool reverse = false) {
@@ -77,7 +57,7 @@ public class Rotator : RotatorParent {
         
         hasBeenRotated = true;
 
-        if(signedAngle <= 0)
+        if(lastAngle <= 0)
             gameObject.GetComponent<AudioSource>().PlayOneShot(to);
         else
             gameObject.GetComponent<AudioSource>().PlayOneShot(fro);
@@ -88,7 +68,7 @@ public class Rotator : RotatorParent {
         
         //flip rotation direction by sign
         Quaternion tempFrom = thing.transform.rotation;
-        Quaternion tempTo = Quaternion.AngleAxis(Mathf.Sign(signedAngle) * 90f, transform.up) * tempFrom;
+        Quaternion tempTo = Quaternion.AngleAxis(Mathf.Sign(lastAngle) * 90f, transform.up) * tempFrom;
    
         if (reverse)
             tempTo = reverseFrom;
@@ -105,7 +85,7 @@ public class Rotator : RotatorParent {
         thing.transform.rotation = tempTo;
         GameController.rotating = false;
         GameController.lastRotatorStrip = null;
-
+        
     }
 
     private IEnumerator OnMouseOver() {
@@ -159,20 +139,8 @@ public class Rotator : RotatorParent {
         
         gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
         
-        signedAngle = 0f;
+        ResetValues();
         
-        plane = new Plane(transform.up, 0);
-        
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out var hit, Mathf.Infinity,1<<LayerMask.NameToLayer("RotatorStrips"));
-
-        plane.Raycast(ray, out var enter);
-
-        //set helper to hitpoint
-        helper= ray.GetPoint(enter);
-//        helper = Vector3.ProjectOnPlane(hit.point, transform.up);
-        helperDown = helper;
-
     }
     
     private void OnMouseUp() {
@@ -184,8 +152,14 @@ public class Rotator : RotatorParent {
         
         if(!isHovering)
             StartCoroutine(nameof(OnMouseExit));
-        
-        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && Mathf.Abs(signedAngle) > ANGLEMIN) {
+
+        if (!curved.gameObject.GetComponent<MeshRenderer>().enabled) {
+            lineIndex = 0;
+            lr.positionCount = 0;
+        }
+
+        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && 
+            curved.gameObject.GetComponent<MeshRenderer>().enabled) {
             GameController.lastRotatorStrip = this;
             base.rotateRoutine = StartCoroutine(Rotate());
         }
@@ -195,18 +169,12 @@ public class Rotator : RotatorParent {
         
         if (!enabled) return;
 
-        //update helper position along transform's plane and calculate angle between it and mousedown helper position
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        plane.Raycast(ray, out var enter);
-
-        helper= ray.GetPoint(enter);
-        
-        signedAngle = Vector3.SignedAngle(helperDown, helper, transform.up);
+        DragMouse();
 
     }
 
     private void Update() {
-
+        
         //rotate with keys
         if (Input.anyKeyDown && !GameController.rotating && !GameController.moving && !GameController.teleporting) {
             if (acceptedInputStrings.Contains(Input.inputString)) {
