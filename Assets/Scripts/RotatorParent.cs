@@ -146,9 +146,9 @@ public class RotatorParent : MonoBehaviour {
         
         //clear last linerenders
         curved.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
-        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
-        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+        GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+        GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+        GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
 
         //set first line renderer position
         lineIndex = 0;

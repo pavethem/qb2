@@ -269,6 +269,10 @@ public class GameController : MonoBehaviour {
             StartCoroutine(nameof(LoadYourAsyncScene),"test");
         #else
             Save();
+            GameObject.FindWithTag("curved").gameObject.GetComponent<MeshRenderer>().enabled = false;
+            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
             StartCoroutine(nameof(LoadYourAsyncScene),scene);
         #endif
 

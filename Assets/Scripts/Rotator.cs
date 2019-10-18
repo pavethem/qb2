@@ -176,12 +176,10 @@ public class Rotator : RotatorParent {
     private void DrawArrow() {
         //clear last linerenders
         curved.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>()
-            .positionCount = 0;
-        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>()
-            .positionCount = 0;
-        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>()
-            .positionCount = 0;
+        GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+        GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+        GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
+
 
         //camera position if it was on the same plane as rotatorStripX
         Vector3 correctedCameraPosition = new Vector3(Camera.main.transform.position.x, 0,
