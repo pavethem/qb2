@@ -40,6 +40,8 @@ public class RotatorParent : MonoBehaviour {
         lr.positionCount = 0;
 
         curved = GameObject.FindWithTag("curved");
+        if(curved != null)
+            curved.gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     internal void DragMouse() {
@@ -49,7 +51,7 @@ public class RotatorParent : MonoBehaviour {
         plane.Raycast(ray, out var enter);
 
         helper = ray.GetPoint(enter);
-
+        
         signedAngle = Vector3.SignedAngle(helperDown, helper, transform.up);
 
         if (lr.positionCount > lineIndex) {
@@ -87,34 +89,40 @@ public class RotatorParent : MonoBehaviour {
                     lineIndex++;
                     lr.positionCount = lineIndex + 1;
                     lr.SetPosition(lineIndex, toPosition);
-
-                    //set and correct curved position and rotation
+                    
                     if (Vector3.Distance(lr.GetPosition(0), toPosition) >
                         curved.gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2) {
-                        curved.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                        curved.transform.position = toPosition;
-
-                        curved.transform.LookAt(Vector3.zero);
-
-                        if (CompareTag("rotatorStripX")) {
-                            if (Vector3.SignedAngle(from, toPosition, transform.up) > 0)
-                                curved.transform.RotateAround(curved.transform.position, curved.transform.forward,
-                                    180f);
-                        }
-                        else if (CompareTag("rotatorStripY")) {
-                            curved.transform.RotateAround(curved.transform.position, curved.transform.forward, 270f);
-                            if (Vector3.SignedAngle(from, toPosition, transform.forward) > 0)
-                                curved.transform.RotateAround(curved.transform.position, curved.transform.forward,
-                                    180f);
-                        }
-                        else if (CompareTag("rotatorStripZ")) {
-                            curved.transform.RotateAround(curved.transform.position, curved.transform.forward, 90f);
-                            if (Vector3.SignedAngle(from, toPosition, transform.forward) > 0)
-                                curved.transform.RotateAround(curved.transform.position, curved.transform.forward,
-                                    180f);
-                        }
+                        SetCurved(from,toPosition);
                     }
                 }
+            }
+        }
+    }
+
+    internal void SetCurved(Vector3 from, Vector3 toPosition) {
+        {
+            //set and correct curved position and rotation
+            curved.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            curved.transform.position = toPosition;
+
+            curved.transform.LookAt(Vector3.zero);
+
+            if (CompareTag("rotatorStripX")) {
+                if (Vector3.SignedAngle(from, toPosition, transform.up) > 0)
+                    curved.transform.RotateAround(curved.transform.position, curved.transform.forward,
+                        180f);
+            }
+            else if (CompareTag("rotatorStripY")) {
+                curved.transform.RotateAround(curved.transform.position, curved.transform.forward, 270f);
+                if (Vector3.SignedAngle(from, toPosition, transform.forward) > 0)
+                    curved.transform.RotateAround(curved.transform.position, curved.transform.forward,
+                        180f);
+            }
+            else if (CompareTag("rotatorStripZ")) {
+                curved.transform.RotateAround(curved.transform.position, curved.transform.forward, 90f);
+                if (Vector3.SignedAngle(from, toPosition, transform.forward) > 0)
+                    curved.transform.RotateAround(curved.transform.position, curved.transform.forward,
+                        180f);
             }
         }
     }

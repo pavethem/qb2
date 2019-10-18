@@ -173,6 +173,77 @@ public class Rotator : RotatorParent {
 
     }
 
+    private void DrawArrow() {
+        //clear last linerenders
+        curved.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>()
+            .positionCount = 0;
+        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>()
+            .positionCount = 0;
+        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>()
+            .positionCount = 0;
+
+        //camera position if it was on the same plane as rotatorStripX
+        Vector3 correctedCameraPosition = new Vector3(Camera.main.transform.position.x, 0,
+            Camera.main.transform.position.z);
+        Ray ray = new Ray(transform.position, correctedCameraPosition);
+        
+        helper = ray.GetPoint(transform.parent.GetComponent<MeshRenderer>().bounds.size.x / 2);
+
+        //ray doesn't really work with any rotatorstrip other than X (and even then it only works when rotation is not free)
+        //so instead use closest intersection as starting point for arrow
+        if (CompareTag("rotatorStripY") || CompareTag("rotatorStripZ")) {
+            float distance = Mathf.Infinity;
+            foreach (Transform intersection in transform.parent.transform) {
+                if (intersection.name == "intersection") {
+                    float temp = Vector3.Distance(correctedCameraPosition, intersection.transform.position);
+                    if (temp < distance) {
+                        distance = temp;
+                        helper = intersection.position;
+                    }
+                }
+            }
+        }
+
+        //correct arrow position
+        float radius = 0;
+        Vector3 toPosition = helper.normalized;
+        if (CompareTag("rotatorStripX")) {
+            radius = transform.parent.GetComponent<MeshRenderer>().bounds.size.x / 2;
+            toPosition = new Vector3(helper.normalized.x * radius, -1, helper.normalized.z * radius);
+        }
+        else if (CompareTag("rotatorStripY")) {
+//            radius = transform.parent.GetComponent<MeshRenderer>().bounds.size.y / 2;
+            toPosition = new Vector3(helper.x, helper.y, -1);
+        }
+        else if (CompareTag("rotatorStripZ")) {
+//            radius = transform.parent.GetComponent<MeshRenderer>().bounds.size.z / 2;
+            toPosition = new Vector3(-1, helper.y, helper.z);
+        }
+
+        lineIndex = 0;
+        lr.positionCount = 1;
+        lr.SetPosition(lineIndex, toPosition);
+
+        //draw slerped 28 degree arrow in given direction
+        Vector3 from = toPosition;
+        Quaternion toRotation = Quaternion.AngleAxis(lastAngle * 28f, transform.up);
+        Vector3 goalPosition = toRotation * toPosition;
+
+        float step = 0;
+        while (!GameController.Compare(goalPosition, toPosition)) {
+            if (lineIndex > 100) break;
+
+            lineIndex++;
+            lr.positionCount = lineIndex + 1;
+            toPosition = Vector3.Slerp(from, goalPosition, step);
+            lr.SetPosition(lineIndex, toPosition);
+            step += 0.1f;
+        }
+
+        SetCurved(from, toPosition);
+    }
+
     private void Update() {
         
         //rotate with keys
@@ -181,19 +252,25 @@ public class Rotator : RotatorParent {
                 keyPressed = true;
                 if (acceptedInputStrings[0] == Input.inputString) {
                     signedAngle = 90f;
+                    lastAngle = 1;
                     #if (DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
                     #endif
-                    if(keyDownTime==0)
+                    if (keyDownTime == 0) {
+                        DrawArrow();
                         base.rotateRoutine = StartCoroutine(Rotate());
+                    }
                 }
                 else if (acceptedInputStrings[1] == Input.inputString) {
                     signedAngle = -90f;
+                    lastAngle = -1;
                     #if (DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
                     #endif
-                    if(keyDownTime==0)
+                    if (keyDownTime == 0) {
+                        DrawArrow();
                         base.rotateRoutine = StartCoroutine(Rotate());
+                    }
                 }
                 GameController.lastRotatorStrip = this;
             }
