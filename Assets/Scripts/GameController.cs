@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
-    public static bool DEBUG = true;
+    public static bool DEBUG = false;
 
     public static GameController instance = null;
     
