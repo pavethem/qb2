@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public static bool DEBUG = false;
+    public DebugObject debugScriptableObject;
 
     public static GameController instance = null;
     
@@ -83,6 +84,8 @@ public class GameController : MonoBehaviour {
             reflectionCameraPosition = GameObject.Find("ReflectionCamera").transform.position;
             reflectionCameraRotation = GameObject.Find("ReflectionCamera").transform.rotation;
             gravity = Physics.gravity;
+
+            DEBUG = debugScriptableObject.DEBUG;
 
             currentScene = 1;
             if (DEBUG) {
