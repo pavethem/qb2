@@ -1,5 +1,4 @@
-﻿#undef DEBUG
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
+
+    public static bool DEBUG = true;
 
     public static GameController instance = null;
     
@@ -54,13 +55,13 @@ public class GameController : MonoBehaviour {
 
     public AudioClip transition;
     
+    //DEBUG STUFF REMOVE
     //use Z to go to last rotation
-    #if DEBUG
     public static Stack<Quaternion> lastrotations;
     private float solveTimeout = 0;
     private List<string> inputs = new List<string>();
     private List<string> solved = new List<string>();
-#endif
+    
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -84,14 +85,14 @@ public class GameController : MonoBehaviour {
             gravity = Physics.gravity;
 
             currentScene = 1;
-            #if (DEBUG)
+            if (DEBUG) {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
-            #else
+            }
+            else {
                 Load();
                 SceneManager.LoadScene("level" + currentScene + "_final");
-            #endif
-
+            }
         }
         
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -148,9 +149,8 @@ public class GameController : MonoBehaviour {
             Destroy(child.gameObject);
         }
         
-        #if (DEBUG)
-        lastrotations.Clear();
-        #endif
+        if (DEBUG)
+            lastrotations.Clear();
 
         Camera.main.transform.rotation = cameraRotation;
         Camera.main.transform.position = cameraPosition;
@@ -170,11 +170,11 @@ public class GameController : MonoBehaviour {
 
     void LateUpdate() {
 
-        #if (DEBUG)
-        if(!rotating && !moving && !teleporting)
-//            Solve();
-        #endif
-        
+        if (DEBUG) {
+//            if (!rotating && !moving && !teleporting)
+            //            Solve();
+        }
+
         //fade in Audio
         if (gameObject.GetComponent<AudioSource>().volume < 0.5f)
         {
@@ -195,12 +195,12 @@ public class GameController : MonoBehaviour {
                 currentScene -= 2;
             GameOver();
         }
-        
-        #if (DEBUG)
-        if (Input.GetKeyUp(KeyCode.Y)) {
-            GameObject.FindWithTag("thing").transform.rotation = lastrotations.Pop();
+
+        if (DEBUG) {
+            if (Input.GetKeyUp(KeyCode.Y)) {
+                GameObject.FindWithTag("thing").transform.rotation = lastrotations.Pop();
+            }
         }
-        #endif
 
         if (gameOver && !isLoadingNextLevel) {
             
@@ -265,18 +265,21 @@ public class GameController : MonoBehaviour {
         isLoadingNextLevel = true;
         currentScene++;
         string scene = "level" + currentScene + "_final";
-        #if (DEBUG)
+        if (DEBUG)
             StartCoroutine(nameof(LoadYourAsyncScene),"test");
-        #else
+        else {
             Save();
             GameObject.FindWithTag("curved").gameObject.GetComponent<MeshRenderer>().enabled = false;
-            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripX").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
-            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripY").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
-            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject.GetComponent<LineRenderer>().positionCount = 0;
-            StartCoroutine(nameof(LoadYourAsyncScene),scene);
-        #endif
+            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripX").transform.GetChild(0).gameObject
+                .GetComponent<LineRenderer>().positionCount = 0;
+            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripY").transform.GetChild(0).gameObject
+                .GetComponent<LineRenderer>().positionCount = 0;
+            GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject
+                .GetComponent<LineRenderer>().positionCount = 0;
+            StartCoroutine(nameof(LoadYourAsyncScene), scene);
+        }
 
-        
+
     }
     
     IEnumerator LoadYourAsyncScene(string scene)
@@ -312,9 +315,7 @@ public class GameController : MonoBehaviour {
         currentScene = PlayerPrefs.GetInt("currentScene",1);
     }
     
-#if (DEBUG)
     private void Solve() {
-
 
         int random = Random.Range(1, 7);
         solveTimeout += Time.deltaTime;
@@ -412,7 +413,6 @@ public class GameController : MonoBehaviour {
         }
 
     }
-#endif
 }
 
 

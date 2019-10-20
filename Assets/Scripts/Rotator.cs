@@ -1,5 +1,4 @@
-﻿#undef DEBUG
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,13 +43,13 @@ public class Rotator : RotatorParent {
     }
 
     IEnumerator Rotate(bool reverse = false) {
-        
-        #if (DEBUG)
-        if (reverse) {
-            if(GameController.lastrotations.Count > 0)
-                GameController.lastrotations.Pop();
+
+        if (GameController.DEBUG) {
+            if (reverse) {
+                if (GameController.lastrotations.Count > 0)
+                    GameController.lastrotations.Pop();
+            }
         }
-        #endif
 
         if(!hasBeenRotated)
             GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(true);
@@ -251,9 +250,8 @@ public class Rotator : RotatorParent {
                 if (acceptedInputStrings[0] == Input.inputString) {
                     signedAngle = 90f;
                     lastAngle = 1;
-                    #if (DEBUG)
+                    if (GameController.DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
-                    #endif
                     if (keyDownTime == 0) {
                         DrawArrow();
                         base.rotateRoutine = StartCoroutine(Rotate());
@@ -262,9 +260,8 @@ public class Rotator : RotatorParent {
                 else if (acceptedInputStrings[1] == Input.inputString) {
                     signedAngle = -90f;
                     lastAngle = -1;
-                    #if (DEBUG)
+                    if (GameController.DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
-                    #endif
                     if (keyDownTime == 0) {
                         DrawArrow();
                         base.rotateRoutine = StartCoroutine(Rotate());
