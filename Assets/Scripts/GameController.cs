@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour {
 
@@ -119,13 +121,16 @@ public class GameController : MonoBehaviour {
             GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<Image>().enabled = true;
             GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
-            GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
-            GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
-            GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().enabled = false;
-            GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = true;
-            GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = true;
-            GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
-            
+            try {
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().enabled = false;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = true;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = true;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
+            }
+            catch (NullReferenceException e) {}
+           
         }
 
         GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(false);

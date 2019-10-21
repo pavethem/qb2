@@ -44,7 +44,7 @@ public class GameRotator : MonoBehaviour, IDragHandler {
             }
         }
         else {
-            if (!GameController.gameOver && !GameController.fallingLock && eventData.pointerId == -1)  {
+            if (!GameController.gameOver && !GameController.fallingLock)  {
                 
                 Camera.main.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
                 //            Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
