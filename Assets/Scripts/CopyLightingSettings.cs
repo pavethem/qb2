@@ -1,7 +1,6 @@
-﻿
+﻿#if UNITY_EDITOR
 using System.Reflection;
 using UnityEditor.SceneManagement;
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
