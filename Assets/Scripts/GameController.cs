@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
 
         if (Application.isMobilePlatform) {
-            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<Image>().enabled = true;
+            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<RawImage>().enabled = true;
             GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
             try {

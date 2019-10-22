@@ -1,93 +1,219 @@
-﻿Shader "Custom/Window"
-{
-	Properties
-	{
-		_ClearColor ("Clear Color", Color) = (1,1,1,1)
-		_FogColor ("Fog Color", Color) = (1,1,1,1)
-		_BlurRadius ("Blur Radius", float) = 3
-		_MaxAge("Max Age", float) = 3
-	}
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-	SubShader
-	{
-		Tags
-        {
-            "Queue" = "Transparent"
-        }
-
-        // Grab the screen behind the object into _BGTex
-        GrabPass
-        {
-            "_BGTex"
-        }
-
-		Pass
-		{
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#include "UnityCG.cginc"
-			#include "blur.cginc"
-			
-			// Properties
-			// set in material
-			uniform float4 _ClearColor;
-			uniform float4 _FogColor;
-			uniform float _BlurRadius;
-			uniform float _MaxAge;
-			// grab pass
-			uniform sampler2D _BGTex;
-			uniform float4 _BGTex_TexelSize;
-			// set by script
-			uniform sampler2D _MouseMap;
-			uniform float _MaxSeconds;
-
-			struct vertexInput
-			{
-				float4 vertex : POSITION;
-				float3 texCoord : TEXCOORD0;
-			};
-
-			struct vertexOutput
-			{
-				float4 pos : SV_POSITION;
-				float3 texCoord : TEXCOORD0;
-				float4 grabPos : TEXCOORD1;
-			};
-
-			vertexOutput vert(vertexInput input)
-			{
-				vertexOutput output;
-				output.pos = UnityObjectToClipPos(input.vertex);
-				output.grabPos = ComputeGrabScreenPos(output.pos);
-				output.texCoord = input.texCoord;
-				return output;
+Shader "Custom/ImageBlur" {
+    Properties {
+        _Color ("Main Color", Color) = (1,1,1,1)
+        _AddedColor ("Added Color", Color) = (0,0,0,0)
+        _MainTex ("Tint Color (RGB)", 2D) = "white" {}
+        _Size ("Size", Range(0, 200)) = 1
+		// these six unused properties are required when a shader
+		 // is used in the UI system, or you get a warning.
+		 // look to UI-Default.shader to see these.
+		 _StencilComp ("Stencil Comparison", Float) = 8
+		 _Stencil ("Stencil ID", Float) = 0
+		 _StencilOp ("Stencil Operation", Float) = 0
+		 _StencilWriteMask ("Stencil Write Mask", Float) = 255
+		 _StencilReadMask ("Stencil Read Mask", Float) = 255
+		 _ColorMask ("Color Mask", Float) = 15
+		 // see for example
+		 // http://answers.unity3d.com/questions/980924/ui-mask-with-shader.html
+    }	 
+ 
+    Category {
+ 
+        Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Opaque" }
+ 
+         SubShader {
+     		Stencil	{
+				Ref [_Stencil]
+				Comp [_StencilComp]
+				Pass [_StencilOp] 
+				ReadMask [_StencilReadMask]
+				WriteMask [_StencilWriteMask]
 			}
+            
+            Blend SrcAlpha OneMinusSrcAlpha
 
-			float4 frag(vertexOutput input) : COLOR
-			{
-				float4 bg = tex2Dproj(_BGTex, input.grabPos);
-				// younger = redder
-				float timeDrawn = tex2D(_MouseMap, input.texCoord.xy).r;
-				float age = clamp(_Time.y - timeDrawn, 0.0001, _Time.y);
-				float percentMaxAge = saturate(age / _MaxAge); 
-				//return float4(percentMaxAge, 0, 0, 1); 
-				
-				// older = higher percentMaxAge = more blur
-				float blurRadius = _BlurRadius * percentMaxAge;
-				float4 color = (1-percentMaxAge)*_ClearColor + percentMaxAge*_FogColor;
 
-				float4 blurX = gaussianBlur(float2(1,0), input.grabPos, _BGTex_TexelSize.z, _BGTex, blurRadius);
-				float4 blurY = gaussianBlur(float2(0,1), input.grabPos, _BGTex_TexelSize.w, _BGTex, blurRadius);
-				return (blurX + blurY) * color;
+            GrabPass {                    
+                Tags { "LightMode" = "Always" }
+            }
 
-				// TEST
-				//float blurRadius = floor(_BlurRadius * mouseSample.r);
-				//return mouseSample; // test mouse map
-				//float noSmudge = mouseSample.r != 0; // test erasing blur
-			}
+            Pass {
+                Tags { "LightMode" = "Always" }
+             
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+                #pragma fragmentoption ARB_precision_hint_fastest
+                #include "UnityCG.cginc"
+             
+                struct appdata_t {
+                    float4 vertex : POSITION;
+                    float2 texcoord: TEXCOORD0;
+                };
+             
+                struct v2f {
+                    float4 vertex : POSITION;
+                    float4 uvgrab : TEXCOORD0;
+                };
+             
+                v2f vert (appdata_t v) {
+                    v2f o;
+                    o.vertex = UnityObjectToClipPos(v.vertex);
+                    #if UNITY_UV_STARTS_AT_TOP
+                    float scale = -1.0;
+                    #else
+                    float scale = 1.0;
+                    #endif
+                    o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y*scale) + o.vertex.w) * 0.5;
+                    o.uvgrab.zw = o.vertex.zw;
+                    return o;
+                }
+             
+                sampler2D _GrabTexture;
+                float4 _GrabTexture_TexelSize;
+                float _Size;
+             
+                half4 frag( v2f i ) : COLOR {
+                 
+                    half4 sum = half4(0,0,0,0);
+                    #define GRABPIXEL(weight,kernelx) tex2Dproj( _GrabTexture, UNITY_PROJ_COORD(float4(i.uvgrab.x + _GrabTexture_TexelSize.x * kernelx*_Size, i.uvgrab.y, i.uvgrab.z, i.uvgrab.w))) * weight
+                    sum += GRABPIXEL(0.05, -4.0);
+                    sum += GRABPIXEL(0.09, -3.0);
+                    sum += GRABPIXEL(0.12, -2.0);
+                    sum += GRABPIXEL(0.15, -1.0);
+                    sum += GRABPIXEL(0.18,  0.0);
+                    sum += GRABPIXEL(0.15, +1.0);
+                    sum += GRABPIXEL(0.12, +2.0);
+                    sum += GRABPIXEL(0.09, +3.0);
+                    sum += GRABPIXEL(0.05, +4.0);
+                 
+                    return sum;
+                }
+                ENDCG
+            }
+ 
+            GrabPass {                        
+                Tags { "LightMode" = "Always" }
+            }
+            Pass {
+                Tags { "LightMode" = "Always" }
+             
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+                #pragma fragmentoption ARB_precision_hint_fastest
+                #include "UnityCG.cginc"
+             
+                struct appdata_t {
+                    float4 vertex : POSITION;
+                    float2 texcoord: TEXCOORD0;
+                };
+             
+                struct v2f {
+                    float4 vertex : POSITION;
+                    float4 uvgrab : TEXCOORD0;
+                };
+             
+                v2f vert (appdata_t v) {
+                    v2f o;
+                    o.vertex = UnityObjectToClipPos(v.vertex);
+                    #if UNITY_UV_STARTS_AT_TOP
+                    float scale = -1.0;
+                    #else
+                    float scale = 1.0;
+                    #endif
+                    o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y*scale) + o.vertex.w) * 0.5;
+                    o.uvgrab.zw = o.vertex.zw;
+                    return o;
+                }
+             
+                sampler2D _GrabTexture;
+                float4 _GrabTexture_TexelSize;
+                float _Size;
+             
+                half4 frag( v2f i ) : COLOR {
+                 
+                    half4 sum = half4(0,0,0,0);
+                    #define GRABPIXEL(weight,kernely) tex2Dproj( _GrabTexture, UNITY_PROJ_COORD(float4(i.uvgrab.x, i.uvgrab.y + _GrabTexture_TexelSize.y * kernely*_Size, i.uvgrab.z, i.uvgrab.w))) * weight
+                 
+                    sum += GRABPIXEL(0.05, -4.0);
+                    sum += GRABPIXEL(0.09, -3.0);
+                    sum += GRABPIXEL(0.12, -2.0);
+                    sum += GRABPIXEL(0.15, -1.0);
+                    sum += GRABPIXEL(0.18,  0.0);
+                    sum += GRABPIXEL(0.15, +1.0);
+                    sum += GRABPIXEL(0.12, +2.0);
+                    sum += GRABPIXEL(0.09, +3.0);
+                    sum += GRABPIXEL(0.05, +4.0);
+                 
+                    return sum;
+                }
+                ENDCG
+            }
+         
+            GrabPass {                        
+                Tags { "LightMode" = "Always" }
+            }
+            Pass {
+                Tags { "LightMode" = "Always" }
+             
+                CGPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+                #pragma fragmentoption ARB_precision_hint_fastest
+                #include "UnityCG.cginc"
+             
+                struct appdata_t {
+                    float4 vertex : POSITION;
+                    float2 texcoord: TEXCOORD0;
+                };
+             
+                struct v2f {
+                    float4 vertex : POSITION;
+                    float4 uvgrab : TEXCOORD0;
+                    float2 uvmain : TEXCOORD1;
+                };
+             
+                float4 _MainTex_ST;
 
-			ENDCG
-		}
-	}
+             
+                v2f vert (appdata_t v) {
+                    v2f o;
+                    o.vertex = UnityObjectToClipPos(v.vertex);
+                    #if UNITY_UV_STARTS_AT_TOP
+                    float scale = -1.0;
+                    #else
+                    float scale = 1.0;
+                    #endif
+                    o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y*scale) + o.vertex.w) * 0.5;
+                    o.uvgrab.zw = o.vertex.zw;
+                    o.uvmain = TRANSFORM_TEX( v.texcoord, _MainTex );
+                    
+                    return o;
+                }
+             
+                fixed4 _Color;
+                fixed4 _AddedColor;
+                sampler2D _GrabTexture;
+                float4 _GrabTexture_TexelSize;
+                sampler2D _MainTex;
+             
+                half4 frag( v2f i ) : COLOR {
+             
+                 
+                    half4 col = tex2Dproj( _GrabTexture, UNITY_PROJ_COORD(i.uvgrab));
+                    half4 tint = tex2D( _MainTex, i.uvmain ) * _Color;
+                    
+                   
+                    half4 finalColor = col * tint;
+                    
+                
+                    return finalColor + _AddedColor;
+                }
+                ENDCG
+            }
+        }
+    }
 }
