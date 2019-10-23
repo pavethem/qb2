@@ -13,7 +13,7 @@ public class GameRotator : MonoBehaviour, IDragHandler {
 //    public GameObject background;
 
     private void Start() {
-        ADJUST_FACTOR = 10 * (float) Screen.width / Screen.height;
+        ADJUST_FACTOR = 5 * (float) Screen.width / Screen.height;
     }
 
     //rotate the background objects around the puzzle

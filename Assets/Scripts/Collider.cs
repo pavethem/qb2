@@ -14,7 +14,7 @@ public class Collider : MonoBehaviour {
 				collided = true;
 			}
 			else
-				stayTime += Time.deltaTime;
+				stayTime += Time.fixedDeltaTime;
 			Behaviour halo = (Behaviour) other.GetComponent("Halo");
 			halo.enabled = true;
 		}
