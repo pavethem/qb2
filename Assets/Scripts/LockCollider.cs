@@ -6,7 +6,7 @@ public class LockCollider : MonoBehaviour {
     private const float STAYTIME_THRESHOLD = 0.25f;
     private bool collided;
     private float shaketime;
-    private const float SHAKETIME_MAX = 0.9f;
+    private const float SHAKETIME_MAX = 0.8f;
     private Vector3 originalPosition;
 
     private void Start() {
