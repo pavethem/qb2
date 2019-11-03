@@ -45,7 +45,7 @@ public class RotateSpoke : MonoBehaviour
                 GameController.rotating = true;
                 transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
                 timeCount += Time.deltaTime * rotationSpeed;
-                yield return null;
+                yield return new WaitForFixedUpdate();
             }
 
             transform.rotation = tempTo;
@@ -85,7 +85,7 @@ public class RotateSpoke : MonoBehaviour
             GameController.rotating = true;
             transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
             timeCount += Time.deltaTime * rotationSpeed;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         transform.parent = lastParent;

@@ -78,7 +78,7 @@ public class Rotator : RotatorParent {
             GameController.rotating = true;
             thing.transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
             timeCount += Time.deltaTime * rotationSpeed;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         thing.transform.rotation = tempTo;
