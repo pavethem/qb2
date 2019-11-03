@@ -44,7 +44,7 @@ public class RotateSpoke : MonoBehaviour
             while (transform.rotation != tempTo) {
                 GameController.rotating = true;
                 transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
-                timeCount += Time.deltaTime * rotationSpeed;
+                timeCount += Time.fixedDeltaTime * rotationSpeed;
                 yield return new WaitForFixedUpdate();
             }
 
@@ -84,7 +84,7 @@ public class RotateSpoke : MonoBehaviour
         while (transform.rotation != tempTo) {
             GameController.rotating = true;
             transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
-            timeCount += Time.deltaTime * rotationSpeed;
+            timeCount += Time.fixedDeltaTime * rotationSpeed;
             yield return new WaitForFixedUpdate();
         }
 
