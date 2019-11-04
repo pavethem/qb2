@@ -1,7 +1,7 @@
 # Blender v2.80 (sub 75) OBJ File: 'key_lowpoly.blend'
 # www.blender.org
 mtllib key_lowpoly.mtl
-o Cylinder
+g Cylinder
 v 0.990624 -0.026233 0.226477
 v 0.990624 -0.019740 0.214328
 v 0.990624 -0.015741 0.173729

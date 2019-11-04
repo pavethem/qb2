@@ -175,8 +175,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 150
+  near clip plane: 90
+  far clip plane: 140
   field of view: 17.6
   orthographic: 0
   orthographic size: 5
@@ -188,7 +188,7 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: fa927b0359fae05c095c146b6035363e, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -656,7 +656,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 999
   far clip plane: 1000
   field of view: 26.991467
   orthographic: 1
@@ -941,8 +941,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugScriptableObject: {fileID: 11400000, guid: 6bb9af987d7694bdb8f77a422525fe57,
     type: 2}
-  key_lowpoly: {fileID: 6001804756567384108, guid: 1547010bf38b8df26a9fd4bbc579a6dd,
-    type: 3}
   transition: {fileID: 8300000, guid: 9f8c76a49402d3a3a8750cf608f70a4b, type: 3}
 --- !u!4 &1263822282
 Transform:
@@ -1442,8 +1440,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 150
+  far clip plane: 300
   field of view: 14.317718
   orthographic: 0
   orthographic size: 5

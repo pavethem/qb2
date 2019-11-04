@@ -9,10 +9,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: LockMaterial
   m_Shader: {fileID: 4800000, guid: 24bb71724cd513d71889a1997ae1294f, type: 3}
-  m_ShaderKeywords: USEDISCARD_ON _ALPHABLEND_ON _GLOSSYREFLECTIONS_OFF _REMOVEDIAG_ON
-    _SPECULARHIGHLIGHTS_OFF _SUNDISK_HIGH_QUALITY
+  m_ShaderKeywords: USEDISCARD_ON _GLOSSYREFLECTIONS_OFF _REMOVEDIAG_ON _SPECULARHIGHLIGHTS_OFF
+    _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -92,7 +92,7 @@ Material:
     - _ColorMask: 15
     - _Cutoff: 0.519
     - _DetailNormalMapScale: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EdgeLength: 10
     - _EnableExternalAlpha: 0
     - _Exposure: 1
@@ -100,7 +100,7 @@ Material:
     - _Glossiness: 0.483
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Mode: 2
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Outline: 0.005
     - _Parallax: 0.02
@@ -110,7 +110,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 0
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -123,7 +123,7 @@ Material:
     - _UseUIAlphaClip: 0
     - _WireThickness: 585
     - _WireframeVal: 0.083
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _BackColor: {r: 0.9433962, g: 0.93643105, b: 0.78319687, a: 1}
     - _Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}

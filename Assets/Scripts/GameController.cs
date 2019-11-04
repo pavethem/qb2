@@ -343,6 +343,10 @@ public class GameController : MonoBehaviour {
         
         if (g.GetComponent<MeshFilter>() != null) {
             string bla = g.GetComponent<MeshFilter>().sharedMesh.name;
+            
+            if(bla == "Sphere")
+                g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("sphere_lowpoly");
+            
             int last = bla.LastIndexOf("_", StringComparison.Ordinal);
             if (last != -1) {
                 string name = bla.Substring(0, last);
