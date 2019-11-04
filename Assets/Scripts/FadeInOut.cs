@@ -41,8 +41,8 @@ public class FadeInOut : MonoBehaviour {
         }
         else {
             
-            color = gameObject.GetComponent<Renderer>().material.color;
-            gameObject.GetComponent<Renderer>().material.color = new Color(color.r,color.g,color.b,alpha);
+            color = gameObject.GetComponent<Renderer>().sharedMaterial.color;
+            gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(color.r,color.g,color.b,alpha);
             
         }
         
@@ -110,7 +110,7 @@ public class FadeInOut : MonoBehaviour {
             }
             else {
             
-                gameObject.GetComponent<Renderer>().material.color = new Color(color.r,color.g,color.b,alpha);
+                gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(color.r,color.g,color.b,alpha);
             
             }
 
@@ -134,7 +134,7 @@ public class FadeInOut : MonoBehaviour {
         }
         else {
             
-            gameObject.GetComponent<Renderer>().material.color = new Color(color.r,color.g,color.b,alpha);
+            gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(color.r,color.g,color.b,alpha);
             
         }
 
@@ -169,7 +169,7 @@ public class FadeInOut : MonoBehaviour {
             }
             else {
             
-                gameObject.GetComponent<Renderer>().material.color = new Color(color.r,color.g,color.b,alpha);
+                gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(color.r,color.g,color.b,alpha);
             
             }
 
@@ -192,7 +192,7 @@ public class FadeInOut : MonoBehaviour {
         }
         else {
             
-            gameObject.GetComponent<Renderer>().material.color = new Color(color.r,color.g,color.b,alpha);
+            gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(color.r,color.g,color.b,alpha);
             
         }
         fadingOut = false;

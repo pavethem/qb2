@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LockMaterial
-  m_Shader: {fileID: 4800000, guid: 24bb71724cd513d71889a1997ae1294f, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: USEDISCARD_ON _GLOSSYREFLECTIONS_OFF _REMOVEDIAG_ON _SPECULARHIGHLIGHTS_OFF
     _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
