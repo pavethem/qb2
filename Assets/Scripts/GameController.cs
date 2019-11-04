@@ -117,22 +117,6 @@ public class GameController : MonoBehaviour {
 
         StopAllCoroutines();
 
-        if (Application.isMobilePlatform) {
-            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<RawImage>().enabled = true;
-            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
-            GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
-            try {
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().enabled = false;
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = true;
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = true;
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
-            }
-            catch (NullReferenceException e) {}
-           
-        }
-
         GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(false);
         
         cubeCount = 0;
@@ -145,6 +129,41 @@ public class GameController : MonoBehaviour {
         teleporters = GameObject.FindGameObjectsWithTag("teleporter");
         keys = GameObject.FindGameObjectsWithTag("key").ToList();
         locks = GameObject.FindGameObjectsWithTag("lock").ToList();
+        
+        if (Application.isMobilePlatform) {
+            //change image for rotating the game world
+            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<RawImage>().enabled = true;
+            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
+            GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
+            //change rotator scripts
+            try {
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().enabled = false;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = true;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = true;
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
+    
+                //change models to their respective low poly versions
+                foreach (var r in rotators) {
+                    r.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("arrowCW_lowpoly");
+                }
+                
+                foreach (var l in locks) {
+                    l.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("lock_lowpoly");
+                }
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponent<MeshFilter>().sharedMesh = 
+                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponent<MeshFilter>().sharedMesh = 
+                    Resources.Load<Mesh>("rotatorStrip_lowpoly");           
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponent<MeshFilter>().sharedMesh = 
+                    Resources.Load<Mesh>("rotatorStrip_lowpoly");        
+            
+                ReplaceMeshes( GameObject.FindWithTag("thing"));
+            }
+            catch (NullReferenceException e) {}
+
+        }
 
         rotating = false;
         moving = false;
@@ -227,8 +246,10 @@ public class GameController : MonoBehaviour {
                 
                 cube.GetComponent<Rigidbody>().useGravity = true;
                 cube.GetComponent<UnityEngine.Collider>().isTrigger = false;
-                cube.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(0,5),Random.Range(5,10),Random.Range(0,5)),ForceMode.VelocityChange);
-                cube.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(10,20),Random.Range(10,20),Random.Range(10,20)),ForceMode.Impulse);
+                cube.GetComponent<Rigidbody>().AddForce(new Vector3(
+                    Random.Range(0,5),Random.Range(5,10),Random.Range(0,5)),ForceMode.VelocityChange);
+                cube.GetComponent<Rigidbody>().AddTorque(new Vector3(
+                    Random.Range(10,20),Random.Range(10,20),Random.Range(10,20)),ForceMode.Impulse);
 
                 foreach (Transform child in cube.transform) {
                     child.gameObject.SetActive(true);
@@ -312,6 +333,66 @@ public class GameController : MonoBehaviour {
     public static bool Compare(Vector3 lhs, Vector3 rhs)
     {
         return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
+    }
+
+    //replace all spoke meshes in thing, where appropriate
+    private static void ReplaceMeshes(GameObject g) {
+        
+        if(g.GetComponent<MeshFilter>() == null && g.transform.childCount == 0)
+            return;
+        
+        if (g.GetComponent<MeshFilter>() != null) {
+            string bla = g.GetComponent<MeshFilter>().sharedMesh.name;
+            int last = bla.LastIndexOf("_", StringComparison.Ordinal);
+            if (last != -1) {
+                string name = bla.Substring(0, last);
+                switch (name) {
+                    case "spoke_corner_flat": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_flat_lowpoly");
+                        break;
+                    }
+                    case "spoke_corner_flat_small": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_flat_small_lowpoly");
+                        break;
+                    }
+                    case "spoke_corner": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_lowpoly");
+                        break;
+                    }
+                    case "spoke_end": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_end_lowpoly");
+                        break;
+                    }
+                    case "spoke_end_small": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_end_small_lowpoly");
+                        break;
+                    }
+                    case "spoke": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_lowpoly");
+                        break;
+                    }
+                    case "spoke_threeway_flat": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_flat_lowpoly");
+                        break;
+                    }
+                    case "spoke_threeway_flat_small": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_flat_small_lowpoly");
+                        break;
+                    }
+                    case "spoke_threeway_small": {
+                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_small_lowpoly");
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (g.transform.childCount != 0) {
+            foreach (Transform child in g.transform) {
+                ReplaceMeshes(child.gameObject);
+            }
+        }
+
     }
 
     private static void Save() {

@@ -1,7 +1,7 @@
 # Blender v2.80 (sub 75) OBJ File: 'spoke_end.blend'
 # www.blender.org
 mtllib spoke_end.mtl
-o Sphere
+g spoke_end_Sphere
 v 0.000001 5.024238 -0.468912
 v 0.000001 -4.775887 -0.468499
 v 0.000001 -4.893241 -0.458762

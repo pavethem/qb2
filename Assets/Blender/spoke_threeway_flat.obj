@@ -1,7 +1,7 @@
 # Blender v2.80 (sub 75) OBJ File: 'spoke_threeway_flat.blend'
 # www.blender.org
 mtllib spoke_threeway_flat.mtl
-o Sphere
+g spoke_threeway_flat_Sphere
 v 0.000001 4.608238 -0.468912
 v 0.000001 -4.983345 -0.468499
 v 0.000001 -5.100698 -0.458763

@@ -1,7 +1,7 @@
-# Blender v2.79 (sub 7) OBJ File: 'key.blend'
+# Blender v2.80 (sub 75) OBJ File: 'key.blend'
 # www.blender.org
 mtllib key.mtl
-o Cylinder
+g key_Cylinder
 v 0.990624 -0.084659 0.117170
 v 0.990624 -0.098368 0.118520
 v 0.990624 -0.098368 0.256356
