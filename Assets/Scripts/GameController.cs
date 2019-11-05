@@ -11,6 +11,11 @@ public class GameController : MonoBehaviour {
 
     public static bool DEBUG = false;
     public DebugObject debugScriptableObject;
+    //for fading in and out when loading the level
+    public GameObject screenWipe;
+    public GameObject directionalLight;
+    private bool wipingIn;
+    public static bool wiping;
 
     public static GameController instance = null;
     
@@ -43,6 +48,7 @@ public class GameController : MonoBehaviour {
     
     public static bool gameOver;
     private bool isLoadingNextLevel;
+    private bool resetting;
 
     //do not rotate while the lock is falling (after the game rotation change)
     public static bool rotating;
@@ -89,6 +95,9 @@ public class GameController : MonoBehaviour {
 
             DEBUG = debugScriptableObject.DEBUG;
 
+            screenWipe.GetComponent<Image>().fillAmount = 1;
+            directionalLight.GetComponent<Light>().shadowStrength = 0;
+
             currentScene = 1;
             if (DEBUG) {
                 SceneManager.LoadScene("test");
@@ -116,12 +125,14 @@ public class GameController : MonoBehaviour {
     void InitGame() {
 
         StopAllCoroutines();
+        StartCoroutine(nameof(ScreenWipeOut));
 
         GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(false);
         
         cubeCount = 0;
         gameOver = false;
         isLoadingNextLevel = false;
+        resetting = false;
         cubes = GameObject.FindGameObjectsWithTag("node");
 
         arrows = GameObject.FindGameObjectsWithTag("arrow");
@@ -210,7 +221,7 @@ public class GameController : MonoBehaviour {
 
         //reset scene
         if (Input.GetKeyUp(KeyCode.R)) {
-            Reset();
+            StartCoroutine(Reset());
         }
         
         //DELETE THIS EVENTUALLY
@@ -282,11 +293,18 @@ public class GameController : MonoBehaviour {
         
     }
 
-    public void Reset() {
-        
-        Scene loadedLevel = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(loadedLevel.buildIndex);
-        
+    public IEnumerator Reset() {
+        if (!isLoadingNextLevel && !resetting) {
+            resetting = true;
+            StartCoroutine(nameof(ScreenWipeIn));
+            while (!wipingIn) {
+                yield return null;
+            }
+
+            Scene loadedLevel = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(loadedLevel.buildIndex);
+        }
+
     }
 
     void GameOver() {
@@ -305,6 +323,7 @@ public class GameController : MonoBehaviour {
                 .GetComponent<LineRenderer>().positionCount = 0;
             GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject
                 .GetComponent<LineRenderer>().positionCount = 0;
+            StartCoroutine(nameof(ScreenWipeIn));
             StartCoroutine(nameof(LoadYourAsyncScene), scene);
         }
 
@@ -315,9 +334,12 @@ public class GameController : MonoBehaviour {
     {
         //wait a bit
         if (currentScene > 1) {
-            yield return new WaitForSeconds(2.1f);
+//            yield return new WaitForSeconds(2.1f);
+            while (!wipingIn) {
+                yield return null;
+            }
             GetComponent<AudioSource>().PlayOneShot(transition);
-            yield return new WaitForSeconds(0.4f);
+//            yield return new WaitForSeconds(0.4f);
         }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
@@ -327,7 +349,36 @@ public class GameController : MonoBehaviour {
         {
             yield return null;
         }
-        
+    }
+
+    IEnumerator ScreenWipeIn() {
+        wiping = true;
+        float timeStep = 0;
+        while (screenWipe.GetComponent<Image>().fillAmount < 1) {
+            screenWipe.GetComponent<Image>().fillAmount = Mathf.Lerp(0, 1, timeStep);
+            directionalLight.GetComponent<Light>().shadowStrength = 1 - screenWipe.GetComponent<Image>().fillAmount;
+            timeStep += Time.deltaTime;
+            yield return null;
+        }
+        screenWipe.GetComponent<Image>().fillAmount = 0.8f;
+        directionalLight.GetComponent<Light>().shadowStrength = 0;
+        wipingIn = true;
+        wiping = false;
+    }
+    
+    IEnumerator ScreenWipeOut() {
+        wipingIn = false;
+        wiping = true;
+        float timeStep = 0;
+        while (screenWipe.GetComponent<Image>().fillAmount > 0) {
+            screenWipe.GetComponent<Image>().fillAmount = Mathf.Lerp(1, 0, timeStep);
+            directionalLight.GetComponent<Light>().shadowStrength = 1 - screenWipe.GetComponent<Image>().fillAmount;
+            timeStep += Time.deltaTime;
+            yield return null;
+        }
+        screenWipe.GetComponent<Image>().fillAmount = 0;
+        directionalLight.GetComponent<Light>().shadowStrength = 1;
+        wiping = false;
     }
     
     public static bool Compare(Vector3 lhs, Vector3 rhs)
@@ -486,7 +537,7 @@ public class GameController : MonoBehaviour {
 
         if (inputs.Count > solved.Count && solved.Count > 0 && !gameOver) {
             inputs.Clear();
-            Reset();
+            StartCoroutine(Reset());
         }
 
         if (gameOver && !isLoadingNextLevel) {

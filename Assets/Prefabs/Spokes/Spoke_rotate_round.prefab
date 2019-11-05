@@ -89,7 +89,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4529216114251582975}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f46d69fae051c76f9a78de4ff7958a70, type: 3}
   m_Name: 
@@ -195,6 +195,11 @@ PrefabInstance:
     - target: {fileID: 2839067358963183359, guid: 04adc59b7d8246e66847cd5bb5d637d8,
         type: 3}
       propertyPath: m_ReflectionProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403034223682087373, guid: 04adc59b7d8246e66847cd5bb5d637d8,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

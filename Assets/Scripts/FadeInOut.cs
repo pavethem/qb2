@@ -53,7 +53,6 @@ public class FadeInOut : MonoBehaviour {
     private void OnDisable() {
         
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        
     }
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
