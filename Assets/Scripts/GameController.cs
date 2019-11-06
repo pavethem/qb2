@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour {
     
     //less "accurate" than unity's implementation
     private const float EPSILON = 9.99999944E-5f;
+    //amount by which to scale rotator strip colliders on mobile
+    private const float SCALEAMOUNT = 3;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -154,7 +156,13 @@ public class GameController : MonoBehaviour {
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = true;
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = true;
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
-    
+
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").Find("collider").transform.localScale
+                    += new Vector3(0,SCALEAMOUNT,0);
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").Find("collider").transform.localScale
+                    += new Vector3(0,SCALEAMOUNT,0);                
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").Find("collider").transform.localScale
+                    += new Vector3(0,SCALEAMOUNT,0);    
                 //change models to their respective low poly versions
                 foreach (var r in rotators) {
                     r.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("arrowCW_lowpoly");
@@ -182,11 +190,8 @@ public class GameController : MonoBehaviour {
         fallingLock = false;
         rotatorClicked = false;
         
-        //destroy all things lying on the pedestal
-        foreach (Transform child in GameObject.Find("Pedestal").transform) {
-            Destroy(child.gameObject);
-        }
-        
+        ClearPedestal();
+
         if (DEBUG)
             lastrotations.Clear();
 
@@ -354,6 +359,13 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    private void ClearPedestal() {
+        //destroy all things lying on the pedestal
+        foreach (Transform child in GameObject.Find("Pedestal").transform) {
+            Destroy(child.gameObject);
+        }
+    }
+
     IEnumerator ScreenWipeIn() {
         wiping = true;
         float timeStep = 0;
@@ -367,6 +379,7 @@ public class GameController : MonoBehaviour {
         directionalLight.GetComponent<Light>().shadowStrength = 0;
         wipingIn = true;
         wiping = false;
+        ClearPedestal();
     }
     
     IEnumerator ScreenWipeOut() {
