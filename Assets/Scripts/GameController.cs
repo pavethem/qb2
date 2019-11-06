@@ -292,6 +292,9 @@ public class GameController : MonoBehaviour {
         }
         
     }
+    public void ResetButton() {
+        StartCoroutine(Reset());
+    }
 
     public IEnumerator Reset() {
         if (!isLoadingNextLevel && !resetting) {
