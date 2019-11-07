@@ -340,7 +340,6 @@ public class GameController : MonoBehaviour {
     
     IEnumerator LoadYourAsyncScene(string scene)
     {
-        //wait a bit
         if (currentScene > 1) {
 //            yield return new WaitForSeconds(2.1f);
             while (!wipingIn) {
@@ -367,6 +366,9 @@ public class GameController : MonoBehaviour {
     }
 
     IEnumerator ScreenWipeIn() {
+        //wait a bit for cubes to fall
+        if(gameOver)
+            yield return new WaitForSeconds(1.6f);
         wiping = true;
         float timeStep = 0;
         while (screenWipe.GetComponent<Image>().fillAmount < 1) {

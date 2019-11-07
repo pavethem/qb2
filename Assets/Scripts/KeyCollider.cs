@@ -48,7 +48,8 @@ public class KeyCollider : MonoBehaviour {
                 yield return null;
             }
             
-            gameObject.transform.localScale = new Vector3(originalScale.x - shrinkScale,originalScale.y - shrinkScale,originalScale.z - shrinkScale);
+            gameObject.transform.localScale = new Vector3(originalScale.x - shrinkScale,originalScale.y - shrinkScale,
+                originalScale.z - shrinkScale);
             gameObject.GetComponent<BoxCollider>().size *= originalScale.x + shrinkScale;
         }
 		

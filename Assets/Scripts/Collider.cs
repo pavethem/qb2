@@ -15,8 +15,9 @@ public class Collider : MonoBehaviour {
 			}
 			else
 				stayTime += Time.fixedDeltaTime;
-			Behaviour halo = (Behaviour) other.GetComponent("Halo");
-			halo.enabled = true;
+//			Behaviour halo = (Behaviour) other.GetComponent("Halo");
+//			halo.enabled = true;
+			other.gameObject.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
 		}
 		
 	}
@@ -27,8 +28,9 @@ public class Collider : MonoBehaviour {
 		{
 			if(collided)
 				GameController.cubeCount--;
-			Behaviour halo = (Behaviour) other.GetComponent("Halo");
-			halo.enabled = false;
+//			Behaviour halo = (Behaviour) other.GetComponent("Halo");
+//			halo.enabled = false;
+			other.gameObject.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
 			stayTime = 0f;
 			collided = false;
 		}

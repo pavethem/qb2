@@ -97,7 +97,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 112000002, guid: c40410c60308af61faf994b44b869e4c,
+  m_LightingDataAsset: {fileID: 112000002, guid: 3b8f194e2e347182a9a87555898eb5d3,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -246,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 6544663598164543436, guid: d491062f7b780545083e2174ac206689,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6544663598164543436, guid: d491062f7b780545083e2174ac206689,
         type: 3}
@@ -638,6 +638,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5000031
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440309419847190076, guid: f0378f46700a185b3810daf4623ee74a,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440309419847190076, guid: f0378f46700a185b3810daf4623ee74a,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440309419847190076, guid: f0378f46700a185b3810daf4623ee74a,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440309419847190076, guid: f0378f46700a185b3810daf4623ee74a,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0378f46700a185b3810daf4623ee74a, type: 3}
