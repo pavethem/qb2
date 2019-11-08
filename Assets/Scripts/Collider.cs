@@ -9,8 +9,8 @@ public class Collider : MonoBehaviour {
 
 	public Material selectedMaterial;
 	public Material unselectedMaterial;
-	
-	void OnTriggerStay(UnityEngine.Collider other) {
+
+    void OnTriggerStay(UnityEngine.Collider other) {
 		
 		if (other.gameObject.CompareTag("bub") && !gameObject.CompareTag("key") && !gameObject.CompareTag("lock")) {
 			if (stayTime > STAYTIME_THRESHOLD && !collided) {
