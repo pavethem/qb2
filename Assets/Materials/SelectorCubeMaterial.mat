@@ -12,7 +12,7 @@ Material:
   m_ShaderKeywords: USEDISCARD_ON _Emission _GLOSSYREFLECTIONS_OFF _REMOVEDIAG_ON
     _SPECULARHIGHLIGHTS_OFF _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3024
   stringTagMap: {}

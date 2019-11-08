@@ -1675,6 +1675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f38ed6bea584da48a09bdfe9ca0209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedMaterial: {fileID: 2100000, guid: 5f08f32b748391b8eae06cf82738a8ef, type: 2}
+  unselectedMaterial: {fileID: 2100000, guid: d765cfa1dbfeb138abba1fe378c71173, type: 2}
 --- !u!114 &2923505776331242789
 MonoBehaviour:
   m_ObjectHideFlags: 0

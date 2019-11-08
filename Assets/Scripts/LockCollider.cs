@@ -22,13 +22,17 @@ public class LockCollider : MonoBehaviour {
             if (stayTime > STAYTIME_THRESHOLD) {
                 GetComponent<AudioSource>().Play();
                 foreach (Transform child in other.gameObject.transform.parent.transform) {
-                    if (child.tag.Equals("key") && GameController.keys.Contains(child.gameObject)) {
+                    if (child.name.Equals("Key") && GameController.keys.Contains(child.gameObject)) {
                         GameController.RemoveLock(gameObject, child.gameObject);
                         child.GetComponent<KeyCollider>().collisionkey.SetActive(false);
                         child.GetComponent<FadeInOut>().StartCoroutine("FadeOut", false);
                     }
-                    child.parent = null;
+                    if(child.tag.Equals("key"))
+                        child.parent = null;
                 }
+
+                if (other.gameObject.CompareTag("key"))
+                    other.gameObject.transform.parent = null;
             }
             else
                 stayTime += Time.deltaTime;
@@ -39,7 +43,7 @@ public class LockCollider : MonoBehaviour {
 
     private void OnTriggerEnter(UnityEngine.Collider other) {
         
-        if (((other.gameObject.CompareTag("bub") && other.gameObject.transform.childCount == 0)
+        if (((other.gameObject.CompareTag("bub") && other.gameObject.transform.childCount == 1)
              || other.gameObject.CompareTag("spoke")) && GameController.locks.Contains(gameObject) && stayTime == 0) {
             //can't go through locks
             if (GameController.lastRotateSpoke != null && GameController.lastRotatorStrip == null) {

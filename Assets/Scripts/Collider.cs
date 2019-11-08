@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class Collider : MonoBehaviour {
 	
@@ -6,6 +7,9 @@ public class Collider : MonoBehaviour {
 	private bool collided;
 	private const float STAYTIME_THRESHOLD = 0.2f;
 
+	public Material selectedMaterial;
+	public Material unselectedMaterial;
+	
 	void OnTriggerStay(UnityEngine.Collider other) {
 		
 		if (other.gameObject.CompareTag("bub") && !gameObject.CompareTag("key") && !gameObject.CompareTag("lock")) {
@@ -15,9 +19,9 @@ public class Collider : MonoBehaviour {
 			}
 			else
 				stayTime += Time.fixedDeltaTime;
-//			Behaviour halo = (Behaviour) other.GetComponent("Halo");
-//			halo.enabled = true;
-			other.gameObject.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+			
+			other.gameObject.transform.Find("particle").gameObject.SetActive(true);
+			other.gameObject.GetComponent<MeshRenderer>().material = selectedMaterial;
 		}
 		
 	}
@@ -28,9 +32,9 @@ public class Collider : MonoBehaviour {
 		{
 			if(collided)
 				GameController.cubeCount--;
-//			Behaviour halo = (Behaviour) other.GetComponent("Halo");
-//			halo.enabled = false;
-			other.gameObject.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
+
+			other.gameObject.GetComponent<MeshRenderer>().material = unselectedMaterial;
+			other.gameObject.transform.Find("particle").gameObject.SetActive(false);
 			stayTime = 0f;
 			collided = false;
 		}
