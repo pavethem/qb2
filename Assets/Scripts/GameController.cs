@@ -215,7 +215,7 @@ public class GameController : MonoBehaviour {
 
     void OnGUI()
     {
-        if (Debug.isDebugBuild)
+        if (Debug.isDebugBuild && DEBUG)
         {
             int w = Screen.width, h = Screen.height;
 
@@ -234,7 +234,7 @@ public class GameController : MonoBehaviour {
 
     void Update()
     {
-        if (Debug.isDebugBuild)
+        if (Debug.isDebugBuild && DEBUG)
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
     }
 

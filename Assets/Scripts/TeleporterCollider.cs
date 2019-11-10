@@ -11,6 +11,9 @@ public class TeleporterCollider : MonoBehaviour {
 	//can only teleport, when there is a spoke inside the other teleporter and not another bub
 	private bool canTeleport;
 	private bool hasBub;
+	private bool speedUp;
+	private float speedUpTime;
+	private const float MAX_SPEEDUPTIME = 3f;
 	//new parent for bub
 	private Transform newParent;
 
@@ -47,6 +50,28 @@ public class TeleporterCollider : MonoBehaviour {
 	    if (other.gameObject.CompareTag("spoke")) {
 		    canTeleport = false;
 		    otherTeleporter.GetComponent<TeleporterCollider>().teleported = false;
+	    }
+    }
+    
+    private void OnMouseUpAsButton() {
+	    if (!GameController.rotating) {
+		    speedUp = true;
+	    }
+		    
+    }
+
+    private void Update() {
+	    if (speedUp && speedUpTime < MAX_SPEEDUPTIME) {
+		    ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
+		    ParticleSystem.MainModule main = ps.main;
+		    main.simulationSpeed = 5f;
+		    speedUpTime += Time.deltaTime;
+	    } else if (speedUp && speedUpTime > MAX_SPEEDUPTIME) {
+		    speedUpTime = 0;
+		    speedUp = false;
+		    ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
+		    ParticleSystem.MainModule main = ps.main;
+		    main.simulationSpeed = 1f;
 	    }
     }
 }

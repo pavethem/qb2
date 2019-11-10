@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowCollider : MonoBehaviour {
@@ -7,6 +9,13 @@ public class ArrowCollider : MonoBehaviour {
     private Vector3? goal;
     //traverse scene graph for children only once
     private bool traversed;
+    private bool rotating;
+
+    private Quaternion originalRotation;
+
+    private void Awake() {
+        originalRotation = transform.rotation;
+    }
 
     private void OnTriggerStay(UnityEngine.Collider other) {
 
@@ -58,6 +67,31 @@ public class ArrowCollider : MonoBehaviour {
             goal = null;
             traversed = false;
         }
+    }
+    
+    private void OnMouseUpAsButton() {
+        if (!GameController.rotating && !rotating)
+            StartCoroutine(Rotate());
+    }
+
+    private IEnumerator Rotate() {
+        rotating = true;
+        for (int i = 0; i < 2; i++) {
+            float step = 0;
+            Quaternion fromRotation = transform.rotation;
+            Quaternion toRotation = Quaternion.AngleAxis(180f, transform.forward) * transform.rotation;
+            while (transform.rotation != toRotation) {
+                transform.rotation = Quaternion.Slerp(fromRotation, toRotation, step);
+                step += Time.deltaTime * 2f;
+                if (step > 1)
+                    break;
+                yield return null;
+            }
+        }
+
+        transform.rotation = originalRotation;
+        rotating = false;
+
     }
 
     //find next joint in parents

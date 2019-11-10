@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class LockCollider : MonoBehaviour {
     
     private float stayTime;
     private const float STAYTIME_THRESHOLD = 0.25f;
     private bool collided;
+    private bool shaking;
     private float shaketime;
     private const float SHAKETIME_MAX = 0.8f;
     private Vector3 originalPosition;
@@ -69,20 +71,32 @@ public class LockCollider : MonoBehaviour {
         if(GameController.locks.Contains(gameObject))
             stayTime = 0;
     }
+    
+    private void OnMouseUpAsButton() {
+        if(!shaking && !GameController.rotating)
+            StartCoroutine(Shake(true));
+    }
+
+    private IEnumerator Shake(bool fromclick) {
+        shaking = true;
+
+        while (shaketime < SHAKETIME_MAX) {
+            shaketime += Time.deltaTime;
+            float amount = 8 * (1 + shaketime);
+            transform.Translate(0, 0, Mathf.Sin(Mathf.Rad2Deg * shaketime) / amount);
+            yield return null;
+        }
+        
+        shaketime = 0;
+        transform.position = originalPosition;
+        collided = false;
+        shaking = false;
+    }
 
     private void Update() {
-
-        if (collided) {
-            if (shaketime < SHAKETIME_MAX) {
-                shaketime += Time.deltaTime;
-                float amount = 8 * (1+shaketime);
-                gameObject.transform.Translate(0,0, Mathf.Sin(Mathf.Rad2Deg * shaketime) / amount);
-            }
-            else {
-                shaketime = 0;
-                collided = false;
-                transform.position = originalPosition;
-            }
+        
+        if (collided && !shaking) {
+            StartCoroutine(Shake(false));        
         }
     }
 }

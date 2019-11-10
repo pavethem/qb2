@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherTeleporter: {fileID: 0}
+  ps: {fileID: 2506784590338654968}
 --- !u!54 &2100722396106459270
 Rigidbody:
   m_ObjectHideFlags: 0
