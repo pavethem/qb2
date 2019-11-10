@@ -89,6 +89,25 @@ public class RotatorParent : MonoBehaviour {
                     lineIndex++;
                     lr.positionCount = lineIndex + 1;
                     lr.SetPosition(lineIndex, toPosition);
+
+                    //fill positions if registered new position is too far from the last one (to smooth the line)
+                    if (Vector3.Distance(toPosition, lr.GetPosition(lineIndex - 1)) > MAXDISTANCE / 6) {
+                        Vector3 a = lr.GetPosition(lineIndex - 1);
+                        Vector3 b = a;
+                        Vector3 goalPosition = lr.GetPosition(lineIndex);
+
+                        float step = 0;
+                        while (!GameController.Compare(goalPosition, b)) {
+                            if (lineIndex >= 60) break;
+
+                            lr.positionCount++;
+                            lr.SetPosition(lr.positionCount-1,toPosition);
+                            b = Vector3.Slerp(a, goalPosition, step);
+                            lr.SetPosition(lineIndex, b);
+                            lineIndex++;
+                            step += 0.05f;
+                        }
+                    }
                     
                     if (Vector3.Distance(lr.GetPosition(0), toPosition) >
                         curved.gameObject.GetComponent<MeshRenderer>().bounds.size.x / 2) {
@@ -97,6 +116,7 @@ public class RotatorParent : MonoBehaviour {
                 }
             }
         }
+
     }
 
     internal void SetCurved(Vector3 from, Vector3 toPosition) {
