@@ -72,7 +72,6 @@ public class GameController : MonoBehaviour {
     private float solveTimeout = 0;
     private List<string> inputs = new List<string>();
     private List<string> solved = new List<string>();
-
     float deltaTime = 0.0f;
 
     private void Awake() {
@@ -82,7 +81,6 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
 
         if (currentScene == 0) {
-            
             pedestalPosition = GameObject.Find("Pedestal").transform.position;
             pedestalRotation = GameObject.Find("Pedestal").transform.rotation;
 //            backgroundPosition = GameObject.Find("Background").transform.position;
@@ -101,33 +99,42 @@ public class GameController : MonoBehaviour {
 
             screenWipe.GetComponent<Image>().fillAmount = 1;
             directionalLight.GetComponent<Light>().shadowStrength = 0;
-
-            currentScene = 1;
+            
             if (DEBUG) {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
+            } else {
+                SceneManager.LoadScene("mainmenu");
             }
-            else {
-                Load();
-                SceneManager.LoadScene("level" + currentScene + "_final");
-            }
+
+//            currentScene = 1;
+//            else {
+//                Load();
+//                SceneManager.LoadScene("level" + currentScene + "_final");
+//            }
         }
         
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
         gameObject.GetComponent<AudioSource>().Play();
-        InitGame();
+//        InitGame();
         
+    }
+
+    public static void LoadCurrentScene() {
+        Load();
+        SceneManager.LoadScene("level" + currentScene + "_final");
+
     }
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {   
-        InitGame();
-
+        if(scene.name != "mainmenu" && scene.name != "level0")
+            InitGame();
     }
 
     void InitGame() {
-
+        
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
 
@@ -282,28 +289,30 @@ public class GameController : MonoBehaviour {
 
     void FixedUpdate() {
 
-        //turn on physics for all cubes in scene and add a small amount of velocity and torque
-        if (cubeCount == cubes.Length && cubes.Length > 0 && !gameOver) {
+        if (cubes != null) {
+            //turn on physics for all cubes in scene and add a small amount of velocity and torque
+            if (cubeCount == cubes.Length && cubes.Length > 0 && !gameOver) {
 
-            foreach (var cube in cubes) {
-                
-                cube.GetComponent<Rigidbody>().useGravity = true;
-                cube.GetComponent<UnityEngine.Collider>().isTrigger = false;
-                cube.GetComponent<Rigidbody>().AddForce(new Vector3(
-                    Random.Range(0,5),Random.Range(5,10),Random.Range(0,5)),ForceMode.VelocityChange);
-                cube.GetComponent<Rigidbody>().AddTorque(new Vector3(
-                    Random.Range(10,20),Random.Range(10,20),Random.Range(10,20)),ForceMode.Impulse);
+                foreach (var cube in cubes) {
 
-                foreach (Transform child in cube.transform) {
-                    child.gameObject.SetActive(true);
+                    cube.GetComponent<Rigidbody>().useGravity = true;
+                    cube.GetComponent<UnityEngine.Collider>().isTrigger = false;
+                    cube.GetComponent<Rigidbody>().AddForce(new Vector3(
+                        Random.Range(0, 5), Random.Range(5, 10), Random.Range(0, 5)), ForceMode.VelocityChange);
+                    cube.GetComponent<Rigidbody>().AddTorque(new Vector3(
+                        Random.Range(10, 20), Random.Range(10, 20), Random.Range(10, 20)), ForceMode.Impulse);
+
+                    foreach (Transform child in cube.transform) {
+                        child.gameObject.SetActive(true);
+                    }
+
                 }
-                
-            }
-            
-            gameOver = true;
 
+                gameOver = true;
+
+            }
         }
-        
+
     }
 
     //unlock lock with key
@@ -412,6 +421,7 @@ public class GameController : MonoBehaviour {
     }
     
     IEnumerator ScreenWipeOut() {
+        
         wipingIn = false;
         wiping = true;
         float timeStep = 0;

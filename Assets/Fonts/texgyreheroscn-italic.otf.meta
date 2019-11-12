@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: c8e7be235e37aa9f69127c24ef35a03a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: TeX Gyre Heros Cn
+  fontNames:
+  - TeX Gyre Heros Cn
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6a4324c98ed1ca313abcacc4f05cd9c0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
