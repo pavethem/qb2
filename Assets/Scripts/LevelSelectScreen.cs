@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuScreen : MonoBehaviour {
+public class LevelSelectScreen : MonoBehaviour
+{
     //button to load another screen has been clicked
     private bool isLoading;
-    //name of the button clicked
-    private string buttonName;
+    private string levelName;
     //start position when moving in
     private Vector2 startPosition;
     //the active transform (mobile or desktop)
     private RectTransform buttonsTransform;
     private bool isMoving;
     
-    private void Start() {
-        buttonsTransform = Application.isMobilePlatform
-            ? GameObject.Find("MobileButtons").GetComponent<RectTransform>()
-            : GameObject.Find("DesktopButtons").GetComponent<RectTransform>();
-        startPosition = new Vector2(0,Screen.height / 2f + buttonsTransform.rect.height);
+    // Start is called before the first frame update
+    void Start() {
+        buttonsTransform = GameObject.Find("Scroll View").GetComponent<RectTransform>();
+        startPosition = new Vector2(0,0 - (buttonsTransform.rect.height + Screen.height / 2f));
         buttonsTransform.anchoredPosition = startPosition;
+        levelName = "1";
         StartCoroutine(MoveIn());
     }
-
+    
     private IEnumerator MoveIn() {
         isMoving = true;
         float step = 0;
         float y = startPosition.y;
-        while (buttonsTransform.anchoredPosition.y > 0) {
+        while (buttonsTransform.anchoredPosition.y < 0) {
             buttonsTransform.anchoredPosition = new Vector2(0, Mathf.Lerp(y, 0, step));
             step += Time.deltaTime;
             yield return null;
@@ -41,7 +42,7 @@ public class MainMenuScreen : MonoBehaviour {
         isMoving = true;
         float step = 0;
         float y = startPosition.y;
-        while (buttonsTransform.anchoredPosition.y < y) {
+        while (buttonsTransform.anchoredPosition.y > y) {
             buttonsTransform.anchoredPosition = new Vector2(0, Mathf.Lerp(0, y, step));
             step += Time.deltaTime;
             yield return null;
@@ -51,42 +52,34 @@ public class MainMenuScreen : MonoBehaviour {
         isMoving = false;
     }
 
-    public void StartButton() {
+    public void LevelSelectButton(string buttonName) {
         if(isMoving) return;
         StartCoroutine(MoveOut());
         isLoading = true;
-        buttonName = "start";
-    }    
+        levelName = buttonName;
+    }
     
-    public void SelectButton() {
+    public void BackButton() {
         if(isMoving) return;
         StartCoroutine(MoveOut());
         isLoading = true;
-        buttonName = "select";
+        levelName = "back";
     }
     
-    public void OptionsButton() {
-        if(isMoving) return;
-        StartCoroutine(MoveOut());
-        isLoading = true;
-        buttonName = "options";
-    }
-    
-    public void QuitButton() {
-        Application.Quit();
-    }
-
     private void Update() {
         //load new level after menu has moved out of screen
         if (isLoading) {
             if (!isMoving) {
-                if (buttonName == "start")
+                if(levelName == "back")
+                    SceneManager.LoadSceneAsync("mainmenu");
+                else {
+                    GameController.currentScene = int.Parse(levelName);
+                    PlayerPrefs.SetInt("currentScene", GameController.currentScene);
+                    PlayerPrefs.Save();
                     GameController.LoadCurrentScene();
-                else if (buttonName == "options")
-                    SceneManager.LoadSceneAsync("optionsmenu");
-                else if (buttonName == "select")
-                    SceneManager.LoadSceneAsync("selectlevelmenu");
+                }
             }
         }
     }
+    
 }

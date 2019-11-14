@@ -2830,7 +2830,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Return to the main menu
+  m_text: Return to the Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04e5d3dd3249e9d8c9cd9e7866c0b7e2, type: 2}
   m_sharedMaterial: {fileID: -8832393447170537953, guid: 04e5d3dd3249e9d8c9cd9e7866c0b7e2,
