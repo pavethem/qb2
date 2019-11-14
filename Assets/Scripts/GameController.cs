@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -49,6 +50,8 @@ public class GameController : MonoBehaviour {
     private static Vector3 gravity;
     
     public static bool gameOver;
+    public static int freeRotation = -1;
+    public static int hardmode = -1;
     private bool isLoadingNextLevel;
     private bool resetting;
 
@@ -64,6 +67,7 @@ public class GameController : MonoBehaviour {
     public static RotateSpoke lastRotateSpoke;
     public static bool rotatorClicked;
 
+    public AudioMixer mixer;
     public AudioClip transition;
     
     //DEBUG STUFF REMOVE
@@ -99,7 +103,7 @@ public class GameController : MonoBehaviour {
 
             screenWipe.GetComponent<Image>().fillAmount = 1;
             directionalLight.GetComponent<Light>().shadowStrength = 0;
-            
+
             if (DEBUG) {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
@@ -113,12 +117,20 @@ public class GameController : MonoBehaviour {
 //                SceneManager.LoadScene("level" + currentScene + "_final");
 //            }
         }
-        
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
         gameObject.GetComponent<AudioSource>().Play();
 //        InitGame();
         
+    }
+    
+    private void Start() {
+        //set last audio levels and other variables
+        mixer.SetFloat("BackgroundVolume", PlayerPrefs.GetFloat("BackgroundVolume", 1f));
+        mixer.SetFloat("EffectsVolume", PlayerPrefs.GetFloat("EffectsVolume", 1f));
+        hardmode = PlayerPrefs.GetInt("HardMode", -1);
+        freeRotation = PlayerPrefs.GetInt("FreeRotation", -1);
     }
 
     public static void LoadCurrentScene() {
@@ -129,7 +141,15 @@ public class GameController : MonoBehaviour {
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {   
-        if(scene.name != "mainmenu" && scene.name != "level0")
+       
+        if (Application.isMobilePlatform && !scene.name.StartsWith("level")) {
+            //change to MobileButtons for main menu
+            GameObject.Find("MainCanvas").transform.Find("DesktopButtons").gameObject.SetActive(false);
+            GameObject.Find("MainCanvas").transform.Find("MobileButtons").gameObject.SetActive(true);
+            
+        }
+        
+        if(scene.name.StartsWith("level") && scene.name != "level0")
             InitGame();
     }
 
@@ -157,6 +177,7 @@ public class GameController : MonoBehaviour {
             GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<RawImage>().enabled = true;
             GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
+
             //change rotator scripts
             try {
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
@@ -219,7 +240,7 @@ public class GameController : MonoBehaviour {
         Physics.gravity = gravity;
 
     }
-
+    
     void OnGUI()
     {
         if (Debug.isDebugBuild && DEBUG)
@@ -252,14 +273,14 @@ public class GameController : MonoBehaviour {
             //            Solve();
         }
 
-        //fade in Audio
+        //fade in background audio
         if (gameObject.GetComponent<AudioSource>().volume < 0.5f)
         {
             gameObject.GetComponent<AudioSource>().volume = gameObject.GetComponent<AudioSource>().volume + Time.deltaTime;
         }
 
         //reset scene
-        if (Input.GetKeyUp(KeyCode.R)) {
+        if (Input.GetKeyUp(KeyCode.R) && SceneManager.GetActiveScene().name.StartsWith("level") ) {
             StartCoroutine(Reset());
         }
         

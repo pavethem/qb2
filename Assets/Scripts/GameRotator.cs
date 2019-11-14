@@ -41,6 +41,14 @@ public class GameRotator : MonoBehaviour, IDragHandler {
 
                 Physics.gravity = -pedestal.transform.up * 70;
 
+                if (GameController.freeRotation == 1) {
+                    Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    directionalLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    spotLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    pedestal.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    reflectionCamera.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                }
+
             }
         }
         else {
@@ -66,6 +74,14 @@ public class GameRotator : MonoBehaviour, IDragHandler {
 
                 Physics.gravity = -pedestal.transform.up * 70;
 
+                if (GameController.freeRotation == 1) {
+                    Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    directionalLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    spotLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    pedestal.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                    reflectionCamera.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
+                }
+                
             }
         }
     }
