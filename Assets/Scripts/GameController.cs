@@ -146,11 +146,13 @@ public class GameController : MonoBehaviour {
             //change to MobileButtons for main menu
             GameObject.Find("MainCanvas").transform.Find("DesktopButtons").gameObject.SetActive(false);
             GameObject.Find("MainCanvas").transform.Find("MobileButtons").gameObject.SetActive(true);
-            
         }
-        
-        if(scene.name.StartsWith("level") && scene.name != "level0")
+
+        if (scene.name.StartsWith("level") && scene.name != "level0") {
+            GameObject.Find("Canvas").transform.Find("MobileImage").Find("BackButton").gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.Find("MobileImage").Find("ResetButton").gameObject.SetActive(true);
             InitGame();
+        }
     }
 
     void InitGame() {
@@ -158,8 +160,6 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
 
-        GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(false);
-        
         cubeCount = 0;
         gameOver = false;
         isLoadingNextLevel = false;
@@ -356,6 +356,25 @@ public class GameController : MonoBehaviour {
     }
     public void ResetButton() {
         StartCoroutine(Reset());
+    }
+    
+    public void BackButton() {
+        StartCoroutine(LoadMainMenu());
+    }
+
+    public IEnumerator LoadMainMenu() {
+        if (!isLoadingNextLevel && !resetting) {
+            resetting = true;
+            StartCoroutine(nameof(ScreenWipeIn));
+            while (!wipingIn) {
+                yield return null;
+            }
+
+            isLoadingNextLevel = true;
+            gameOver = true;
+            
+            SceneManager.LoadScene("mainmenu");
+        }
     }
 
     public IEnumerator Reset() {

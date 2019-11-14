@@ -50,9 +50,6 @@ public class Rotator : RotatorParent {
                     GameController.lastrotations.Pop();
             }
         }
-
-        if(!hasBeenRotated)
-            GameObject.Find("Canvas").transform.transform.Find("MobileImage").GetComponentInChildren<Button>(true).gameObject.SetActive(true);
         
         hasBeenRotated = true;
 
