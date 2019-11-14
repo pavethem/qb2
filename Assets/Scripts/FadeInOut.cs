@@ -79,7 +79,7 @@ public class FadeInOut : MonoBehaviour {
             }
             
             fadingOut = true;
-            StartCoroutine(FadeOut());
+            StartCoroutine("FadeOut", false);
         }
     }
 
@@ -173,7 +173,7 @@ public class FadeInOut : MonoBehaviour {
             
             }
 
-            timeCount += Time.deltaTime;
+            timeCount += Time.deltaTime * 2;
             yield return null;
         }
         
