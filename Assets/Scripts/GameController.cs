@@ -283,12 +283,7 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.R) && SceneManager.GetActiveScene().name.StartsWith("level") ) {
             StartCoroutine(Reset());
         }
-        
-        if (Input.GetKeyUp(KeyCode.X)) {
-            ScreenCapture.CaptureScreenshot("/media/Storage/" + currentScene);
-        }
-        
-        
+
         //DELETE THIS EVENTUALLY
         if (Input.GetKeyUp(KeyCode.L)) {
             GameOver();
