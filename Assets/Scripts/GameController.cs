@@ -62,6 +62,8 @@ public class GameController : MonoBehaviour {
     public static bool fallingLock;
 
     public static int currentScene;
+    //the maximum level reached by the player
+    public static int maxScene;
     //last rotator to be used (needed to reverse rotations when hitting locks)
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
@@ -135,6 +137,13 @@ public class GameController : MonoBehaviour {
 
     public static void LoadCurrentScene() {
         Load();
+        SceneManager.LoadScene("level" + currentScene + "_final");
+
+    }
+    
+    public static void LoadMaxtScene() {
+        Load();
+        currentScene = maxScene;
         SceneManager.LoadScene("level" + currentScene + "_final");
 
     }
@@ -395,6 +404,10 @@ public class GameController : MonoBehaviour {
 
         isLoadingNextLevel = true;
         currentScene++;
+        
+        if (maxScene < currentScene)
+            maxScene = currentScene;
+        
         string scene = "level" + currentScene + "_final";
         if (DEBUG)
             StartCoroutine(nameof(LoadYourAsyncScene),"test");
@@ -547,11 +560,13 @@ public class GameController : MonoBehaviour {
 
     private static void Save() {
         PlayerPrefs.SetInt("currentScene", currentScene);
+        PlayerPrefs.SetInt("maxScene", maxScene);
         PlayerPrefs.Save();
     }
     
     private static void Load() {
         currentScene = PlayerPrefs.GetInt("currentScene",1);
+        maxScene = PlayerPrefs.GetInt("maxScene",1);
     }
     
     private void Solve() {
