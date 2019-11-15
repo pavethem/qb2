@@ -21,7 +21,7 @@ public class LevelSelectScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         buttonsTransform = GameObject.Find("Scroll View").GetComponent<RectTransform>();
-        startPosition = new Vector2(0,0 - (buttonsTransform.rect.height + Screen.height / 2f));
+        startPosition = new Vector2(Screen.width / 2f + buttonsTransform.rect.width, 0);
         buttonsTransform.anchoredPosition = startPosition;
         levelName = "1";
         StartCoroutine(MoveIn());
@@ -39,23 +39,25 @@ public class LevelSelectScreen : MonoBehaviour
     private IEnumerator MoveIn() {
         isMoving = true;
         float step = 0;
-        float y = startPosition.y;
-        while (buttonsTransform.anchoredPosition.y < 0) {
-            buttonsTransform.anchoredPosition = new Vector2(0, Mathf.Lerp(y, 0, step));
+        float x = startPosition.x;
+        while (buttonsTransform.anchoredPosition.x > 0)
+        {
+            buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(x, 0, step), 0);
             step += Time.deltaTime;
             yield return null;
         }
 
-        buttonsTransform.anchoredPosition = new Vector2(0,0);
+        buttonsTransform.anchoredPosition = new Vector2(0, 0);
         isMoving = false;
     }
     
     private IEnumerator MoveOut() {
         isMoving = true;
         float step = 0;
-        float y = startPosition.y;
-        while (buttonsTransform.anchoredPosition.y > y) {
-            buttonsTransform.anchoredPosition = new Vector2(0, Mathf.Lerp(0, y, step));
+        float x = startPosition.x;
+        while (buttonsTransform.anchoredPosition.x < x)
+        {
+            buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(0, x, step), 0);
             step += Time.deltaTime;
             yield return null;
         }

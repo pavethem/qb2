@@ -83,9 +83,9 @@ public class MainMenuScreen : MonoBehaviour {
                 if (buttonName == "start")
                     GameController.LoadMaxScene();
                 else if (buttonName == "options")
-                    SceneManager.LoadSceneAsync("optionsmenu");
+                    SceneManager.LoadScene("optionsmenu");
                 else if (buttonName == "select")
-                    SceneManager.LoadSceneAsync("selectlevelmenu");
+                    SceneManager.LoadScene("selectlevelmenu");
             }
         }
     }

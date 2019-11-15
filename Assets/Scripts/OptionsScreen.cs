@@ -25,7 +25,7 @@ public class OptionsScreen : MonoBehaviour
     private void Start() {
         
         buttonsTransform = GameObject.Find("OptionsButtons").GetComponent<RectTransform>();
-        startPosition = new Vector2(Screen.width / 2f + buttonsTransform.rect.width,0);
+        startPosition = new Vector2( 0 - (Screen.width / 2f + buttonsTransform.rect.width),0);
         buttonsTransform.anchoredPosition = startPosition;
         
         backgroundVolumeSlider.value = PlayerPrefs.GetFloat("BackgroundVolumeSlider", 1f);
@@ -41,7 +41,7 @@ public class OptionsScreen : MonoBehaviour
         isMoving = true;
         float step = 0;
         float x = startPosition.x;
-        while (buttonsTransform.anchoredPosition.x > 0) {
+        while (buttonsTransform.anchoredPosition.x < 0) {
             buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(x, 0, step), 0);
             step += Time.deltaTime;
             yield return null;
@@ -55,7 +55,7 @@ public class OptionsScreen : MonoBehaviour
         isMoving = true;
         float step = 0;
         float x = startPosition.x;
-        while (buttonsTransform.anchoredPosition.x < x) {
+        while (buttonsTransform.anchoredPosition.x > x) {
             buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(0, x, step), 0);
             step += Time.deltaTime;
             yield return null;
