@@ -133,6 +133,7 @@ public class GameController : MonoBehaviour {
         mixer.SetFloat("EffectsVolume", PlayerPrefs.GetFloat("EffectsVolume", 1f));
         hardmode = PlayerPrefs.GetInt("HardMode", -1);
         freeRotation = PlayerPrefs.GetInt("FreeRotation", -1);
+        maxScene = PlayerPrefs.GetInt("maxScene",1);
     }
 
     public static void LoadCurrentScene() {
@@ -141,7 +142,7 @@ public class GameController : MonoBehaviour {
 
     }
     
-    public static void LoadMaxtScene() {
+    public static void LoadMaxScene() {
         Load();
         currentScene = maxScene;
         SceneManager.LoadScene("level" + currentScene + "_final");

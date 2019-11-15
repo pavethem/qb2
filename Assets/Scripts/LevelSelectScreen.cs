@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelSelectScreen : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class LevelSelectScreen : MonoBehaviour
     //the active transform (mobile or desktop)
     private RectTransform buttonsTransform;
     private bool isMoving;
+
+    public Texture replacementTexture;
     
     // Start is called before the first frame update
     void Start() {
@@ -22,6 +25,15 @@ public class LevelSelectScreen : MonoBehaviour
         buttonsTransform.anchoredPosition = startPosition;
         levelName = "1";
         StartCoroutine(MoveIn());
+
+        int levelCount = GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).childCount - 1;
+
+        //replace textures with locks, when levels are not yet unlocked
+        for (int i = GameController.maxScene + 1; i <= levelCount; i++) {
+            GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).GetChild(i).Find("LevelImage").GetComponent<RawImage>().texture =
+                replacementTexture;
+        }
+
     }
     
     private IEnumerator MoveIn() {
@@ -53,7 +65,7 @@ public class LevelSelectScreen : MonoBehaviour
     }
 
     public void LevelSelectButton(string buttonName) {
-        if(isMoving) return;
+        if(isMoving || int.Parse(buttonName) > GameController.maxScene) return;
         StartCoroutine(MoveOut());
         isLoading = true;
         levelName = buttonName;

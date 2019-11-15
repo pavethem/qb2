@@ -81,7 +81,7 @@ public class MainMenuScreen : MonoBehaviour {
         if (isLoading) {
             if (!isMoving) {
                 if (buttonName == "start")
-                    GameController.LoadCurrentScene();
+                    GameController.LoadMaxScene();
                 else if (buttonName == "options")
                     SceneManager.LoadSceneAsync("optionsmenu");
                 else if (buttonName == "select")

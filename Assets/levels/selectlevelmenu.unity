@@ -7004,6 +7004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9c3352b72707478a4fa79fae32d18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  replacementTexture: {fileID: 2800000, guid: 361023ca8aa9c1639aa64aba2df6f62c, type: 3}
 --- !u!1 &1628928547
 GameObject:
   m_ObjectHideFlags: 0
