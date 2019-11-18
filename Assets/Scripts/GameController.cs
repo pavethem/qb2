@@ -36,6 +36,10 @@ public class GameController : MonoBehaviour {
     public static GameObject[] rotators;
     public static GameObject[] teleporters;
 
+    //for hard mode
+    public static int numberRotations;
+    public static int maxRotations;
+
     //backup original rotations to reset them when gameover
     private static Quaternion pedestalRotation;
     private static Vector3 pedestalPosition;
@@ -169,7 +173,7 @@ public class GameController : MonoBehaviour {
             GameObject.Find("MainCanvas").transform.Find("MobileButtons").gameObject.SetActive(true);
         }
 
-        if (scene.name.StartsWith("level") && scene.name != "level0") {
+        if (scene.name.StartsWith("level") && scene.name != "level0" || scene.name == "test") {
             GameObject.Find("Canvas").transform.Find("MobileImage").Find("BackButton").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("MobileImage").Find("ResetButton").gameObject.SetActive(true);
             InitGame();
@@ -180,7 +184,7 @@ public class GameController : MonoBehaviour {
         
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
-        StartCoroutine("MoveInButtons");
+        StartCoroutine(nameof(MoveInButtons));
         if(Application.isMobilePlatform && freeRotation==1)
             StartCoroutine(nameof(MoveInFromTheRight));
 
@@ -189,6 +193,11 @@ public class GameController : MonoBehaviour {
         isLoadingNextLevel = false;
         resetting = false;
         cubes = GameObject.FindGameObjectsWithTag("node");
+
+        if (hardmode == 1) {
+            numberRotations = 0;
+            maxRotations = GameObject.FindWithTag("thing").GetComponent<RotationCount>().rotationCount;
+        }
 
         arrows = GameObject.FindGameObjectsWithTag("arrow");
         rotators = GameObject.FindGameObjectsWithTag("rotator");
@@ -659,6 +668,7 @@ public class GameController : MonoBehaviour {
                 case 1: {
                     GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
                         90f;
+                    GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
                     GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
                     lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
@@ -670,6 +680,7 @@ public class GameController : MonoBehaviour {
                 case 2: {
                     GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
                         -90f;
+                    GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
                     GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
                     lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
@@ -682,7 +693,8 @@ public class GameController : MonoBehaviour {
                 case 3: {
                     GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
                         90f;
-                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
                     lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
                         .GetComponent<Rotator>();
@@ -693,7 +705,8 @@ public class GameController : MonoBehaviour {
                 case 4: {
                     GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
                         -90f;
-                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                    GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
                     lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
                         .GetComponent<Rotator>();
@@ -704,7 +717,8 @@ public class GameController : MonoBehaviour {
                 case 5: {
                     GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
                         90f;
-                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
                     lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
                         .GetComponent<Rotator>();
@@ -715,7 +729,8 @@ public class GameController : MonoBehaviour {
                 case 6: {
                     GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
                         -90f;
-                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                    GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
                         .StartCoroutine("Rotate", false);
                     lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
                         .GetComponent<Rotator>();
@@ -726,7 +741,7 @@ public class GameController : MonoBehaviour {
             }
         }
 
-        if (inputs.Count > solved.Count && solved.Count > 0 && !gameOver) {
+        if (inputs.Count > solved.Count && solved.Count > 0) {
             inputs.Clear();
             StartCoroutine(Reset());
         }
@@ -742,12 +757,14 @@ public class GameController : MonoBehaviour {
                 solved.Clear();
                 solved.AddRange(inputs);
                 Debug.Log(finishedinputs);
-                ScreenCapture.CaptureScreenshot("/media/Storage/" + solved.Count + " Moves " + Time.deltaTime + random);
+                ScreenCapture.CaptureScreenshot("/home/tino/" + solved.Count + " Moves " + Time.deltaTime + random);
             }
             inputs.Clear();
+            StartCoroutine(Reset());
         }
 
     }
+    
 }
 
 

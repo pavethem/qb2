@@ -5235,6 +5235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5775704699096245127}
+  - component: {fileID: 5775704699096245132}
   m_Layer: 8
   m_Name: Thing
   m_TagString: thing
@@ -5242,3 +5243,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5775704699096245132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775704699096245131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3121508ba6ee9556c868cc8f58a0c57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationCount: 18

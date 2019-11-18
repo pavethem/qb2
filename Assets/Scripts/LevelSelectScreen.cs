@@ -14,6 +14,7 @@ public class LevelSelectScreen : MonoBehaviour
     private Vector2 startPosition;
     //the active transform (mobile or desktop)
     private RectTransform buttonsTransform;
+    private RectTransform contentTransform;
     private bool isMoving;
 
     public Texture replacementTexture;
@@ -21,6 +22,7 @@ public class LevelSelectScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         buttonsTransform = GameObject.Find("Scroll View").GetComponent<RectTransform>();
+        contentTransform = buttonsTransform.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
         startPosition = new Vector2(Screen.width / 2f + buttonsTransform.rect.width, 0);
         buttonsTransform.anchoredPosition = startPosition;
         levelName = "1";
@@ -66,16 +68,32 @@ public class LevelSelectScreen : MonoBehaviour
         isMoving = false;
     }
 
+    //scroll content back to the left
+    private IEnumerator ResetContent() {
+        isMoving = true;
+        float step = 0;
+        float x = contentTransform.anchoredPosition.x;
+        while (contentTransform.anchoredPosition.x < 0)
+        {
+            contentTransform.anchoredPosition = new Vector2(Mathf.Lerp(x, 0, step), 0);
+            step += Time.deltaTime * 2;
+            yield return null;
+        }
+
+        contentTransform.anchoredPosition = new Vector2(0,0);
+        StartCoroutine(nameof(MoveOut));
+    }
+
     public void LevelSelectButton(string buttonName) {
         if(isMoving || int.Parse(buttonName) > GameController.maxScene) return;
-        StartCoroutine(MoveOut());
+        StartCoroutine(ResetContent());
         isLoading = true;
         levelName = buttonName;
     }
     
     public void BackButton() {
         if(isMoving) return;
-        StartCoroutine(MoveOut());
+        StartCoroutine(ResetContent());
         isLoading = true;
         levelName = "back";
     }

@@ -263,6 +263,8 @@ public class MobileRotator : RotatorParent {
 
     IEnumerator Rotate(bool reverse = false) {
 
+        GameController.rotating = true;
+
         if (GameController.DEBUG) {
             if (reverse) {
                 if (GameController.lastrotations.Count > 0)
@@ -294,16 +296,20 @@ public class MobileRotator : RotatorParent {
             reverseFrom = tempFrom;
         
         while (thing.transform.rotation != tempTo) {
-            GameController.rotating = true;
             thing.transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
             timeCount += Time.fixedDeltaTime * rotationSpeed;
             yield return new WaitForFixedUpdate();
         }
 
         thing.transform.rotation = tempTo;
-        GameController.rotating = false;
-        GameController.lastRotatorStrip = null;
         
+        if (GameController.hardmode == 1 && !reverse) {
+            GameController.numberRotations++;
+        }
+        
+        GameController.lastRotatorStrip = null;
+        GameController.rotating = false;
+
     }
 
     private IEnumerator OnMouseDown() {
