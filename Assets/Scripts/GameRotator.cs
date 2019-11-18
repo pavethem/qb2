@@ -54,33 +54,37 @@ public class GameRotator : MonoBehaviour, IDragHandler {
         else {
             if (!GameController.gameOver && !GameController.fallingLock)  {
                 
-                Camera.main.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
-                //            Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
-
-                directionalLight.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
-                //            directionalLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
-
-                spotLight.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
-                //            spotLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
-
-                //            background.transform.RotateAround(Vector3.zero, pedestal.transform.up, eventData.delta.x / ADJUST_FACTOR);
-                //            background.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
-
-                pedestal.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
-                //            pedestal.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
-
-                reflectionCamera.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
-                //            reflectionCamera.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
-
-                Physics.gravity = -pedestal.transform.up * 70;
-
-                if (GameController.freeRotation == 1) {
+                if (GameController.freeRotation == 1  && gameObject.name == "MobileImageY") {
                     Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
                     directionalLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
                     spotLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
                     pedestal.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
                     reflectionCamera.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));
                 }
+                else {
+
+                    Camera.main.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
+                    //            Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+                    directionalLight.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
+                    //            directionalLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+                    spotLight.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
+                    //            spotLight.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+                    //            background.transform.RotateAround(Vector3.zero, pedestal.transform.up, eventData.delta.x / ADJUST_FACTOR);
+                    //            background.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+                    pedestal.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
+                    //            pedestal.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+                    reflectionCamera.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
+                    //            reflectionCamera.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
+
+                }
+
+                Physics.gravity = -pedestal.transform.up * 70;
+                
                 
             }
         }

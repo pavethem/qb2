@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
     public GameObject screenWipe;
     public GameObject directionalLight;
     public GameObject mobileImage;
+    public GameObject mobileImageY;
     private bool wipingIn;
     public static bool wiping;
 
@@ -103,9 +104,13 @@ public class GameController : MonoBehaviour {
             gravity = Physics.gravity;
 
             mobileImage.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.x,
-                Screen.height / 10);
+                Screen.height / 10f);
             mobileImage.GetComponent<RectTransform>().anchoredPosition =new Vector2(0, 
                 0 - mobileImage.GetComponent<RectTransform>().rect.height);
+            
+            mobileImageY.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.y*2, 
+                mobileImageY.GetComponent<RectTransform>().sizeDelta.y);
+            mobileImageY.GetComponent<RectTransform>().offsetMin = new Vector2(0,mobileImage.GetComponent<RectTransform>().sizeDelta.y);
 
             DEBUG = debugScriptableObject.DEBUG;
 
@@ -176,6 +181,8 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
         StartCoroutine("MoveInButtons");
+        if(Application.isMobilePlatform && freeRotation==1)
+            StartCoroutine(nameof(MoveInFromTheRight));
 
         cubeCount = 0;
         gameOver = false;
@@ -191,8 +198,10 @@ public class GameController : MonoBehaviour {
         
         if (Application.isMobilePlatform) {
             //change image for rotating the game world
-            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<RawImage>().enabled = true;
-            GameObject.Find("Canvas").transform.Find("MobileImage").GetComponent<GameRotator>().enabled = true;
+            mobileImage.GetComponent<RawImage>().enabled = true;
+            mobileImage.GetComponent<GameRotator>().enabled = true;
+            mobileImageY.GetComponent<RawImage>().enabled = true;
+            mobileImageY.GetComponent<GameRotator>().enabled = true;
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
 
             //change rotator scripts
@@ -383,6 +392,8 @@ public class GameController : MonoBehaviour {
         if (!isLoadingNextLevel && !resetting) {
             resetting = true;
             StartCoroutine(nameof(MoveOutButtons));
+            if (Application.isMobilePlatform && freeRotation == 1)
+                StartCoroutine(nameof(MoveOutFromTheRight));
             StartCoroutine(nameof(ScreenWipeIn));
             while (!wipingIn) {
                 yield return null;
@@ -475,6 +486,23 @@ public class GameController : MonoBehaviour {
 
         mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     }
+    
+    //for moving mobileimageY
+    IEnumerator MoveInFromTheRight() {
+        
+        float step = 0;
+        float x = mobileImageY.GetComponent<RectTransform>().anchoredPosition.x;
+        while (mobileImageY.GetComponent<RectTransform>().anchoredPosition.x > -mobileImageY.GetComponent<RectTransform>().rect.width/2)
+        {
+            mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(x, 
+                -mobileImageY.GetComponent<RectTransform>().rect.width/2, step), mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
+            step += Time.deltaTime * 2f;
+            yield return null;
+        }
+
+        mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(-mobileImageY.GetComponent<RectTransform>().rect.width/2, 
+            mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
+    }
 
 
     IEnumerator MoveOutButtons()
@@ -489,6 +517,22 @@ public class GameController : MonoBehaviour {
         }
 
         mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, y);
+    }
+    
+    IEnumerator MoveOutFromTheRight()
+    {
+        float step = 0;
+        float x = mobileImageY.GetComponent<RectTransform>().rect.width/2;
+        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.x < x)
+        {
+            mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(-x, x, step), 
+                mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
+            step += Time.deltaTime * 2f;
+            yield return null;
+        }
+
+        mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(x,
+            mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
     }
 
     IEnumerator ScreenWipeIn() {
