@@ -49,6 +49,7 @@ public class Rotator : RotatorParent {
         
         if (GameController.DEBUG) {
             if (reverse) {
+                GameController.hitLock = true;
                 if (GameController.lastrotations.Count > 0)
                     GameController.lastrotations.Pop();
             }
@@ -88,7 +89,7 @@ public class Rotator : RotatorParent {
         
         GameController.lastRotatorStrip = null;
         GameController.rotating = false;
-
+        
     }
 
     private IEnumerator OnMouseOver() {
