@@ -695,6 +695,24 @@ public class GameController : MonoBehaviour {
     }
     
     private void Solve() {
+        
+        if (gameOver && !isLoadingNextLevel) {
+            string finishedinputs = "";
+            foreach (var entry in inputs) {
+                finishedinputs += entry + ", ";
+            }
+
+            if (solved.Count > inputs.Count || solved.Count == 0) {
+                finishedinputs += inputs.Count;
+                solved.Clear();
+                solved.AddRange(inputs);
+                Debug.Log(finishedinputs);
+                ScreenCapture.CaptureScreenshot("/home/tino/" + solved.Count + " Moves " + Time.deltaTime);
+            }
+
+            inputs.Clear();
+//                StartCoroutine(Reset());
+        }
 
         solveTimeout += Time.deltaTime;
         if (solveTimeout > 0.5f) {
@@ -795,28 +813,11 @@ public class GameController : MonoBehaviour {
                 }
             }
 
-            if (inputs.Count > solved.Count && solved.Count > 0) {
+            if (inputs.Count > solved.Count && solved.Count > 0 || inputs.Count > GameObject.FindWithTag("thing").GetComponent<RotationCount>().rotationCount) {
                 inputs.Clear();
                 StartCoroutine(Reset());
             }
-
-            if (gameOver && !isLoadingNextLevel) {
-                string finishedinputs = "";
-                foreach (var entry in inputs) {
-                    finishedinputs += entry + ", ";
-                }
-
-                if (solved.Count > inputs.Count || solved.Count == 0) {
-                    finishedinputs += inputs.Count;
-                    solved.Clear();
-                    solved.AddRange(inputs);
-                    Debug.Log(finishedinputs);
-                    ScreenCapture.CaptureScreenshot("/home/tino/" + solved.Count + " Moves " + Time.deltaTime + random);
-                }
-
-                inputs.Clear();
-                StartCoroutine(Reset());
-            }
+            
         }
     }
     
