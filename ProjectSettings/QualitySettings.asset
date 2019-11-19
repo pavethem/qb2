@@ -252,6 +252,6 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
-    Android: 0
+    Android: 6
     Standalone: 6
-    WebGL: 0
+    WebGL: 6
