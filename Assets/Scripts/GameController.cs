@@ -696,115 +696,128 @@ public class GameController : MonoBehaviour {
     
     private void Solve() {
 
-        int random = Random.Range(1, 7);
         solveTimeout += Time.deltaTime;
-        if (!hitLock || random != lastRotation) {
-            if (solveTimeout >= 0.5f && !gameOver) {
-                switch (random) {
-                    case 1: {
-                        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
-                            90f;
-                        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+        if (solveTimeout > 0.5f) {
+            solveTimeout = 0;
+            int random = Random.Range(1, 7);
+            
+            if (!(hitLock && random == lastRotation)) {
+                if (!gameOver) {
+                    switch (random) {
+                        case 1: {
                             GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
-                                .StartCoroutine("Rotate", false);
-                        lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
-                            .GetComponent<Rotator>();
-                        solveTimeout = 0;
-                        inputs.Add("a");
-                        break;
-                    }
-                    case 2: {
-                        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
-                            -90f;
-                        GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                                    .lastAngle =
+                                90f;
                             GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
-                                .StartCoroutine("Rotate", false);
-                        lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
-                            .GetComponent<Rotator>();
-                        solveTimeout = 0;
-                        inputs.Add("d");
-                        break;
+                                    .rotateRoutine =
+                                GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
+                                    .StartCoroutine("Rotate", false);
+                            lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
+                                .GetComponent<Rotator>();
+                            solveTimeout = 0;
+                            inputs.Add("a");
+                            break;
+                        }
+                        case 2: {
+                            GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
+                                    .lastAngle =
+                                -90f;
+                            GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
+                                    .rotateRoutine =
+                                GameObject.FindWithTag("rotatorStripX").transform.GetChild(0).GetComponent<Rotator>()
+                                    .StartCoroutine("Rotate", false);
+                            lastRotatorStrip = GameObject.FindWithTag("rotatorStripX").transform.GetChild(0)
+                                .GetComponent<Rotator>();
+                            solveTimeout = 0;
+                            inputs.Add("d");
+                            break;
 
-                    }
-                    case 3: {
-                        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
-                            90f;
-                        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                        }
+                        case 3: {
                             GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
-                                .StartCoroutine("Rotate", false);
-                        lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
-                            .GetComponent<Rotator>();
-                        solveTimeout = 0;
-                        inputs.Add("w");
-                        break;
-                    }
-                    case 4: {
-                        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
-                            -90f;
-                        GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                                    .lastAngle =
+                                90f;
                             GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
-                                .StartCoroutine("Rotate", false);
-                        lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
-                            .GetComponent<Rotator>();
-                        solveTimeout = 0;
-                        inputs.Add("s");
-                        break;
-                    }
-                    case 5: {
-                        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
-                            90f;
-                        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                                    .rotateRoutine =
+                                GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                                    .StartCoroutine("Rotate", false);
+                            lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
+                                .GetComponent<Rotator>();
+                            solveTimeout = 0;
+                            inputs.Add("w");
+                            break;
+                        }
+                        case 4: {
+                            GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                                    .lastAngle =
+                                -90f;
+                            GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                                    .rotateRoutine =
+                                GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
+                                    .StartCoroutine("Rotate", false);
+                            lastRotatorStrip = GameObject.FindWithTag("rotatorStripY").transform.GetChild(0)
+                                .GetComponent<Rotator>();
+                            solveTimeout = 0;
+                            inputs.Add("s");
+                            break;
+                        }
+                        case 5: {
                             GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
-                                .StartCoroutine("Rotate", false);
-                        lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
-                            .GetComponent<Rotator>();
-                        solveTimeout = 0;
-                        inputs.Add("e");
-                        break;
-                    }
-                    case 6: {
-                        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().signedAngle =
-                            -90f;
-                        GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>().rotateRoutine =
+                                    .lastAngle =
+                                90f;
                             GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
-                                .StartCoroutine("Rotate", false);
-                        lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
-                            .GetComponent<Rotator>();
-                        solveTimeout = 0;
-                        inputs.Add("q");
-                        break;
+                                    .rotateRoutine =
+                                GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                                    .StartCoroutine("Rotate", false);
+                            lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
+                                .GetComponent<Rotator>();
+                            solveTimeout = 0;
+                            inputs.Add("e");
+                            break;
+                        }
+                        case 6: {
+                            GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                                    .lastAngle =
+                                -90f;
+                            GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                                    .rotateRoutine =
+                                GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0).GetComponent<Rotator>()
+                                    .StartCoroutine("Rotate", false);
+                            lastRotatorStrip = GameObject.FindWithTag("rotatorStripZ").transform.GetChild(0)
+                                .GetComponent<Rotator>();
+                            solveTimeout = 0;
+                            inputs.Add("q");
+                            break;
+                        }
                     }
+                    hitLock = false;
+                    lastRotation = random;
                 }
             }
 
-            if (hitLock)
-                hitLock = false;
-        }
-        
-        lastRotation = random;
-
-        if (inputs.Count > solved.Count && solved.Count > 0) {
-            inputs.Clear();
-            StartCoroutine(Reset());
-        }
-
-        if (gameOver && !isLoadingNextLevel) {
-            string finishedinputs = "";
-            foreach (var entry in inputs) {
-                finishedinputs += entry + ", ";
+            if (inputs.Count > solved.Count && solved.Count > 0) {
+                inputs.Clear();
+                StartCoroutine(Reset());
             }
 
-            if (solved.Count > inputs.Count || solved.Count == 0) {
-                finishedinputs += inputs.Count;
-                solved.Clear();
-                solved.AddRange(inputs);
-                Debug.Log(finishedinputs);
-                ScreenCapture.CaptureScreenshot("/home/tino/" + solved.Count + " Moves " + Time.deltaTime + random);
-            }
-            inputs.Clear();
-            StartCoroutine(Reset());
-        }
+            if (gameOver && !isLoadingNextLevel) {
+                string finishedinputs = "";
+                foreach (var entry in inputs) {
+                    finishedinputs += entry + ", ";
+                }
 
+                if (solved.Count > inputs.Count || solved.Count == 0) {
+                    finishedinputs += inputs.Count;
+                    solved.Clear();
+                    solved.AddRange(inputs);
+                    Debug.Log(finishedinputs);
+                    ScreenCapture.CaptureScreenshot("/home/tino/" + solved.Count + " Moves " + Time.deltaTime + random);
+                }
+
+                inputs.Clear();
+                StartCoroutine(Reset());
+            }
+        }
     }
     
 }
