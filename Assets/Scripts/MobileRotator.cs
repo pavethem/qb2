@@ -304,7 +304,7 @@ public class MobileRotator : RotatorParent {
         thing.transform.rotation = tempTo;
         
         if (GameController.hardmode == 1 && !reverse) {
-            GameController.numberRotations++;
+            GameController.CountDownRotations();
         }
         
         GameController.lastRotatorStrip = null;

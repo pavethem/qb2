@@ -83,7 +83,7 @@ public class Rotator : RotatorParent {
         thing.transform.rotation = tempTo;
         
         if (GameController.hardmode == 1 && !reverse) {
-            GameController.numberRotations++;
+            GameController.CountDownRotations();
         }
         
         GameController.lastRotatorStrip = null;

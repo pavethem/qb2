@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -70,6 +71,7 @@ public class GameController : MonoBehaviour {
     public static int currentScene;
     //the maximum level reached by the player
     public static int maxScene;
+    private const int LEVELCOUNT = 18;
     //last rotator to be used (needed to reverse rotations when hitting locks)
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
@@ -159,7 +161,10 @@ public class GameController : MonoBehaviour {
     
     public static void LoadMaxScene() {
         Load();
-        currentScene = maxScene;
+        if (maxScene <= LEVELCOUNT)
+            currentScene = maxScene;
+        else
+            currentScene = LEVELCOUNT;
         SceneManager.LoadScene("level" + currentScene + "_final");
 
     }
@@ -176,6 +181,8 @@ public class GameController : MonoBehaviour {
         if (scene.name.StartsWith("level") && scene.name != "level0" || scene.name == "test") {
             GameObject.Find("Canvas").transform.Find("MobileImage").Find("BackButton").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("MobileImage").Find("ResetButton").gameObject.SetActive(true);
+            if (hardmode == 1)
+                GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(true);
             InitGame();
         }
     }
@@ -197,6 +204,7 @@ public class GameController : MonoBehaviour {
         if (hardmode == 1) {
             numberRotations = 0;
             maxRotations = GameObject.FindWithTag("thing").GetComponent<RotationCount>().rotationCount;
+            GameObject.Find("Canvas").transform.Find("HardModePanel").GetComponentInChildren<TextMeshProUGUI>().text = "" + maxRotations;
         }
 
         arrows = GameObject.FindGameObjectsWithTag("arrow");
@@ -371,6 +379,23 @@ public class GameController : MonoBehaviour {
 
     }
 
+    //for hard mode
+    public static void CountDownRotations() {
+        numberRotations++;
+        int n = maxRotations - numberRotations;
+        GameObject.Find("Canvas").transform.Find("HardModePanel").GetComponentInChildren<TextMeshProUGUI>().text = "" + n;
+
+        if (n == 0) {
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().enabled = false;
+            GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = false;
+        }
+        
+    }
+
     //unlock lock with key
     public static void RemoveLock(GameObject locky, GameObject key) {
 
@@ -407,7 +432,7 @@ public class GameController : MonoBehaviour {
             while (!wipingIn) {
                 yield return null;
             }
-
+            GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(false);
             isLoadingNextLevel = true;
             gameOver = true;
             
@@ -430,6 +455,11 @@ public class GameController : MonoBehaviour {
     }
 
     void GameOver() {
+
+        if (hardmode == 1) {
+            PlayerPrefs.SetInt("level" + currentScene, 1);
+            PlayerPrefs.Save();
+        }
 
         isLoadingNextLevel = true;
         currentScene++;
@@ -556,6 +586,8 @@ public class GameController : MonoBehaviour {
             timeStep += Time.deltaTime;
             yield return null;
         }
+        //looks weird otherwise
+        GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(false);
         screenWipe.GetComponent<Image>().fillAmount = 0.8f;
         directionalLight.GetComponent<Light>().shadowStrength = 0;
         wipingIn = true;

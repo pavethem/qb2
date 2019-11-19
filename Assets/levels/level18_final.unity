@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121508ba6ee9556c868cc8f58a0c57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationCount: 8
+  rotationCount: 7
 --- !u!1001 &387825985
 PrefabInstance:
   m_ObjectHideFlags: 0

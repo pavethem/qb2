@@ -29,6 +29,12 @@ public class LevelSelectScreen : MonoBehaviour
         StartCoroutine(MoveIn());
 
         int levelCount = GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).childCount - 1;
+        
+        //add checkmars if hard mode was completed
+        for (int i = 1; i <= GameController.maxScene; i++) {
+            if(PlayerPrefs.GetInt("level"+i,-1) == 1)
+                GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).GetChild(i).Find("Panel").gameObject.SetActive(true);
+        }
 
         //replace textures with locks, when levels are not yet unlocked
         for (int i = GameController.maxScene + 1; i <= levelCount; i++) {
