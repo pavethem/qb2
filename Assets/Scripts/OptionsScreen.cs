@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -25,8 +23,8 @@ public class OptionsScreen : MonoBehaviour
     private void Start() {
         
         buttonsTransform = GameObject.Find("OptionsButtons").GetComponent<RectTransform>();
-        startPosition = new Vector2( 0 - (Screen.width / 2f + buttonsTransform.rect.width),0);
-        buttonsTransform.anchoredPosition = startPosition;
+//        startPosition = new Vector2( 0 - (Screen.width / 2f + buttonsTransform.rect.width),0);
+//        buttonsTransform.anchoredPosition = startPosition;
         
         backgroundVolumeSlider.value = PlayerPrefs.GetFloat("BackgroundVolumeSlider", 1f);
         effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolumeSlider", 1f);
@@ -34,40 +32,13 @@ public class OptionsScreen : MonoBehaviour
         freerotation = GameController.freeRotation;
         SetHardModeText();
         SetFreeRotationText();
-        StartCoroutine(MoveIn());
-    }
-    
-    private IEnumerator MoveIn() {
-        isMoving = true;
-        float step = 0;
-        float x = startPosition.x;
-        while (buttonsTransform.anchoredPosition.x < 0) {
-            buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(x, 0, step), 0);
-            step += Time.deltaTime;
-            yield return null;
-        }
-
-        buttonsTransform.anchoredPosition = new Vector2(0,0);
-        isMoving = false;
-    }
-    
-    private IEnumerator MoveOut() {
-        isMoving = true;
-        float step = 0;
-        float x = startPosition.x;
-        while (buttonsTransform.anchoredPosition.x > x) {
-            buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(0, x, step), 0);
-            step += Time.deltaTime;
-            yield return null;
-        }
-
-        buttonsTransform.anchoredPosition = startPosition;
-        isMoving = false;
+//        StartCoroutine(MoveIn());
+        buttonsTransform.GetComponent<Animation>().Play();
     }
 
     public void BackButton() {
         if(isMoving) return;
-        StartCoroutine(MoveOut());
+        buttonsTransform.GetComponent<Animation>().Play("OptionScreenOut");
         isLoading = true;
     }
     
@@ -146,7 +117,7 @@ public class OptionsScreen : MonoBehaviour
     
     private void Update() {
         if (isLoading) {
-            if (!isMoving) {
+            if (!buttonsTransform.GetComponent<Animation>().isPlaying) {
                 SceneManager.LoadSceneAsync("mainmenu");
             }
         }

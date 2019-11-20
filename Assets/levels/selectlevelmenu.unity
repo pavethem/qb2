@@ -4716,7 +4716,7 @@ MonoBehaviour:
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 76
+  m_FallbackScreenDPI: 69.2
   m_DefaultSpriteDPI: 76
   m_DynamicPixelsPerUnit: 1
 --- !u!223 &878375769
@@ -7559,7 +7559,6 @@ GameObject:
   - component: {fileID: 1520716998}
   - component: {fileID: 1520716997}
   - component: {fileID: 1520716996}
-  - component: {fileID: 1520716999}
   m_Layer: 5
   m_Name: Scrollbar Horizontal
   m_TagString: Untagged
@@ -7583,9 +7582,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 23.221954}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1520716996
 MonoBehaviour:
@@ -7675,20 +7674,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520716994}
   m_CullTransparentMesh: 0
---- !u!114 &1520716999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520716994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AspectMode: 3
-  m_AspectRatio: 35
 --- !u!1 &1528871686
 GameObject:
   m_ObjectHideFlags: 0
@@ -10524,6 +10509,7 @@ GameObject:
   - component: {fileID: 2029418472}
   - component: {fileID: 2029418471}
   - component: {fileID: 2029418470}
+  - component: {fileID: 2029418469}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -10550,8 +10536,25 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!111 &2029418469
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029418467}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c4c570e55eebda44894a4cb6d50ac6c5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c4c570e55eebda44894a4cb6d50ac6c5, type: 2}
+  - {fileID: 7400000, guid: 2144da688e813fc3aa71369144c5cfe2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &2029418470
 MonoBehaviour:
   m_ObjectHideFlags: 0

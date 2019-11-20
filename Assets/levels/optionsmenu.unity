@@ -2941,6 +2941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2055279222}
   - component: {fileID: 2055279224}
+  - component: {fileID: 2055279223}
   m_Layer: 5
   m_Name: OptionsButtons
   m_TagString: Untagged
@@ -2971,6 +2972,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 760, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!111 &2055279223
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055279221}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4d12fe8f83d020f1594d0d320f526f9e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4d12fe8f83d020f1594d0d320f526f9e, type: 2}
+  - {fileID: 7400000, guid: b66e30a92bb3721119a7c37664f4c2b4, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &2055279224
 MonoBehaviour:
   m_ObjectHideFlags: 0

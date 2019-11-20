@@ -23,10 +23,11 @@ public class LevelSelectScreen : MonoBehaviour
     void Start() {
         buttonsTransform = GameObject.Find("Scroll View").GetComponent<RectTransform>();
         contentTransform = buttonsTransform.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
-        startPosition = new Vector2(Screen.width / 2f + buttonsTransform.rect.width, 0);
-        buttonsTransform.anchoredPosition = startPosition;
+        buttonsTransform.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(
+            buttonsTransform.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta.x,
+            Screen.height/15f);
         levelName = "1";
-        StartCoroutine(MoveIn());
+        buttonsTransform.GetComponent<Animation>().Play();
 
         int levelCount = GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).childCount - 1;
         
@@ -43,36 +44,6 @@ public class LevelSelectScreen : MonoBehaviour
         }
 
     }
-    
-    private IEnumerator MoveIn() {
-        isMoving = true;
-        float step = 0;
-        float x = startPosition.x;
-        while (buttonsTransform.anchoredPosition.x > 0)
-        {
-            buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(x, 0, step), 0);
-            step += Time.deltaTime;
-            yield return null;
-        }
-
-        buttonsTransform.anchoredPosition = new Vector2(0, 0);
-        isMoving = false;
-    }
-    
-    private IEnumerator MoveOut() {
-        isMoving = true;
-        float step = 0;
-        float x = startPosition.x;
-        while (buttonsTransform.anchoredPosition.x < x)
-        {
-            buttonsTransform.anchoredPosition = new Vector2(Mathf.Lerp(0, x, step), 0);
-            step += Time.deltaTime;
-            yield return null;
-        }
-
-        buttonsTransform.anchoredPosition = startPosition;
-        isMoving = false;
-    }
 
     //scroll content back to the left
     private IEnumerator ResetContent() {
@@ -87,7 +58,8 @@ public class LevelSelectScreen : MonoBehaviour
         }
 
         contentTransform.anchoredPosition = new Vector2(0,0);
-        StartCoroutine(nameof(MoveOut));
+        isMoving = false;
+        buttonsTransform.GetComponent<Animation>().Play("LevelSelectOut");
     }
 
     public void LevelSelectButton(string buttonName) {
@@ -107,7 +79,7 @@ public class LevelSelectScreen : MonoBehaviour
     private void Update() {
         //load new level after menu has moved out of screen
         if (isLoading) {
-            if (!isMoving) {
+            if (!buttonsTransform.GetComponent<Animation>().isPlaying && !isMoving) {
                 if(levelName == "back")
                     SceneManager.LoadSceneAsync("mainmenu");
                 else {

@@ -112,7 +112,7 @@ public class GameController : MonoBehaviour {
             gravity = Physics.gravity;
 
             mobileImage.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.x,
-                Screen.height / 10f);
+                Screen.height / 15f);
             mobileImage.GetComponent<RectTransform>().anchoredPosition =new Vector2(0, 
                 0 - mobileImage.GetComponent<RectTransform>().rect.height);
             
