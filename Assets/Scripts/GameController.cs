@@ -702,7 +702,7 @@ public class GameController : MonoBehaviour {
                 finishedinputs += entry + ", ";
             }
 
-            if (solved.Count > inputs.Count || solved.Count == 0) {
+            if ((solved.Count > inputs.Count && inputs.Count > 0) || (solved.Count == 0 && inputs.Count > 0)) {
                 finishedinputs += inputs.Count;
                 solved.Clear();
                 solved.AddRange(inputs);
