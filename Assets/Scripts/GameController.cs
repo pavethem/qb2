@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour {
     public static int currentScene;
     //the maximum level reached by the player
     public static int maxScene;
-    private const int LEVELCOUNT = 18;
+    private const int LEVELCOUNT = 19;
     //last rotator to be used (needed to reverse rotations when hitting locks)
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
@@ -315,7 +315,7 @@ public class GameController : MonoBehaviour {
 
         if (DEBUG) {
             if (!rotating && !moving && !teleporting) {
-                Solve();
+//                Solve();
             }
         }
 
@@ -326,7 +326,7 @@ public class GameController : MonoBehaviour {
         }
 
         //reset scene
-        if (Input.GetKeyUp(KeyCode.R) && SceneManager.GetActiveScene().name.StartsWith("level") ) {
+        if (Input.GetKeyUp(KeyCode.R) && (SceneManager.GetActiveScene().name.StartsWith("level") || DEBUG)) {
             StartCoroutine(Reset());
         }
 

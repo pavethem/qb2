@@ -27,7 +27,7 @@ public class KeyCollider : MonoBehaviour {
         if (other.gameObject.CompareTag("bub") && !GameController.rotating && other.gameObject.transform.childCount == 1) {
             gameObject.transform.parent = other.gameObject.transform;
             //create an invisible key, only to keep the original collision box
-            collisionkey = Instantiate(collisionkey, gameObject.transform.position, gameObject.transform.rotation, other.gameObject.transform);
+            collisionkey = Instantiate(collisionkey, other.gameObject.transform.position, gameObject.transform.rotation, other.gameObject.transform);
             collisionkey.SetActive(true);
             GameController.keys.Add(collisionkey);
             gameObject.GetComponent<AudioSource>().Play();

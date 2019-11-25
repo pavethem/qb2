@@ -128,7 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4e034ca580641bebd775996ea2c1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionkey: {fileID: 0}
+  collisionkey: {fileID: 6001804756567384108, guid: 6c035e0b0b542eba18a7a3776cf8f8c9,
+    type: 3}
   shrinkSpeed: 5
   shrinkScale: 0.7
 --- !u!114 &2923505776331242789
