@@ -29,7 +29,7 @@ public class TeleporterCollider : MonoBehaviour {
 	    }
 	    
 	    //teleport bub to other teleporter
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !teleported && 
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !teleported && GameController.rotatingColliders.Count == 0 &&
             otherTeleporter.GetComponent<TeleporterCollider>().canTeleport && !otherTeleporter.GetComponent<TeleporterCollider>().hasBub) {
 	        other.gameObject.transform.parent = newParent;
 	        other.gameObject.GetComponent<Teleporter>()
@@ -54,7 +54,7 @@ public class TeleporterCollider : MonoBehaviour {
     }
     
     private void OnMouseUpAsButton() {
-	    if (!GameController.rotating) {
+	    if (!GameController.rotating && GameController.rotatingColliders.Count == 0) {
 		    speedUp = true;
 	    }
 		    

@@ -21,9 +21,7 @@ public class RotatorParent : MonoBehaviour {
     internal Vector3 helperDown;
     //plane of this rotatorStrip
     internal Plane plane;
-
-    //wait a while before rotating with keys again
-    internal const float MINKEYDOWNTIME = 0.9f;
+    
     //for drawing the arrow next to the rotator Strips
     internal const float MINDISTANCE = 0.5f;
     internal const float MAXDISTANCE = 12f;

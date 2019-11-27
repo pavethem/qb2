@@ -315,32 +315,37 @@ public class MobileRotator : RotatorParent {
     private IEnumerator OnMouseDown() {
         
         if (!enabled) yield break;
-        
-        GameController.rotatorClicked = true;
-        isClicked = true;
-        ResetValues();
-        
-        StopCoroutine(nameof(OnMouseUp));
-        StopCoroutine(nameof(FadeOut));
 
-        float timeCount = 0;
-        Color currentColor = gameObject.GetComponentInParent<MeshRenderer>().material.color;
 
-        while (gameObject.GetComponentInParent<MeshRenderer>().material.color != Color.white) {
-            
-            gameObject.GetComponentInParent<MeshRenderer>().material.color =
-                Color.Lerp(currentColor, Color.white, timeCount);
-            timeCount += Time.deltaTime;
-            yield return null;
+        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0) {
+            ResetValues();
+            GameController.rotatorClicked = true;
+            isClicked = true;
 
+
+            StopCoroutine(nameof(OnMouseUp));
+            StopCoroutine(nameof(FadeOut));
+
+            float timeCount = 0;
+            Color currentColor = gameObject.GetComponentInParent<MeshRenderer>().material.color;
+
+            while (gameObject.GetComponentInParent<MeshRenderer>().material.color != Color.white) {
+
+                gameObject.GetComponentInParent<MeshRenderer>().material.color =
+                    Color.Lerp(currentColor, Color.white, timeCount);
+                timeCount += Time.deltaTime;
+                yield return null;
+
+            }
+
+            gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
         }
-        gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
 
     }
     
     private IEnumerator OnMouseUp() {
         
-        if (!enabled) yield break;
+        if (!enabled || !isClicked) yield break;
 
         GameController.rotatorClicked = false;
         isClicked = false;
@@ -350,7 +355,7 @@ public class MobileRotator : RotatorParent {
             lr.positionCount = 0;
         }
 
-        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && 
+        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0 &&
             curved.gameObject.GetComponent<MeshRenderer>().enabled) {
             GameController.lastRotatorStrip = this;
             base.rotateRoutine = StartCoroutine(Rotate());
@@ -406,7 +411,10 @@ public class MobileRotator : RotatorParent {
         
         if (!enabled) return;
 
-        DragMouse();
+        if (!GameController.rotating && !GameController.moving && !GameController.teleporting &&
+            GameController.rotatingColliders.Count == 0 && isClicked) {
+            DragMouse();
+        }
 
     }
 

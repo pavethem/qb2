@@ -7,19 +7,24 @@ public class RotateSpoke : MonoBehaviour
     private Transform lastParent;
     private Quaternion lastRotation;
     private Vector3 lastAxis;
+    private GameObject lastSpoke;
     internal bool reversing;
 
     public AudioClip[] rotationSounds;
 
-    public IEnumerator RotateIt(Vector3 axis) {
+    public IEnumerator RotateIt(GameObject spoke) {
 
         if (!reversing) {
+            GameController.rotatingSpoke = true;
 
             float timeCount = 0;
 
+            Vector3 axis = spoke.transform.up;
+            
             //remove parent while rotating, else it starts to skew
             lastParent = transform.parent;
             lastRotation = transform.rotation;
+            lastSpoke = spoke;
             lastAxis = axis;
             transform.parent = null;
 
@@ -40,9 +45,9 @@ public class RotateSpoke : MonoBehaviour
             } else if (-axis == GameObject.FindGameObjectWithTag("rotatorStripZ").transform.up) {
                 gameObject.GetComponent<AudioSource>().PlayOneShot(rotationSounds[5]);
             }
-
+            
             while (transform.rotation != tempTo) {
-                GameController.rotating = true;
+                GameController.rotatingSpoke = true;
                 transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
                 timeCount += Time.fixedDeltaTime * rotationSpeed;
                 yield return new WaitForFixedUpdate();
@@ -51,12 +56,16 @@ public class RotateSpoke : MonoBehaviour
             transform.rotation = tempTo;
             transform.parent = lastParent;
 
-            GameController.rotating = false;
+            GameController.rotatingColliders.Remove(spoke);
+            if(GameController.rotatingColliders.Count == 0)
+                GameController.lastRotateSpoke = null;
+            GameController.rotatingSpoke = false;
         }
     }
 
     public IEnumerator RotateItBack() {
         
+        GameController.rotatingSpoke = true;
         reversing = true;
         float timeCount = 0;
         
@@ -82,7 +91,7 @@ public class RotateSpoke : MonoBehaviour
         }
         
         while (transform.rotation != tempTo) {
-            GameController.rotating = true;
+            GameController.rotatingSpoke = true;
             transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
             timeCount += Time.fixedDeltaTime * rotationSpeed;
             yield return new WaitForFixedUpdate();
@@ -90,7 +99,11 @@ public class RotateSpoke : MonoBehaviour
 
         transform.parent = lastParent;
         transform.rotation = tempTo;
-        GameController.rotating = false;
+        reversing = false;
+        GameController.rotatingColliders.Remove(lastSpoke);
+        if(GameController.rotatingColliders.Count == 0)
+            GameController.lastRotateSpoke = null;
+        GameController.rotatingSpoke = false;
     }
 
 }

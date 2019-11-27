@@ -48,11 +48,9 @@ public class LockCollider : MonoBehaviour {
         if (((other.gameObject.CompareTag("bub") && other.gameObject.transform.childCount == 1)
              || other.gameObject.CompareTag("spoke")) && GameController.locks.Contains(gameObject) && stayTime == 0) {
             //can't go through locks
-            if (GameController.lastRotateSpoke != null && GameController.lastRotatorStrip == null) {
-
+            if (GameController.lastRotateSpoke != null) {
                 GameController.lastRotateSpoke.StopCoroutine(nameof(RotateSpoke.RotateIt));
                 GameController.lastRotateSpoke.StartCoroutine("RotateItBack");
-
             }
             
             if (GameController.lastRotatorStrip != null && GameController.locks.Contains(gameObject)) {
@@ -73,7 +71,7 @@ public class LockCollider : MonoBehaviour {
     }
     
     private void OnMouseUpAsButton() {
-        if(!shaking && !GameController.rotating)
+        if(!shaking && !GameController.rotating && GameController.rotatingColliders.Count == 0)
             StartCoroutine(Shake(true));
     }
 

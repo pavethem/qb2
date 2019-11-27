@@ -15,37 +15,46 @@ public class RotatorCollider : MonoBehaviour {
 	
 	private void OnTriggerStay(UnityEngine.Collider other) {
 
-		//rotate bub's grandparent around transform.up
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && rotate) {
+		//rotate bub's parent around transform.up
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && rotate && !GameController.rotatingSpoke) {
 			
 	        rotate = false;
 
-	        if (other.gameObject.transform.parent.parent != null) {
-		        other.gameObject.transform.parent.parent.GetComponent<RotateSpoke>()
-				        .StartCoroutine(nameof(RotateSpoke.RotateIt), transform.up);
+	        if (other.gameObject.transform.parent.GetComponent<RotateSpoke>() != null) {
+		        GameController.lastRotateSpoke = other.gameObject.transform.parent.GetComponent<RotateSpoke>();
+		        GameController.lastRotateSpoke.reversing = false;
+		        other.gameObject.transform.parent.GetComponent<RotateSpoke>()
+				        .StartCoroutine(nameof(RotateSpoke.RotateIt), gameObject);
+		        if(!rotating)
+					StartCoroutine(Rotate());
 	        }
         }
     }
 
     private void OnTriggerEnter(UnityEngine.Collider other) {
-	    if(other.gameObject.CompareTag("bub"))
-			rotate = true;
+	    if (other.gameObject.CompareTag("bub")) {
+		    if (other.gameObject.transform.parent.GetComponent<RotateSpoke>() != null) {
+			    rotate = true;
+			    GameController.rotatingColliders.Add(gameObject);
+		    }
+	    }
     }
 
     private void OnTriggerExit(UnityEngine.Collider other) {
 	    if (other.gameObject.CompareTag("bub")) {
-		    rotate = false;
-
-		    GameController.lastRotateSpoke = other.gameObject.transform.parent.parent.GetComponent<RotateSpoke>();
-		    GameController.lastRotateSpoke.reversing = false;
+		    if (other.gameObject.transform.parent.GetComponent<RotateSpoke>() != null) {
+			    rotate = false;
+			    GameController.rotatingColliders.Remove(gameObject);
+		    }
 	    }
     }
     
     private void OnMouseUpAsButton() {
-	    if (!GameController.rotating && !rotating)
+	    if (!GameController.rotating && !rotating && !GameController.rotatingSpoke)
 		    StartCoroutine(Rotate());
     }
 
+    //just the little animation onclick
     private IEnumerator Rotate() {
 	    rotating = true;
 	    for (int i = 0; i < 2; i++) {

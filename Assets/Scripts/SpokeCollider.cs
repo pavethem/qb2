@@ -9,7 +9,6 @@ public class SpokeCollider : MonoBehaviour
             
             GameController.lastRotateSpoke.StopCoroutine(nameof(RotateSpoke.RotateIt));
             GameController.lastRotateSpoke.StartCoroutine("RotateItBack");
-
         } 
 
     }

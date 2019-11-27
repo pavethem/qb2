@@ -24,7 +24,8 @@ public class ArrowCollider : MonoBehaviour {
             traversed = false;
         }
 
-        if (other.gameObject.CompareTag("joint") && !GameController.rotating && !GameController.moving && goal == null) {
+        if (other.gameObject.CompareTag("joint") && !GameController.rotating && !GameController.moving && 
+            GameController.rotatingColliders.Count == 0 && goal == null) {
 
             Transform parent = null;
             Vector3 spoke = new Vector3();
@@ -39,7 +40,8 @@ public class ArrowCollider : MonoBehaviour {
             }
 
             //now search for children if no parents where found
-            if (other.gameObject.transform.childCount > 0 && !GameController.rotating && goal == null && !traversed) {
+            if (other.gameObject.transform.childCount > 0 && !GameController.rotating && 
+                GameController.rotatingColliders.Count == 0 && goal == null && !traversed) {
 
                 traversed = true;
                 List<Transform> children = TraverseChildren(other.gameObject.transform);
@@ -54,7 +56,8 @@ public class ArrowCollider : MonoBehaviour {
             }
         }
         //if a joint was found as a parent or child, go there
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving  && goal != null) {
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving &&
+            GameController.rotatingColliders.Count == 0 && goal != null) {
             other.gameObject.GetComponent<MoveAlongSpoke>().StartCoroutine(nameof(MoveAlongSpoke.MoveIt), goal);
             gameObject.GetComponent<AudioSource>().Play();
             goal = null; 
@@ -70,7 +73,7 @@ public class ArrowCollider : MonoBehaviour {
     }
     
     private void OnMouseUpAsButton() {
-        if (!GameController.rotating && !rotating)
+        if (!GameController.rotating && !rotating && GameController.rotatingColliders.Count == 0)
             StartCoroutine(Rotate());
     }
 

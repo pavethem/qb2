@@ -43,7 +43,7 @@ public class Collider : MonoBehaviour {
 	}
 	
 	private void OnMouseUpAsButton() {
-		if (!GameController.rotating && !rotating)
+		if (!GameController.rotating && !rotating && !GameController.rotatingSpoke)
 			StartCoroutine(Rotate());
 	}
 

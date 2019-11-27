@@ -27,6 +27,10 @@ public class GameController : MonoBehaviour {
     private const float EPSILON = 9.99999944E-5f;
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
+    
+    //wait a while before rotating with keys again
+    public static float MINKEYDOWNTIME = 0.9f;
+    public static float keyDownTime;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -67,6 +71,9 @@ public class GameController : MonoBehaviour {
     public static bool moving;
     public static bool teleporting;
     public static bool fallingLock;
+    public static bool rotatingSpoke;
+    //all rotatorColliders eligible for rotation right now
+    public static List<GameObject> rotatingColliders;
 
     public static int currentScene;
     //the maximum level reached by the player
@@ -264,6 +271,10 @@ public class GameController : MonoBehaviour {
         teleporting = false;
         fallingLock = false;
         rotatorClicked = false;
+        rotatingSpoke = false;
+        rotatingColliders = new List<GameObject>();
+        
+        keyDownTime = 0;
         
         ClearPedestal();
 
@@ -312,9 +323,9 @@ public class GameController : MonoBehaviour {
     }
 
     void LateUpdate() {
-
+        
         if (DEBUG) {
-            if (!rotating && !moving && !teleporting) {
+            if (!rotating && !moving && !teleporting && rotatingColliders.Count == 0) {
 //                Solve();
             }
         }

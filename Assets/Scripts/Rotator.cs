@@ -17,8 +17,7 @@ public class Rotator : RotatorParent {
 
     //accept w,a,s,d,q,e for rotation
     private string[] acceptedInputStrings;
-    //wait a bit before you can rotate with keys again
-    private float keyDownTime;
+
     private bool keyPressed;
 
     private void Awake() {
@@ -76,6 +75,7 @@ public class Rotator : RotatorParent {
             reverseFrom = tempFrom;
         
         while (thing.transform.rotation != tempTo) {
+            GameController.rotating = true;
             thing.transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
             timeCount += Time.fixedDeltaTime * rotationSpeed;
             yield return new WaitForFixedUpdate();
@@ -135,21 +135,21 @@ public class Rotator : RotatorParent {
     }
 
     private void OnMouseDown() {
-        
+
         if (!enabled) return;
 
-        isClicked = true;
-        GameController.rotatorClicked = true;
-        
-        gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
-        
-        ResetValues();
-        
+        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0) {
+            gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
+            ResetValues();
+            isClicked = true;
+            GameController.rotatorClicked = true;
+        }
+
     }
     
     private void OnMouseUp() {
         
-        if (!enabled) return;
+        if (!enabled || !isClicked) return;
 
         isClicked = false;
         GameController.rotatorClicked = false;
@@ -162,7 +162,7 @@ public class Rotator : RotatorParent {
             lr.positionCount = 0;
         }
 
-        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && 
+        if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0 &&
             curved.gameObject.GetComponent<MeshRenderer>().enabled) {
             GameController.lastRotatorStrip = this;
             base.rotateRoutine = StartCoroutine(Rotate());
@@ -173,7 +173,9 @@ public class Rotator : RotatorParent {
         
         if (!enabled) return;
 
-        DragMouse();
+        if(!GameController.rotating && !GameController.moving && !GameController.teleporting && 
+           GameController.rotatingColliders.Count == 0 && isClicked)
+            DragMouse();
 
     }
 
@@ -252,7 +254,8 @@ public class Rotator : RotatorParent {
     private void Update() {
         
         //rotate with keys
-        if (Input.anyKeyDown && !GameController.rotating && !GameController.moving && !GameController.teleporting) {
+        if (Input.anyKeyDown && !GameController.rotating && !GameController.moving && !GameController.teleporting &&
+            GameController.rotatingColliders.Count == 0) {
             if (acceptedInputStrings.Contains(Input.inputString)) {
                 keyPressed = true;
                 if (acceptedInputStrings[0] == Input.inputString) {
@@ -260,7 +263,7 @@ public class Rotator : RotatorParent {
                     lastAngle = 1;
                     if (GameController.DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
-                    if (keyDownTime == 0) {
+                    if (GameController.keyDownTime == 0) {
                         DrawArrow();
                         base.rotateRoutine = StartCoroutine(Rotate());
                     }
@@ -270,7 +273,7 @@ public class Rotator : RotatorParent {
                     lastAngle = -1;
                     if (GameController.DEBUG)
                         GameController.lastrotations.Push(GameObject.FindWithTag("thing").transform.rotation);
-                    if (keyDownTime == 0) {
+                    if (GameController.keyDownTime == 0) {
                         DrawArrow();
                         base.rotateRoutine = StartCoroutine(Rotate());
                     }
@@ -278,13 +281,13 @@ public class Rotator : RotatorParent {
                 GameController.lastRotatorStrip = this;
             }
         }
-
+        
         //wait a bit before you can rotate with keys again
         if (keyPressed) {
-            keyDownTime += Time.deltaTime;
-            if (keyDownTime > MINKEYDOWNTIME) {
+            GameController.keyDownTime += Time.deltaTime;
+            if (GameController.keyDownTime > GameController.MINKEYDOWNTIME) {
                 keyPressed = false;
-                keyDownTime = 0;
+                GameController.keyDownTime = 0;
             }
         }
         

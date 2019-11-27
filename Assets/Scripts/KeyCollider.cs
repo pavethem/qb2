@@ -24,7 +24,8 @@ public class KeyCollider : MonoBehaviour {
     private void OnTriggerStay(UnityEngine.Collider other) {
 
         //pick up the key when done rotating
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && other.gameObject.transform.childCount == 1) {
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && 
+            GameController.rotatingColliders.Count == 0 && other.gameObject.transform.childCount == 1) {
             gameObject.transform.parent = other.gameObject.transform;
             //create an invisible key, only to keep the original collision box
             collisionkey = Instantiate(collisionkey, other.gameObject.transform.position, gameObject.transform.rotation, other.gameObject.transform);
@@ -41,7 +42,7 @@ public class KeyCollider : MonoBehaviour {
     }
 
     private void OnMouseUpAsButton() {
-        if (!GameController.rotating && !shrunk)
+        if (!GameController.rotating && GameController.rotatingColliders.Count == 0 && !shrunk)
             StartCoroutine(Rotate());
     }
 
