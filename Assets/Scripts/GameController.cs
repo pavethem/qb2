@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour {
     public static int currentScene;
     //the maximum level reached by the player
     public static int maxScene;
-    private const int LEVELCOUNT = 19;
+    private const int LEVELCOUNT = 20;
     //last rotator to be used (needed to reverse rotations when hitting locks)
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
