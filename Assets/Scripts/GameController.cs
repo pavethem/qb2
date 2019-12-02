@@ -27,10 +27,13 @@ public class GameController : MonoBehaviour {
     private const float EPSILON = 9.99999944E-5f;
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
+    private const int LEVELCOUNT = 21;
+
     
     //wait a while before rotating with keys again
     public static float MINKEYDOWNTIME = 0.9f;
     public static float keyDownTime;
+    public static bool keyPressed;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -78,7 +81,6 @@ public class GameController : MonoBehaviour {
     public static int currentScene;
     //the maximum level reached by the player
     public static int maxScene;
-    private const int LEVELCOUNT = 20;
     //last rotator to be used (needed to reverse rotations when hitting locks)
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
@@ -102,7 +104,7 @@ public class GameController : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-
+        
         if (currentScene == 0) {
             pedestalPosition = GameObject.Find("Pedestal").transform.position;
             pedestalRotation = GameObject.Find("Pedestal").transform.rotation;
@@ -275,6 +277,7 @@ public class GameController : MonoBehaviour {
         rotatingColliders = new List<GameObject>();
         
         keyDownTime = 0;
+        keyPressed = false;
         
         ClearPedestal();
 
@@ -323,6 +326,15 @@ public class GameController : MonoBehaviour {
     }
 
     void LateUpdate() {
+        
+        //wait a bit before you can rotate with keys again
+        if (keyPressed) {
+            keyDownTime += Time.deltaTime;
+            if (keyDownTime > MINKEYDOWNTIME) {
+                keyPressed = false;
+                keyDownTime = 0;
+            }
+        }
         
         if (DEBUG) {
             if (!rotating && !moving && !teleporting && rotatingColliders.Count == 0) {

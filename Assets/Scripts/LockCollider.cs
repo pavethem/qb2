@@ -17,7 +17,7 @@ public class LockCollider : MonoBehaviour {
     }
 
     void OnTriggerStay(UnityEngine.Collider other) {
-
+        
         //key will let you go through locks
         if (other.gameObject.CompareTag("key") && GameController.locks.Contains(gameObject)) {
             
@@ -40,11 +40,31 @@ public class LockCollider : MonoBehaviour {
                 stayTime += Time.deltaTime;
 
         }
+        
+        //backup collision detection if triggerenter fails to collide, due to having a key
+        if (other.gameObject.CompareTag("spoke") && GameController.locks.Contains(gameObject) && stayTime == 0 && !collided) {
+            //can't go through locks
+            if (GameController.lastRotateSpoke != null) {
+                GameController.lastRotateSpoke.StopCoroutine(nameof(RotateSpoke.RotateIt));
+                GameController.lastRotateSpoke.StartCoroutine("RotateItBack");
+            }
+            
+            if (GameController.lastRotatorStrip != null && GameController.locks.Contains(gameObject)) {
+                
+                GameController.lastRotatorStrip.StopRotating();
+                GameController.lastRotatorStrip.signedAngle *= -1;
+                GameController.lastRotatorStrip.StartCoroutine("Rotate", true);
+            }
+            
+            collided = true;
+        }
+
 
     }
 
     private void OnTriggerEnter(UnityEngine.Collider other) {
-        
+       
+        //one child means no key
         if (((other.gameObject.CompareTag("bub") && other.gameObject.transform.childCount == 1)
              || other.gameObject.CompareTag("spoke")) && GameController.locks.Contains(gameObject) && stayTime == 0) {
             //can't go through locks

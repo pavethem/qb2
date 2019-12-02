@@ -6,6 +6,9 @@ public class RotatorCollider : MonoBehaviour {
 	//rotate only once
 	private bool rotate;
 	private bool rotating;
+	
+	//some rotators should rotate before others
+	public int priority;
 
 	private Quaternion originalRotation;
 
@@ -15,8 +18,15 @@ public class RotatorCollider : MonoBehaviour {
 	
 	private void OnTriggerStay(UnityEngine.Collider other) {
 
+		bool higherPriority = false;
+
+		//check if there is a rotator with a higher priority
+		foreach (var r in GameController.rotatingColliders) {
+			higherPriority = r.GetComponent<RotatorCollider>().priority > priority;
+		}
+
 		//rotate bub's parent around transform.up
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && rotate && !GameController.rotatingSpoke) {
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && rotate && !GameController.rotatingSpoke && !higherPriority) {
 			
 	        rotate = false;
 

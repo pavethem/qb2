@@ -17,9 +17,7 @@ public class Rotator : RotatorParent {
 
     //accept w,a,s,d,q,e for rotation
     private string[] acceptedInputStrings;
-
-    private bool keyPressed;
-
+    
     private void Awake() {
 
         switch (gameObject.tag) {
@@ -257,7 +255,7 @@ public class Rotator : RotatorParent {
         if (Input.anyKeyDown && !GameController.rotating && !GameController.moving && !GameController.teleporting &&
             GameController.rotatingColliders.Count == 0) {
             if (acceptedInputStrings.Contains(Input.inputString)) {
-                keyPressed = true;
+                GameController.keyPressed = true;
                 if (acceptedInputStrings[0] == Input.inputString) {
                     signedAngle = 90f;
                     lastAngle = 1;
@@ -281,15 +279,5 @@ public class Rotator : RotatorParent {
                 GameController.lastRotatorStrip = this;
             }
         }
-        
-        //wait a bit before you can rotate with keys again
-        if (keyPressed) {
-            GameController.keyDownTime += Time.deltaTime;
-            if (GameController.keyDownTime > GameController.MINKEYDOWNTIME) {
-                keyPressed = false;
-                GameController.keyDownTime = 0;
-            }
-        }
-        
     }
 }
