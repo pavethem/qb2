@@ -4779,7 +4779,6 @@ GameObject:
   - component: {fileID: 2529209494911307918}
   - component: {fileID: 8690888908623297879}
   - component: {fileID: 908726155}
-  - component: {fileID: 5112677287373580067}
   m_Layer: 8
   m_Name: Node
   m_TagString: bub
@@ -5012,15 +5011,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
---- !u!122 &5112677287373580067
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7984222196115338356}
-  m_Enabled: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278190335
-  m_Size: 2.3

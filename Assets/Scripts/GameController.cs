@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
     public GameObject directionalLight;
     public GameObject mobileImage;
     public GameObject mobileImageY;
+    public GameObject titleLevel;
     private bool wipingIn;
     public static bool wiping;
 
@@ -131,8 +132,8 @@ public class GameController : MonoBehaviour {
 
             DEBUG = debugScriptableObject.DEBUG;
 
-            screenWipe.GetComponent<Image>().fillAmount = 1;
-            directionalLight.GetComponent<Light>().shadowStrength = 0;
+//            screenWipe.GetComponent<Image>().fillAmount = 1;
+//            directionalLight.GetComponent<Light>().shadowStrength = 0;
 
             if (DEBUG) {
                 SceneManager.LoadScene("test");
@@ -164,25 +165,28 @@ public class GameController : MonoBehaviour {
         maxScene = PlayerPrefs.GetInt("maxScene",1);
     }
 
-    public static void LoadCurrentScene() {
+    public void LoadCurrentScene() {
         Load();
-        SceneManager.LoadScene("level" + currentScene + "_final");
-
+        StartCoroutine(nameof(ScreenWipeIn), true);
     }
     
-    public static void LoadMaxScene() {
+    public void LoadMaxScene() {
         Load();
         if (maxScene <= LEVELCOUNT)
             currentScene = maxScene;
         else
             currentScene = LEVELCOUNT;
-        SceneManager.LoadScene("level" + currentScene + "_final");
-
+        StartCoroutine(nameof(ScreenWipeIn), true);
     }
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {   
-       
+    {
+        if (scene.name == "mainmenu") {
+            StartCoroutine(nameof(ScreenWipeOut));
+            titleLevel.SetActive(true);
+            gameOver = false;
+        }
+
         if (Application.isMobilePlatform && !scene.name.StartsWith("level")) {
             //change to MobileButtons for main menu
             GameObject.Find("MainCanvas").transform.Find("DesktopButtons").gameObject.SetActive(false);
@@ -199,7 +203,9 @@ public class GameController : MonoBehaviour {
     }
 
     void InitGame() {
-        
+
+        titleLevel.SetActive(false);
+
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
         StartCoroutine(nameof(MoveInButtons));
@@ -300,6 +306,7 @@ public class GameController : MonoBehaviour {
 
     }
     
+    //shows fps
     void OnGUI()
     {
         if (Debug.isDebugBuild && DEBUG)
@@ -454,7 +461,7 @@ public class GameController : MonoBehaviour {
             StartCoroutine(nameof(MoveOutButtons));
             if (Application.isMobilePlatform && freeRotation == 1)
                 StartCoroutine(nameof(MoveOutFromTheRight));
-            StartCoroutine(nameof(ScreenWipeIn));
+            StartCoroutine(nameof(ScreenWipeIn),false);
             while (!wipingIn) {
                 yield return null;
             }
@@ -469,7 +476,7 @@ public class GameController : MonoBehaviour {
     public IEnumerator Reset() {
         if (!isLoadingNextLevel && !resetting) {
             resetting = true;
-            StartCoroutine(nameof(ScreenWipeIn));
+            StartCoroutine(nameof(ScreenWipeIn),false);
             while (!wipingIn) {
                 yield return null;
             }
@@ -505,7 +512,7 @@ public class GameController : MonoBehaviour {
                 .GetComponent<LineRenderer>().positionCount = 0;
             GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject
                 .GetComponent<LineRenderer>().positionCount = 0;
-            StartCoroutine(nameof(ScreenWipeIn));
+            StartCoroutine(nameof(ScreenWipeIn),false);
             StartCoroutine(nameof(LoadYourAsyncScene), scene);
         }
 
@@ -600,7 +607,8 @@ public class GameController : MonoBehaviour {
             mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
     }
 
-    IEnumerator ScreenWipeIn() {
+    IEnumerator ScreenWipeIn(bool levelbutton = false) {
+        
         //wait a bit for cubes to fall
         if(gameOver)
             yield return new WaitForSeconds(1.6f);
@@ -619,6 +627,11 @@ public class GameController : MonoBehaviour {
         wipingIn = true;
         wiping = false;
         ClearPedestal();
+        
+        //load scene when level or start button was pressed
+        if(levelbutton)
+            SceneManager.LoadScene("level" + currentScene + "_final");
+        
     }
     
     IEnumerator ScreenWipeOut() {

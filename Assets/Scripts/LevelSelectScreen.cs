@@ -86,7 +86,7 @@ public class LevelSelectScreen : MonoBehaviour
                     GameController.currentScene = int.Parse(levelName);
                     PlayerPrefs.SetInt("currentScene", GameController.currentScene);
                     PlayerPrefs.Save();
-                    GameController.LoadCurrentScene();
+                    GameController.instance.LoadCurrentScene();
                 }
             }
         }
