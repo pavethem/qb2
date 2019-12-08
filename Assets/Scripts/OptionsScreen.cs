@@ -14,7 +14,6 @@ public class OptionsScreen : MonoBehaviour
     //start position when moving in
     private Vector2 startPosition;
     private RectTransform buttonsTransform;
-    private bool isMoving;
 
     public AudioMixer mixer;
     public Slider backgroundVolumeSlider;
@@ -37,12 +36,13 @@ public class OptionsScreen : MonoBehaviour
     }
 
     public void BackButton() {
-        if(isMoving) return;
+        if(buttonsTransform.GetComponent<Animation>().isPlaying) return;
         buttonsTransform.GetComponent<Animation>().Play("OptionScreenOut");
         isLoading = true;
     }
     
     public void HardModeButton() {
+        if(buttonsTransform.GetComponent<Animation>().isPlaying) return;
         hard *= -1;
         GameController.hardmode = hard;
         PlayerPrefs.SetInt("HardMode",hard);
@@ -51,6 +51,7 @@ public class OptionsScreen : MonoBehaviour
     }
     
     public void FreeRotationButton() {
+        if(buttonsTransform.GetComponent<Animation>().isPlaying) return;
         freerotation *= -1;
         GameController.freeRotation = freerotation;
         PlayerPrefs.SetInt("FreeRotation",freerotation);

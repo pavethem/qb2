@@ -63,14 +63,14 @@ public class LevelSelectScreen : MonoBehaviour
     }
 
     public void LevelSelectButton(string buttonName) {
-        if(isMoving || int.Parse(buttonName) > GameController.maxScene) return;
+        if(isMoving || int.Parse(buttonName) > GameController.maxScene || buttonsTransform.GetComponent<Animation>().isPlaying) return;
         StartCoroutine(ResetContent());
         isLoading = true;
         levelName = buttonName;
     }
     
     public void BackButton() {
-        if(isMoving) return;
+        if(isMoving || buttonsTransform.GetComponent<Animation>().isPlaying) return;
         StartCoroutine(ResetContent());
         isLoading = true;
         levelName = "back";

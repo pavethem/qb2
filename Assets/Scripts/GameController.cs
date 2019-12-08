@@ -63,7 +63,8 @@ public class GameController : MonoBehaviour {
     private static Vector3 reflectionCameraPosition;
     private static Quaternion reflectionCameraRotation;
     private static Vector3 gravity;
-    
+
+    public static bool firstTimeLoading = true;
     public static bool gameOver;
     public static int freeRotation = -1;
     public static int hardmode = -1;
