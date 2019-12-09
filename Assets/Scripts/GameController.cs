@@ -164,6 +164,10 @@ public class GameController : MonoBehaviour {
         hardmode = PlayerPrefs.GetInt("HardMode", -1);
         freeRotation = PlayerPrefs.GetInt("FreeRotation", -1);
         maxScene = PlayerPrefs.GetInt("maxScene",1);
+        
+        if(Application.isMobilePlatform)
+            ReplaceMeshes(titleLevel);
+        
     }
 
     public void LoadCurrentScene() {
