@@ -21,7 +21,13 @@ public class TeleporterCollider : MonoBehaviour {
 	    
 	    if (other.gameObject.CompareTag("spoke")) {
 		    canTeleport = true;
-		    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform;
+		    //for levels with rotatorcubes, set the new parent to the joint child or parent object of the spoke
+		    if(other.gameObject.transform.Find("Joint") != null)
+			    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform.Find("Joint");
+		    else if (other.gameObject.transform.parent.name == "Joint")
+			    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform.parent;
+		    else
+			    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform;
 	    }
 	    
 	    if (other.gameObject.CompareTag("bub")) {
