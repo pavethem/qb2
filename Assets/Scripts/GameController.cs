@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
     public GameObject directionalLight;
     public GameObject mobileImage;
     public GameObject mobileImageY;
+    public GameObject reflectionImage;
     public GameObject titleLevel;
     private bool wipingIn;
     public static bool wiping;
@@ -87,6 +88,7 @@ public class GameController : MonoBehaviour {
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
     public static bool rotatorClicked;
+    public static bool splashScreenDone;
 
     public AudioMixer mixer;
     public AudioClip transition;
@@ -140,7 +142,7 @@ public class GameController : MonoBehaviour {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
             } else {
-                SceneManager.LoadScene("mainmenu");
+                SceneManager.LoadScene("splashScreen");
             }
 
 //            currentScene = 1;
@@ -152,7 +154,6 @@ public class GameController : MonoBehaviour {
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
-        gameObject.GetComponent<AudioSource>().Play();
 //        InitGame();
         
     }
@@ -168,6 +169,13 @@ public class GameController : MonoBehaviour {
         if(Application.isMobilePlatform)
             ReplaceMeshes(titleLevel);
         
+    }
+
+    public static void SplashScreenDone() {
+        SceneManager.LoadScene("mainmenu");
+        instance.reflectionImage.SetActive(true);
+        instance.gameObject.GetComponent<AudioSource>().Play();
+        splashScreenDone = true;
     }
 
     public void LoadCurrentScene() {
@@ -355,9 +363,9 @@ public class GameController : MonoBehaviour {
         }
 
         //fade in background audio
-        if (gameObject.GetComponent<AudioSource>().volume < 0.5f)
+        if (gameObject.GetComponent<AudioSource>().volume < 0.5f && splashScreenDone)
         {
-            gameObject.GetComponent<AudioSource>().volume = gameObject.GetComponent<AudioSource>().volume + Time.deltaTime;
+            gameObject.GetComponent<AudioSource>().volume += Time.deltaTime / 10;
         }
 
         //reset scene

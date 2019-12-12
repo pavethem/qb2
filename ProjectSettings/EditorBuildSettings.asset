@@ -83,4 +83,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/levels/selectlevelmenu.unity
     guid: fc65472763a6b92b0a0c2f0e7ed943b9
+  - enabled: 1
+    path: Assets/levels/splashScreen.unity
+    guid: 6b0708c4fb87b3dc8a9f448bf32eb7d6
   m_configObjects: {}

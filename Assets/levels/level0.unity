@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.108
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1760319550}
-  m_IndirectSpecularColor: {r: 0.20050716, g: 0.1953854, b: 0.19342837, a: 0.108}
+  m_IndirectSpecularColor: {r: 0.20051849, g: 0.19538546, b: 0.19342622, a: 0.108}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &24819278
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1102,6 +1102,7 @@ MonoBehaviour:
   directionalLight: {fileID: 1760319549}
   mobileImage: {fileID: 1899725881}
   mobileImageY: {fileID: 2051627913}
+  reflectionImage: {fileID: 24819277}
   titleLevel: {fileID: 1507137062}
   mixer: {fileID: 24100000, guid: a8cb080b970ece01f87520f72d4871fd, type: 2}
   transition: {fileID: 8300000, guid: 9f8c76a49402d3a3a8750cf608f70a4b, type: 3}
@@ -1132,7 +1133,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 31a43a12e04518c2c94ac871ec4917ce, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.116
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1314,7 +1315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 0
-  m_AspectRatio: 5.852617
+  m_AspectRatio: 4.3453765
 --- !u!1 &1328597512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,7 +2093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1899725882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2374,7 +2375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2051627914
 RectTransform:
   m_ObjectHideFlags: 0
