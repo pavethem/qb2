@@ -4,6 +4,8 @@ using UnityEngine;
 public class RotateSpoke : MonoBehaviour
 {
     public float rotationSpeed;
+    //sometimes you don't want the actual Transform to rotate, but only part of the thing
+    public GameObject rotationObject;
     private Transform lastParent;
     private Quaternion lastRotation;
     private Vector3 lastAxis;
@@ -20,15 +22,17 @@ public class RotateSpoke : MonoBehaviour
             float timeCount = 0;
 
             Vector3 axis = spoke.transform.up;
+            Transform trans = rotationObject == null ? transform : rotationObject.transform;
             
             //remove parent while rotating, else it starts to skew
-            lastParent = transform.parent;
-            lastRotation = transform.rotation;
+            lastParent = trans.parent;
+            lastRotation = trans.rotation;
             lastSpoke = spoke;
             lastAxis = axis;
-            transform.parent = null;
+            trans.parent = null;
 
-            Quaternion tempFrom = transform.rotation;
+
+            Quaternion tempFrom = trans.rotation;
             Quaternion tempTo = Quaternion.AngleAxis(-90f, axis) * tempFrom;
 
             //rotation sound is equal to that of the rotator strips
@@ -46,15 +50,15 @@ public class RotateSpoke : MonoBehaviour
                 gameObject.GetComponent<AudioSource>().PlayOneShot(rotationSounds[5]);
             }
             
-            while (transform.rotation != tempTo) {
+            while (trans.rotation != tempTo) {
                 GameController.rotatingSpoke = true;
-                transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
+                trans.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
                 timeCount += Time.fixedDeltaTime * rotationSpeed;
                 yield return new WaitForFixedUpdate();
             }
 
-            transform.rotation = tempTo;
-            transform.parent = lastParent;
+            trans.rotation = tempTo;
+            trans.parent = lastParent;
 
             GameController.rotatingColliders.Remove(spoke);
             if(GameController.rotatingColliders.Count == 0)
@@ -69,10 +73,12 @@ public class RotateSpoke : MonoBehaviour
         reversing = true;
         float timeCount = 0;
         
+        Transform trans = rotationObject == null ? transform : rotationObject.transform;
+
         //remove parent while rotating, else it starts to skew, though it shouldn't have a parent at this point anyways
-        transform.parent = null;
+        trans.parent = null;
         
-        Quaternion tempFrom = transform.rotation;
+        Quaternion tempFrom = trans.rotation;
         Quaternion tempTo = lastRotation;
         
         //rotation sound is equal to that of the rotator strips
@@ -90,15 +96,15 @@ public class RotateSpoke : MonoBehaviour
             gameObject.GetComponent<AudioSource>().PlayOneShot(rotationSounds[4]);
         }
         
-        while (transform.rotation != tempTo) {
+        while (trans.rotation != tempTo) {
             GameController.rotatingSpoke = true;
-            transform.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
+            trans.rotation = Quaternion.Lerp(tempFrom, tempTo, timeCount);
             timeCount += Time.fixedDeltaTime * rotationSpeed;
             yield return new WaitForFixedUpdate();
         }
 
-        transform.parent = lastParent;
-        transform.rotation = tempTo;
+        trans.parent = lastParent;
+        trans.rotation = tempTo;
         reversing = false;
         GameController.rotatingColliders.Remove(lastSpoke);
         if(GameController.rotatingColliders.Count == 0)

@@ -12,6 +12,8 @@ public class RotatorParent : MonoBehaviour {
     
     //fade in resetButton when game has been rotated at least once
     internal bool hasBeenRotated;
+    //when hard mode limit is reached
+    internal bool disabled;
     
     internal Quaternion reverseFrom;
 
@@ -36,6 +38,8 @@ public class RotatorParent : MonoBehaviour {
 
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 0;
+
+        disabled = false;
 
         curved = GameObject.FindWithTag("curved");
         if(curved != null)

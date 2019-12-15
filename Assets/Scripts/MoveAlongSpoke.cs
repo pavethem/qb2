@@ -7,9 +7,10 @@ public class MoveAlongSpoke : MonoBehaviour {
     public float moveSpeed;   
     
     //moves bub along its spoke
-    public IEnumerator MoveIt(Vector3 goal) {
+    public IEnumerator MoveIt(GameObject target) {
 
         Vector3 pos = transform.position;
+        Vector3 goal = target.transform.position;
 //        Vector3 goal = transform.parent.parent.position;
 
         float timeCount = 0;
@@ -30,8 +31,8 @@ public class MoveAlongSpoke : MonoBehaviour {
         transform.position = goal;
         transform.position.Normalize();
         transform.rotation.Normalize();
+        transform.parent = target.transform;
         GameController.moving = false;
-
-//        transform.parent = transform.parent.parent.parent;
+        
     }
 }

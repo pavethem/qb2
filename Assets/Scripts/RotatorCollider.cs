@@ -26,7 +26,8 @@ public class RotatorCollider : MonoBehaviour {
 		}
 
 		//rotate bub's parent around transform.up
-        if (other.gameObject.CompareTag("bub") && !GameController.rotating && rotate && !GameController.rotatingSpoke && !higherPriority) {
+        if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving && rotate && !GameController.rotatingSpoke 
+            && !higherPriority) {
 			
 	        rotate = false;
 

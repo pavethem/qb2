@@ -11,7 +11,7 @@ public class Rotator : RotatorParent {
     private float hoverTime;
     private bool isClicked;
     private bool isHovering;
-    
+
     public AudioClip to;
     public AudioClip fro;
 
@@ -92,7 +92,7 @@ public class Rotator : RotatorParent {
 
     private IEnumerator OnMouseOver() {
 
-        if (!enabled) yield break;
+        if (!enabled || disabled) yield break;
         
         isHovering = true;
         StopCoroutine(nameof(OnMouseExit));
@@ -134,7 +134,7 @@ public class Rotator : RotatorParent {
 
     private void OnMouseDown() {
 
-        if (!enabled) return;
+        if (!enabled || disabled) return;
 
         if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0) {
             gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
@@ -147,7 +147,7 @@ public class Rotator : RotatorParent {
     
     private void OnMouseUp() {
         
-        if (!enabled || !isClicked) return;
+        if (!enabled || !isClicked || disabled) return;
 
         isClicked = false;
         GameController.rotatorClicked = false;
@@ -169,7 +169,7 @@ public class Rotator : RotatorParent {
 
     private void OnMouseDrag() {  
         
-        if (!enabled) return;
+        if (!enabled || disabled) return;
 
         if(!GameController.rotating && !GameController.moving && !GameController.teleporting && 
            GameController.rotatingColliders.Count == 0 && isClicked)
@@ -253,7 +253,7 @@ public class Rotator : RotatorParent {
         
         //rotate with keys
         if (Input.anyKeyDown && !GameController.rotating && !GameController.moving && !GameController.teleporting &&
-            GameController.rotatingColliders.Count == 0) {
+            GameController.rotatingColliders.Count == 0 && !disabled) {
             if (acceptedInputStrings.Contains(Input.inputString)) {
                 GameController.keyPressed = true;
                 if (acceptedInputStrings[0] == Input.inputString) {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ArrowCollider : MonoBehaviour {
 
     //goal to move to
-    private Vector3? goal;
+    private GameObject goal;
     //traverse scene graph for children only once
     private bool traversed;
     private bool rotating;
@@ -35,7 +35,7 @@ public class ArrowCollider : MonoBehaviour {
                 //search for parents in the direction of the arrow first
                 spoke = parent.position - other.gameObject.transform.position;
                 if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
-                    goal = parent.position;
+                    goal = parent.gameObject;
                 }
             }
 
@@ -49,7 +49,7 @@ public class ArrowCollider : MonoBehaviour {
                     spoke = child.position - other.gameObject.transform.position;
 
                     if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
-                        goal = child.position;
+                        goal = child.gameObject;
                         break;
                     }
                 }
