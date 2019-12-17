@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1.4
+  rotationObject: {fileID: 0}
+  skipJoint: 0
   rotationSounds:
   - {fileID: 8300000, guid: e13d35d2c9d01fe9b89eb092be612bed, type: 3}
   - {fileID: 8300000, guid: 319b5ffaa308e7ed0ae974cfbef3dcd7, type: 3}

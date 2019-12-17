@@ -9,6 +9,7 @@ public class ArrowCollider : MonoBehaviour {
     private GameObject goal;
     //traverse scene graph for children only once
     private bool traversed;
+    private bool travesedParents;
     private bool rotating;
 
     private Quaternion originalRotation;
@@ -22,16 +23,17 @@ public class ArrowCollider : MonoBehaviour {
         if (GameController.rotating) {
             goal = null;
             traversed = false;
+            travesedParents = false;
         }
-
+        
         if (other.gameObject.CompareTag("joint") && !GameController.rotating && !GameController.moving && 
             GameController.rotatingColliders.Count == 0 && goal == null) {
 
             Transform parent = null;
             Vector3 spoke = new Vector3();
-            if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.name != "Empty") {
+            if (other.gameObject.transform.parent != null && other.gameObject.transform.parent.name != "Empty" && !travesedParents) {
                 parent = TraverseParents(other.gameObject.transform);
-
+                travesedParents = true;
                 //search for parents in the direction of the arrow first
                 spoke = parent.position - other.gameObject.transform.position;
                 if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
@@ -69,6 +71,7 @@ public class ArrowCollider : MonoBehaviour {
         if (other.gameObject.CompareTag("joint")) {
             goal = null;
             traversed = false;
+            travesedParents = false;
         }
     }
     
@@ -104,7 +107,18 @@ public class ArrowCollider : MonoBehaviour {
             parent = TraverseParents(trans.parent);
         }
         else {
-            parent = trans.parent;
+            //skip joints that have been rotated an odd number of times
+            //and thus form a straight line with their parent and child spoke
+            if (trans.parent.GetComponent<RotateSpoke>() != null) {
+                if (trans.parent.GetComponent<RotateSpoke>().skipJoint) {
+                    if(trans.parent.GetComponent<RotateSpoke>().rotated % 2 == 0)
+                        parent = trans.parent;
+                    else
+                        parent = TraverseParents(trans.parent);
+                } else
+                    parent = trans.parent;
+            } else
+                parent = trans.parent;
         }
 
         return parent;
@@ -116,7 +130,17 @@ public class ArrowCollider : MonoBehaviour {
 
         foreach (Transform kid in trans) {
             if (kid.CompareTag("joint")) {
-                children.Add(kid);
+                //skip joints that have been rotated an odd number of times
+                //and thus form a straight line with their parent and child spoke
+                if (kid.GetComponent<RotateSpoke>() != null) {
+                    if (kid.GetComponent<RotateSpoke>().skipJoint) {
+                        if(kid.GetComponent<RotateSpoke>().rotated % 2 == 0)
+                            children.Add(kid);
+                    } else
+                        children.Add(kid);
+                } else
+                    children.Add(kid);
+                
             }
         }
 

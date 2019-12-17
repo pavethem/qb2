@@ -6,6 +6,10 @@ public class RotateSpoke : MonoBehaviour
     public float rotationSpeed;
     //sometimes you don't want the actual Transform to rotate, but only part of the thing
     public GameObject rotationObject;
+    //some joints should be skipped while traversing through the scene graph (see arrow collider)
+    public bool skipJoint;
+    //how often this joint was rotated
+    internal int rotated = 0;
     private Transform lastParent;
     private Quaternion lastRotation;
     private Vector3 lastAxis;
@@ -63,6 +67,7 @@ public class RotateSpoke : MonoBehaviour
             GameController.rotatingColliders.Remove(spoke);
             if(GameController.rotatingColliders.Count == 0)
                 GameController.lastRotateSpoke = null;
+            rotated++;
             GameController.rotatingSpoke = false;
         }
     }
