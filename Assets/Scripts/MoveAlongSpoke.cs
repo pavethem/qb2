@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class MoveAlongSpoke : MonoBehaviour {
@@ -11,10 +9,11 @@ public class MoveAlongSpoke : MonoBehaviour {
 
         Vector3 pos = transform.position;
         Vector3 goal = target.transform.position;
-//        Vector3 goal = transform.parent.parent.position;
+        transform.parent = target.transform;
 
         float timeCount = 0;
 
+        
         while (!GameController.Compare(goal,transform.position)) {
 
             GameController.moving = true;
@@ -31,7 +30,6 @@ public class MoveAlongSpoke : MonoBehaviour {
         transform.position = goal;
         transform.position.Normalize();
         transform.rotation.Normalize();
-        transform.parent = target.transform;
         GameController.moving = false;
         
     }

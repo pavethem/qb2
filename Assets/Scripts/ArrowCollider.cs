@@ -35,9 +35,11 @@ public class ArrowCollider : MonoBehaviour {
                 parent = TraverseParents(other.gameObject.transform);
                 travesedParents = true;
                 //search for parents in the direction of the arrow first
-                spoke = parent.position - other.gameObject.transform.position;
-                if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
-                    goal = parent.gameObject;
+                if (parent != null) {
+                    spoke = parent.position - other.gameObject.transform.position;
+                    if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving) {
+                        goal = parent.gameObject;
+                    }
                 }
             }
 
@@ -54,6 +56,13 @@ public class ArrowCollider : MonoBehaviour {
                         goal = child.gameObject;
                         break;
                     }
+                }
+                //use childjoint if no legit child was found
+                if (goal == null && other.gameObject.GetComponent<ChildJoint>().childJoint != null) {
+                    Transform child = other.gameObject.GetComponent<ChildJoint>().childJoint.transform;
+                    spoke = child.position - other.gameObject.transform.position;
+                    if (GameController.Compare(spoke.normalized, gameObject.transform.forward) && !GameController.moving)
+                        goal = child.gameObject;
                 }
             }
         }
@@ -104,6 +113,8 @@ public class ArrowCollider : MonoBehaviour {
     private Transform TraverseParents(Transform trans) {
         Transform parent = null;
         if (!trans.parent.CompareTag("joint")) {
+            if (trans.parent.CompareTag("thing"))
+                return null;
             parent = TraverseParents(trans.parent);
         }
         else {

@@ -78,6 +78,9 @@ EditorBuildSettings:
     path: Assets/levels/level8_final.unity
     guid: ce8f192c7d9834ebbae7a94861a7808b
   - enabled: 1
+    path: Assets/levels/level23_final.unity
+    guid: 13ea3f1a32cdc18d8ae2c46a7b8be3e3
+  - enabled: 1
     path: Assets/levels/mainmenu.unity
     guid: 60d3e9ac1e2e510c2b03625e3d32ad7a
   - enabled: 1

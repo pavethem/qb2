@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
     private const float EPSILON = 9.99999944E-5f;
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
-    private const int LEVELCOUNT = 22;
+    private const int LEVELCOUNT = 23;
 
     
     //wait a while before rotating with keys again
@@ -198,6 +198,18 @@ public class GameController : MonoBehaviour {
             StartCoroutine(nameof(ScreenWipeOut));
             titleLevel.SetActive(true);
             gameOver = false;
+            GameObject.Find("Canvas").transform.Find("DesktopImage").GetComponent<Image>().enabled = false;
+            Camera.main.transform.rotation = cameraRotation;
+            Camera.main.transform.position = cameraPosition;
+            GameObject.Find("Pedestal").transform.rotation = pedestalRotation;
+            GameObject.Find("Pedestal").transform.position = pedestalPosition;
+            GameObject.Find("Spot Light").transform.rotation = spotlightRotation;
+            GameObject.Find("Spot Light").transform.position = spotlightPosition;
+            GameObject.Find("Directional Light").transform.rotation = directionalLightRotation;
+            GameObject.Find("Directional Light").transform.position = directionalLightPosition;
+            GameObject.Find("ReflectionCamera").transform.position = reflectionCameraPosition;
+            GameObject.Find("ReflectionCamera").transform.rotation = reflectionCameraRotation;
+            Physics.gravity = gravity;
         }
 
         if (Application.isMobilePlatform && !scene.name.StartsWith("level")) {
@@ -285,6 +297,9 @@ public class GameController : MonoBehaviour {
             }
             catch (NullReferenceException e) {}
 
+        }
+        else {
+            GameObject.Find("Canvas").transform.Find("DesktopImage").GetComponent<Image>().enabled = true;
         }
 
         rotating = false;

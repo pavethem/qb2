@@ -28,7 +28,7 @@ public class RotatorCollider : MonoBehaviour {
 		//rotate bub's parent around transform.up
         if (other.gameObject.CompareTag("bub") && !GameController.rotating && !GameController.moving && rotate && !GameController.rotatingSpoke 
             && !higherPriority) {
-			
+	        
 	        rotate = false;
 
 	        if (other.gameObject.transform.parent.GetComponent<RotateSpoke>() != null) {
@@ -38,6 +38,9 @@ public class RotatorCollider : MonoBehaviour {
 				        .StartCoroutine(nameof(RotateSpoke.RotateIt), gameObject);
 		        if(!rotating)
 					StartCoroutine(Rotate());
+	        }
+	        else {
+		        GameController.rotatingColliders.Remove(gameObject);
 	        }
         }
     }
