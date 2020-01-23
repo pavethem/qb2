@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/levels/level11_final.unity
     guid: d93dd1336f2c95899aef28e711474422
   - enabled: 1
+    path: Assets/levels/level24_final.unity
+    guid: c985f06b99c4d00fab99063fdbf6b042
+  - enabled: 1
     path: Assets/levels/level12_final.unity
     guid: cc1df8eb6b48ee5cab630991c1d8634b
   - enabled: 1

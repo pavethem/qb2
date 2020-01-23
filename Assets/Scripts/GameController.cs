@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
     private const float EPSILON = 9.99999944E-5f;
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
-    private const int LEVELCOUNT = 23;
+    private const int LEVELCOUNT = 24;
 
     
     //wait a while before rotating with keys again

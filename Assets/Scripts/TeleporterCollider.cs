@@ -21,13 +21,18 @@ public class TeleporterCollider : MonoBehaviour {
 	    
 	    if (other.gameObject.CompareTag("spoke")) {
 		    canTeleport = true;
+		    // //for levels with rotatorcubes, set the new parent to the joint child or parent object of the spoke
+		    // if(other.gameObject.transform.Find("Joint") != null)
+			   //  otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform.Find("Joint");
+		    // else if (other.gameObject.transform.parent.name == "Joint")
+			   //  otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform.parent;
+		    // else
+			   //  otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform;
+	    }
+
+	    if (other.gameObject.transform.name == "Joint") {
 		    //for levels with rotatorcubes, set the new parent to the joint child or parent object of the spoke
-		    if(other.gameObject.transform.Find("Joint") != null)
-			    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform.Find("Joint");
-		    else if (other.gameObject.transform.parent.name == "Joint")
-			    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform.parent;
-		    else
-			    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform;
+		    otherTeleporter.GetComponent<TeleporterCollider>().newParent = other.gameObject.transform;
 	    }
 	    
 	    if (other.gameObject.CompareTag("bub")) {
@@ -36,8 +41,10 @@ public class TeleporterCollider : MonoBehaviour {
 	    
 	    //teleport bub to other teleporter
         if (other.gameObject.CompareTag("bub") && !GameController.rotating && !teleported && GameController.rotatingColliders.Count == 0 &&
-            otherTeleporter.GetComponent<TeleporterCollider>().canTeleport && !otherTeleporter.GetComponent<TeleporterCollider>().hasBub) {
-	        other.gameObject.transform.parent = newParent;
+            otherTeleporter.GetComponent<TeleporterCollider>().canTeleport && !otherTeleporter.GetComponent<TeleporterCollider>().hasBub &&
+            !otherTeleporter.GetComponent<TeleporterCollider>().teleported) {
+	        if(newParent != null)
+		        other.gameObject.transform.parent = newParent;
 	        other.gameObject.GetComponent<Teleporter>()
 		        .StartCoroutine("TeleportIt", otherTeleporter.transform.position);
 	        otherTeleporter.GetComponent<TeleporterCollider>().teleported = true;
