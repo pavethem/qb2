@@ -20,7 +20,7 @@ public class GameRotator : MonoBehaviour, IDragHandler {
     public void OnDrag(PointerEventData eventData) {
 
         if (!Application.isMobilePlatform) {
-            if (!GameController.gameOver && !GameController.fallingLock && eventData.pointerId == -2) {
+            if (!GameController.gameOver && !GameController.fallingLock && eventData.pointerId == -2 && !GameController.tutorialLock) {
                 Camera.main.transform.RotateAround(Vector3.zero, Vector3.up, eventData.delta.x / ADJUST_FACTOR);
                 //            Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right,-(eventData.delta.y / ADJUST_FACTOR) );
 
@@ -52,7 +52,7 @@ public class GameRotator : MonoBehaviour, IDragHandler {
             }
         }
         else {
-            if (!GameController.gameOver && !GameController.fallingLock)  {
+            if (!GameController.gameOver && !GameController.fallingLock && !GameController.tutorialLock)  {
                 
                 if (GameController.freeRotation == 1  && gameObject.name == "MobileImageY") {
                     Camera.main.transform.RotateAround(Vector3.zero, Camera.main.transform.right, -(eventData.delta.y / ADJUST_FACTOR));

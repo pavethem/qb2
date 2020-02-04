@@ -36,6 +36,11 @@ public class GameController : MonoBehaviour {
     public static float MINKEYDOWNTIME = 0.9f;
     public static float keyDownTime;
     public static bool keyPressed;
+    
+    //tutorial stuff
+    public static bool skipTutorials;
+    private string[] tutorialLevels = {"level1", "level2", "level4", "level6", "level8", "level12", "level19"};
+    public static bool tutorialLock;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -141,21 +146,14 @@ public class GameController : MonoBehaviour {
             if (DEBUG) {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
+                skipTutorials = true;
             } else {
                 SceneManager.LoadScene("splashScreen");
             }
-
-//            currentScene = 1;
-//            else {
-//                Load();
-//                SceneManager.LoadScene("level" + currentScene + "_final");
-//            }
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
-//        InitGame();
-        
     }
     
     private void Start() {
@@ -165,6 +163,9 @@ public class GameController : MonoBehaviour {
         hardmode = PlayerPrefs.GetInt("HardMode", -1);
         freeRotation = PlayerPrefs.GetInt("FreeRotation", -1);
         maxScene = PlayerPrefs.GetInt("maxScene",1);
+
+        //UNCOMMENT THIS EVENTUALLY
+        // skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
         
         if(Application.isMobilePlatform)
             ReplaceMeshes(titleLevel);
@@ -233,9 +234,20 @@ public class GameController : MonoBehaviour {
 
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
-        StartCoroutine(nameof(MoveInButtons));
-        if(Application.isMobilePlatform && freeRotation==1)
-            StartCoroutine(nameof(MoveInFromTheRight));
+        
+        //fade in tutorial if level should display a tutorial
+        tutorialLock = false;
+        if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock &&
+            PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1) {
+            SceneManager.LoadSceneAsync("tutorialScreen",LoadSceneMode.Additive);
+            tutorialLock = true;
+        }
+
+        if (!tutorialLock) {
+            StartCoroutine(nameof(MoveInButtons));
+            if (Application.isMobilePlatform && freeRotation == 1)
+                StartCoroutine(nameof(MoveInFromTheRight));
+        }
 
         cubeCount = 0;
         gameOver = false;
@@ -331,7 +343,6 @@ public class GameController : MonoBehaviour {
 //        GameObject.Find("Background").transform.rotation = backgroundRotation;
 //        GameObject.Find("Background").transform.position = backgroundPosition;
         Physics.gravity = gravity;
-
     }
     
     //shows fps
@@ -384,7 +395,7 @@ public class GameController : MonoBehaviour {
         }
 
         //reset scene
-        if (Input.GetKeyUp(KeyCode.R) && (SceneManager.GetActiveScene().name.StartsWith("level") || DEBUG)) {
+        if (Input.GetKeyUp(KeyCode.R) && (SceneManager.GetActiveScene().name.StartsWith("level") && !tutorialLock || DEBUG)) {
             StartCoroutine(Reset());
         }
 
@@ -479,11 +490,13 @@ public class GameController : MonoBehaviour {
         
     }
     public void ResetButton() {
-        StartCoroutine(Reset());
+        if(!tutorialLock)
+            StartCoroutine(Reset());
     }
     
     public void BackButton() {
-        StartCoroutine(LoadMainMenu());
+        if(!tutorialLock)
+            StartCoroutine(LoadMainMenu());
     }
 
     public IEnumerator LoadMainMenu() {
@@ -550,8 +563,7 @@ public class GameController : MonoBehaviour {
 
     }
     
-    IEnumerator LoadYourAsyncScene(string scene)
-    {
+    IEnumerator LoadYourAsyncScene(string scene) {
         if (currentScene > 1) {
 //            yield return new WaitForSeconds(2.1f);
             while (!wipingIn) {
