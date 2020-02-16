@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Rotator : RotatorParent {
     
@@ -92,7 +91,7 @@ public class Rotator : RotatorParent {
 
     private IEnumerator OnMouseOver() {
 
-        if (!enabled || disabled) yield break;
+        if (!enabled || disabled || GameController.tutorialLock) yield break;
         
         isHovering = true;
         StopCoroutine(nameof(OnMouseExit));
@@ -112,7 +111,7 @@ public class Rotator : RotatorParent {
 
     private IEnumerator OnMouseExit() {
 
-        if (!enabled) yield break;
+        if (!enabled || GameController.tutorialLock) yield break;
 
         if (!isClicked) {
             hoverTime = 0;
@@ -134,7 +133,7 @@ public class Rotator : RotatorParent {
 
     private void OnMouseDown() {
 
-        if (!enabled || disabled) return;
+        if (!enabled || disabled || GameController.tutorialLock) return;
 
         if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0) {
             gameObject.GetComponentInParent<MeshRenderer>().material.color = Color.white;
@@ -147,7 +146,7 @@ public class Rotator : RotatorParent {
     
     private void OnMouseUp() {
         
-        if (!enabled || !isClicked || disabled) return;
+        if (!enabled || !isClicked || disabled || GameController.tutorialLock) return;
 
         isClicked = false;
         GameController.rotatorClicked = false;
@@ -169,7 +168,7 @@ public class Rotator : RotatorParent {
 
     private void OnMouseDrag() {  
         
-        if (!enabled || disabled) return;
+        if (!enabled || disabled || GameController.tutorialLock) return;
 
         if(!GameController.rotating && !GameController.moving && !GameController.teleporting && 
            GameController.rotatingColliders.Count == 0 && isClicked)
@@ -253,7 +252,7 @@ public class Rotator : RotatorParent {
         
         //rotate with keys
         if (Input.anyKeyDown && !GameController.rotating && !GameController.moving && !GameController.teleporting &&
-            GameController.rotatingColliders.Count == 0 && !disabled) {
+            GameController.rotatingColliders.Count == 0 && !disabled && !GameController.tutorialLock) {
             if (acceptedInputStrings.Contains(Input.inputString)) {
                 GameController.keyPressed = true;
                 if (acceptedInputStrings[0] == Input.inputString) {

@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour {
             gravity = Physics.gravity;
 
             mobileImage.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.x,
-                Screen.height / 15f);
+                Mathf.Clamp(Screen.height / 15f,40f,45f));
             mobileImage.GetComponent<RectTransform>().anchoredPosition =new Vector2(0, 
                 0 - mobileImage.GetComponent<RectTransform>().rect.height);
             
@@ -237,8 +237,9 @@ public class GameController : MonoBehaviour {
         
         //fade in tutorial if level should display a tutorial
         tutorialLock = false;
-        if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock &&
-            PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1) {
+        if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock //&&
+            //PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1) {
+            ){
             SceneManager.LoadSceneAsync("tutorialScreen",LoadSceneMode.Additive);
             tutorialLock = true;
         }

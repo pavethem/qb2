@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.UI;
 
 public class MobileRotator : RotatorParent {
@@ -314,7 +311,7 @@ public class MobileRotator : RotatorParent {
 
     private IEnumerator OnMouseDown() {
         
-        if (!enabled || disabled) yield break;
+        if (!enabled || disabled || GameController.tutorialLock) yield break;
 
 
         if (!GameController.rotating && !GameController.moving && !GameController.teleporting && GameController.rotatingColliders.Count == 0) {
@@ -345,7 +342,7 @@ public class MobileRotator : RotatorParent {
     
     private IEnumerator OnMouseUp() {
         
-        if (!enabled || !isClicked || disabled) yield break;
+        if (!enabled || !isClicked || disabled || GameController.tutorialLock) yield break;
 
         GameController.rotatorClicked = false;
         isClicked = false;
@@ -409,7 +406,7 @@ public class MobileRotator : RotatorParent {
 
     private void OnMouseDrag() {  
         
-        if (!enabled || disabled) return;
+        if (!enabled || disabled || GameController.tutorialLock) return;
 
         if (!GameController.rotating && !GameController.moving && !GameController.teleporting &&
             GameController.rotatingColliders.Count == 0 && isClicked) {

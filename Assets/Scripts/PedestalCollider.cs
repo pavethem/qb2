@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 //Plays Dice Sound when cubes are colliding with it
 public class PedestalCollider : MonoBehaviour
