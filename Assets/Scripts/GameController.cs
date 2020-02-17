@@ -10,9 +10,10 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour {
-
     public static bool DEBUG = false;
+
     public DebugObject debugScriptableObject;
+
     //for fading in and out when loading the level
     public GameObject screenWipe;
     public GameObject directionalLight;
@@ -24,19 +25,20 @@ public class GameController : MonoBehaviour {
     public static bool wiping;
 
     public static GameController instance = null;
-    
+
     //less "accurate" than unity's implementation
     private const float EPSILON = 9.99999944E-5f;
+
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
     private const int LEVELCOUNT = 24;
 
-    
+
     //wait a while before rotating with keys again
     public static float MINKEYDOWNTIME = 0.9f;
     public static float keyDownTime;
     public static bool keyPressed;
-    
+
     //tutorial stuff
     public static bool skipTutorials;
     private string[] tutorialLevels = {"level1", "level2", "level4", "level6", "level8", "level12", "level19"};
@@ -82,13 +84,17 @@ public class GameController : MonoBehaviour {
     public static bool moving;
     public static bool teleporting;
     public static bool fallingLock;
+
     public static bool rotatingSpoke;
+
     //all rotatorColliders eligible for rotation right now
     public static List<GameObject> rotatingColliders;
 
     public static int currentScene;
+
     //the maximum level reached by the player
     public static int maxScene;
+
     //last rotator to be used (needed to reverse rotations when hitting locks)
     public static RotatorParent lastRotatorStrip;
     public static RotateSpoke lastRotateSpoke;
@@ -97,7 +103,7 @@ public class GameController : MonoBehaviour {
 
     public AudioMixer mixer;
     public AudioClip transition;
-    
+
     //DEBUG STUFF REMOVE
     //use Z to go to last rotation
     public static Stack<Quaternion> lastrotations;
@@ -113,7 +119,7 @@ public class GameController : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        
+
         if (currentScene == 0) {
             pedestalPosition = GameObject.Find("Pedestal").transform.position;
             pedestalRotation = GameObject.Find("Pedestal").transform.rotation;
@@ -130,13 +136,13 @@ public class GameController : MonoBehaviour {
             gravity = Physics.gravity;
 
             mobileImage.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.x,
-                Mathf.Clamp(Screen.height / 15f,40f,45f));
-            mobileImage.GetComponent<RectTransform>().anchoredPosition =new Vector2(0, 
+                Mathf.Clamp(Screen.height / 15f, 40f, 45f));
+            mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,
                 0 - mobileImage.GetComponent<RectTransform>().rect.height);
-            
-            mobileImageY.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.y*2, 
+
+            mobileImageY.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.y * 2,
                 mobileImageY.GetComponent<RectTransform>().sizeDelta.y);
-            mobileImageY.GetComponent<RectTransform>().offsetMin = new Vector2(0,mobileImage.GetComponent<RectTransform>().sizeDelta.y);
+            mobileImageY.GetComponent<RectTransform>().offsetMin = new Vector2(0, mobileImage.GetComponent<RectTransform>().sizeDelta.y);
 
             DEBUG = debugScriptableObject.DEBUG;
 
@@ -147,7 +153,8 @@ public class GameController : MonoBehaviour {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
                 skipTutorials = true;
-            } else {
+            }
+            else {
                 SceneManager.LoadScene("splashScreen");
             }
         }
@@ -155,21 +162,20 @@ public class GameController : MonoBehaviour {
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
     }
-    
+
     private void Start() {
         //set last audio levels and other variables
         mixer.SetFloat("BackgroundVolume", PlayerPrefs.GetFloat("BackgroundVolume", 1f));
         mixer.SetFloat("EffectsVolume", PlayerPrefs.GetFloat("EffectsVolume", 1f));
         hardmode = PlayerPrefs.GetInt("HardMode", -1);
         freeRotation = PlayerPrefs.GetInt("FreeRotation", -1);
-        maxScene = PlayerPrefs.GetInt("maxScene",1);
+        maxScene = PlayerPrefs.GetInt("maxScene", 1);
 
         //UNCOMMENT THIS EVENTUALLY
         // skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
-        
-        if(Application.isMobilePlatform)
+
+        if (Application.isMobilePlatform)
             ReplaceMeshes(titleLevel);
-        
     }
 
     public static void SplashScreenDone() {
@@ -183,7 +189,7 @@ public class GameController : MonoBehaviour {
         Load();
         StartCoroutine(nameof(ScreenWipeIn), true);
     }
-    
+
     public void LoadMaxScene() {
         Load();
         if (maxScene <= LEVELCOUNT)
@@ -192,9 +198,8 @@ public class GameController : MonoBehaviour {
             currentScene = LEVELCOUNT;
         StartCoroutine(nameof(ScreenWipeIn), true);
     }
-    
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         if (scene.name == "mainmenu") {
             StartCoroutine(nameof(ScreenWipeOut));
             titleLevel.SetActive(true);
@@ -229,18 +234,17 @@ public class GameController : MonoBehaviour {
     }
 
     void InitGame() {
-
         titleLevel.SetActive(false);
 
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
-        
+
         //fade in tutorial if level should display a tutorial
         tutorialLock = false;
         if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock //&&
             //PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1) {
-            ){
-            SceneManager.LoadSceneAsync("tutorialScreen",LoadSceneMode.Additive);
+        ) {
+            SceneManager.LoadSceneAsync("tutorialScreen", LoadSceneMode.Additive);
             tutorialLock = true;
         }
 
@@ -267,7 +271,7 @@ public class GameController : MonoBehaviour {
         teleporters = GameObject.FindGameObjectsWithTag("teleporter");
         keys = GameObject.FindGameObjectsWithTag("key").ToList();
         locks = GameObject.FindGameObjectsWithTag("lock").ToList();
-        
+
         if (Application.isMobilePlatform) {
             //change image for rotating the game world
             mobileImage.GetComponent<RawImage>().enabled = true;
@@ -286,30 +290,31 @@ public class GameController : MonoBehaviour {
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().enabled = true;
 
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").Find("collider").transform.localScale
-                    += new Vector3(0,SCALEAMOUNT,0);
+                    += new Vector3(0, SCALEAMOUNT, 0);
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").Find("collider").transform.localScale
-                    += new Vector3(0,SCALEAMOUNT,0);                
+                    += new Vector3(0, SCALEAMOUNT, 0);
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").Find("collider").transform.localScale
-                    += new Vector3(0,SCALEAMOUNT,0);    
+                    += new Vector3(0, SCALEAMOUNT, 0);
                 //change models to their respective low poly versions
                 foreach (var r in rotators) {
                     r.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("arrowCW_lowpoly");
                 }
-                
+
                 foreach (var l in locks) {
                     l.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("lock_lowpoly");
                 }
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponent<MeshFilter>().sharedMesh = 
-                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponent<MeshFilter>().sharedMesh = 
-                    Resources.Load<Mesh>("rotatorStrip_lowpoly");           
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponent<MeshFilter>().sharedMesh = 
-                    Resources.Load<Mesh>("rotatorStrip_lowpoly");        
-            
-                ReplaceMeshes( GameObject.FindWithTag("thing"));
-            }
-            catch (NullReferenceException e) {}
 
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponent<MeshFilter>().sharedMesh =
+                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponent<MeshFilter>().sharedMesh =
+                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
+                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponent<MeshFilter>().sharedMesh =
+                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
+
+                ReplaceMeshes(GameObject.FindWithTag("thing"));
+            }
+            catch (NullReferenceException e) {
+            }
         }
         else {
             GameObject.Find("Canvas").transform.Find("DesktopImage").GetComponent<Image>().enabled = true;
@@ -322,10 +327,10 @@ public class GameController : MonoBehaviour {
         rotatorClicked = false;
         rotatingSpoke = false;
         rotatingColliders = new List<GameObject>();
-        
+
         keyDownTime = 0;
         keyPressed = false;
-        
+
         ClearPedestal();
 
         if (DEBUG)
@@ -345,12 +350,10 @@ public class GameController : MonoBehaviour {
 //        GameObject.Find("Background").transform.position = backgroundPosition;
         Physics.gravity = gravity;
     }
-    
+
     //shows fps
-    void OnGUI()
-    {
-        if (Debug.isDebugBuild && DEBUG)
-        {
+    void OnGUI() {
+        if (Debug.isDebugBuild && DEBUG) {
             int w = Screen.width, h = Screen.height;
 
             GUIStyle style = new GUIStyle();
@@ -366,14 +369,12 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
+    void Update() {
         if (Debug.isDebugBuild && DEBUG)
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
     }
 
     void LateUpdate() {
-        
         //wait a bit before you can rotate with keys again
         if (keyPressed) {
             keyDownTime += Time.deltaTime;
@@ -382,7 +383,7 @@ public class GameController : MonoBehaviour {
                 keyDownTime = 0;
             }
         }
-        
+
         if (DEBUG) {
             if (!rotating && !moving && !teleporting && rotatingColliders.Count == 0) {
 //                Solve();
@@ -390,8 +391,7 @@ public class GameController : MonoBehaviour {
         }
 
         //fade in background audio
-        if (gameObject.GetComponent<AudioSource>().volume < 0.5f && splashScreenDone)
-        {
+        if (gameObject.GetComponent<AudioSource>().volume < 0.5f && splashScreenDone) {
             gameObject.GetComponent<AudioSource>().volume += Time.deltaTime / 10;
         }
 
@@ -404,8 +404,9 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.L)) {
             GameOver();
         }
+
         if (Input.GetKeyUp(KeyCode.K)) {
-            if(currentScene > 1)
+            if (currentScene > 1)
                 currentScene -= 2;
             GameOver();
         }
@@ -417,21 +418,15 @@ public class GameController : MonoBehaviour {
         }
 
         if (gameOver && !isLoadingNextLevel) {
-            
             GameOver();
-
         }
-
     }
 
     void FixedUpdate() {
-
         if (cubes != null) {
             //turn on physics for all cubes in scene and add a small amount of velocity and torque
             if (cubeCount == cubes.Length && cubes.Length > 0 && !gameOver) {
-
                 foreach (var cube in cubes) {
-
                     cube.GetComponent<Rigidbody>().useGravity = true;
                     cube.GetComponent<UnityEngine.Collider>().isTrigger = false;
                     cube.GetComponent<Rigidbody>().AddForce(new Vector3(
@@ -442,14 +437,11 @@ public class GameController : MonoBehaviour {
                     foreach (Transform child in cube.transform) {
                         child.gameObject.SetActive(true);
                     }
-
                 }
 
                 gameOver = true;
-
             }
         }
-
     }
 
     //for hard mode
@@ -459,22 +451,21 @@ public class GameController : MonoBehaviour {
         GameObject.Find("Canvas").transform.Find("HardModePanel").GetComponentInChildren<TextMeshProUGUI>().text = "" + n;
 
         if (n == 0) {
-            if(GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled) {
+            if (GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().enabled) {
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<Rotator>().disabled = true;
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<Rotator>().disabled = true;
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<Rotator>().disabled = true;
-            } else {
+            }
+            else {
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponentInChildren<MobileRotator>().disabled = true;
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponentInChildren<MobileRotator>().disabled = true;
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponentInChildren<MobileRotator>().disabled = true;
             }
         }
-        
     }
 
     //unlock lock with key
     public static void RemoveLock(GameObject locky, GameObject key) {
-
         fallingLock = true;
 
         locks.Remove(locky);
@@ -483,20 +474,20 @@ public class GameController : MonoBehaviour {
         locky.GetComponent<Rigidbody>().useGravity = true;
         locky.GetComponent<UnityEngine.Collider>().isTrigger = false;
 //        locky.GetComponent<Rigidbody>().AddForce(Vector3.down,ForceMode.Acceleration);
-        locky.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(10,20),Random.Range(10,20),Random.Range(10,20)),ForceMode.Impulse);
+        locky.GetComponent<Rigidbody>().AddTorque(new Vector3(Random.Range(10, 20), Random.Range(10, 20), Random.Range(10, 20)), ForceMode.Impulse);
 
         foreach (Transform child in locky.transform) {
             child.gameObject.SetActive(true);
         }
-        
     }
+
     public void ResetButton() {
-        if(!tutorialLock)
+        if (!tutorialLock)
             StartCoroutine(Reset());
     }
-    
+
     public void BackButton() {
-        if(!tutorialLock)
+        if (!tutorialLock)
             StartCoroutine(LoadMainMenu());
     }
 
@@ -506,14 +497,15 @@ public class GameController : MonoBehaviour {
             StartCoroutine(nameof(MoveOutButtons));
             if (Application.isMobilePlatform && freeRotation == 1)
                 StartCoroutine(nameof(MoveOutFromTheRight));
-            StartCoroutine(nameof(ScreenWipeIn),false);
+            StartCoroutine(nameof(ScreenWipeIn), false);
             while (!wipingIn) {
                 yield return null;
             }
+
             GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(false);
             isLoadingNextLevel = true;
             gameOver = true;
-            
+
             SceneManager.LoadScene("mainmenu");
         }
     }
@@ -521,7 +513,7 @@ public class GameController : MonoBehaviour {
     public IEnumerator Reset() {
         if (!isLoadingNextLevel && !resetting) {
             resetting = true;
-            StartCoroutine(nameof(ScreenWipeIn),false);
+            StartCoroutine(nameof(ScreenWipeIn), false);
             while (!wipingIn) {
                 yield return null;
             }
@@ -529,11 +521,9 @@ public class GameController : MonoBehaviour {
             Scene loadedLevel = SceneManager.GetActiveScene();
             SceneManager.LoadScene(loadedLevel.buildIndex);
         }
-
     }
 
     void GameOver() {
-
         if (hardmode == 1) {
             PlayerPrefs.SetInt("level" + currentScene, 1);
             PlayerPrefs.Save();
@@ -541,13 +531,13 @@ public class GameController : MonoBehaviour {
 
         isLoadingNextLevel = true;
         currentScene++;
-        
+
         if (maxScene < currentScene)
             maxScene = currentScene;
-        
+
         string scene = "level" + currentScene + "_final";
         if (DEBUG)
-            StartCoroutine(nameof(LoadYourAsyncScene),"test");
+            StartCoroutine(nameof(LoadYourAsyncScene), "test");
         else {
             Save();
             GameObject.FindWithTag("curved").gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -557,19 +547,18 @@ public class GameController : MonoBehaviour {
                 .GetComponent<LineRenderer>().positionCount = 0;
             GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject
                 .GetComponent<LineRenderer>().positionCount = 0;
-            StartCoroutine(nameof(ScreenWipeIn),false);
+            StartCoroutine(nameof(ScreenWipeIn), false);
             StartCoroutine(nameof(LoadYourAsyncScene), scene);
         }
-
-
     }
-    
+
     IEnumerator LoadYourAsyncScene(string scene) {
         if (currentScene > 1) {
 //            yield return new WaitForSeconds(2.1f);
             while (!wipingIn) {
                 yield return null;
             }
+
             GetComponent<AudioSource>().PlayOneShot(transition);
 //            yield return new WaitForSeconds(0.4f);
         }
@@ -577,8 +566,7 @@ public class GameController : MonoBehaviour {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
 
         // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
+        while (!asyncLoad.isDone) {
             yield return null;
         }
     }
@@ -593,8 +581,7 @@ public class GameController : MonoBehaviour {
     IEnumerator MoveInButtons() {
         float step = 0;
         float y = mobileImage.GetComponent<RectTransform>().anchoredPosition.y;
-        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.y < 0)
-        {
+        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.y < 0) {
             mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, Mathf.Lerp(y, 0, step));
             step += Time.deltaTime * 2f;
             yield return null;
@@ -602,31 +589,27 @@ public class GameController : MonoBehaviour {
 
         mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     }
-    
+
     //for moving mobileimageY
     IEnumerator MoveInFromTheRight() {
-        
         float step = 0;
         float x = mobileImageY.GetComponent<RectTransform>().anchoredPosition.x;
-        while (mobileImageY.GetComponent<RectTransform>().anchoredPosition.x > -mobileImageY.GetComponent<RectTransform>().rect.width/2)
-        {
-            mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(x, 
-                -mobileImageY.GetComponent<RectTransform>().rect.width/2, step), mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
+        while (mobileImageY.GetComponent<RectTransform>().anchoredPosition.x > -mobileImageY.GetComponent<RectTransform>().rect.width / 2) {
+            mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(x,
+                -mobileImageY.GetComponent<RectTransform>().rect.width / 2, step), mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
             step += Time.deltaTime * 2f;
             yield return null;
         }
 
-        mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(-mobileImageY.GetComponent<RectTransform>().rect.width/2, 
+        mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(-mobileImageY.GetComponent<RectTransform>().rect.width / 2,
             mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
     }
 
 
-    IEnumerator MoveOutButtons()
-    {
+    IEnumerator MoveOutButtons() {
         float step = 0;
         float y = -mobileImage.GetComponent<RectTransform>().rect.height;
-        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.y > y)
-        {
+        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.y > y) {
             mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, Mathf.Lerp(0, y, step));
             step += Time.deltaTime * 2f;
             yield return null;
@@ -634,14 +617,12 @@ public class GameController : MonoBehaviour {
 
         mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, y);
     }
-    
-    IEnumerator MoveOutFromTheRight()
-    {
+
+    IEnumerator MoveOutFromTheRight() {
         float step = 0;
-        float x = mobileImageY.GetComponent<RectTransform>().rect.width/2;
-        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.x < x)
-        {
-            mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(-x, x, step), 
+        float x = mobileImageY.GetComponent<RectTransform>().rect.width / 2;
+        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.x < x) {
+            mobileImageY.GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(-x, x, step),
                 mobileImageY.GetComponent<RectTransform>().anchoredPosition.y);
             step += Time.deltaTime * 2f;
             yield return null;
@@ -652,9 +633,8 @@ public class GameController : MonoBehaviour {
     }
 
     IEnumerator ScreenWipeIn(bool levelbutton = false) {
-        
         //wait a bit for cubes to fall
-        if(gameOver)
+        if (gameOver)
             yield return new WaitForSeconds(1.6f);
         wiping = true;
         float timeStep = 0;
@@ -664,6 +644,7 @@ public class GameController : MonoBehaviour {
             timeStep += Time.deltaTime;
             yield return null;
         }
+
         //looks weird otherwise
         GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(false);
         screenWipe.GetComponent<Image>().fillAmount = 0.8f;
@@ -671,15 +652,13 @@ public class GameController : MonoBehaviour {
         wipingIn = true;
         wiping = false;
         ClearPedestal();
-        
+
         //load scene when level or start button was pressed
-        if(levelbutton)
+        if (levelbutton)
             SceneManager.LoadScene("level" + currentScene + "_final");
-        
     }
-    
+
     IEnumerator ScreenWipeOut() {
-        
         wipingIn = false;
         wiping = true;
         float timeStep = 0;
@@ -689,28 +668,27 @@ public class GameController : MonoBehaviour {
             timeStep += Time.deltaTime;
             yield return null;
         }
+
         screenWipe.GetComponent<Image>().fillAmount = 0;
         directionalLight.GetComponent<Light>().shadowStrength = 1;
         wiping = false;
     }
-    
-    public static bool Compare(Vector3 lhs, Vector3 rhs)
-    {
+
+    public static bool Compare(Vector3 lhs, Vector3 rhs) {
         return Vector3.SqrMagnitude(lhs - rhs) < EPSILON;
     }
 
     //replace all spoke meshes in thing, where appropriate
     private static void ReplaceMeshes(GameObject g) {
-        
-        if(g.GetComponent<MeshFilter>() == null && g.transform.childCount == 0)
+        if (g.GetComponent<MeshFilter>() == null && g.transform.childCount == 0)
             return;
-        
+
         if (g.GetComponent<MeshFilter>() != null) {
             string bla = g.GetComponent<MeshFilter>().sharedMesh.name;
-            
-            if(bla == "Sphere")
+
+            if (bla == "Sphere")
                 g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("sphere_lowpoly");
-            
+
             int last = bla.LastIndexOf("_", StringComparison.Ordinal);
             if (last != -1) {
                 string name = bla.Substring(0, last);
@@ -754,13 +732,12 @@ public class GameController : MonoBehaviour {
                 }
             }
         }
-        
+
         if (g.transform.childCount != 0) {
             foreach (Transform child in g.transform) {
                 ReplaceMeshes(child.gameObject);
             }
         }
-
     }
 
     private static void Save() {
@@ -768,14 +745,13 @@ public class GameController : MonoBehaviour {
         PlayerPrefs.SetInt("maxScene", maxScene);
         PlayerPrefs.Save();
     }
-    
+
     private static void Load() {
-        currentScene = PlayerPrefs.GetInt("currentScene",1);
-        maxScene = PlayerPrefs.GetInt("maxScene",1);
+        currentScene = PlayerPrefs.GetInt("currentScene", 1);
+        maxScene = PlayerPrefs.GetInt("maxScene", 1);
     }
-    
+
     private void Solve() {
-        
         if (gameOver && !isLoadingNextLevel) {
             string finishedinputs = "";
             foreach (var entry in inputs) {
@@ -798,7 +774,7 @@ public class GameController : MonoBehaviour {
         if (solveTimeout > 0.5f) {
             solveTimeout = 0;
             int random = Random.Range(1, 7);
-            
+
             if (!(hitLock && random == lastRotation)) {
                 if (!gameOver) {
                     switch (random) {
@@ -829,7 +805,6 @@ public class GameController : MonoBehaviour {
                             solveTimeout = 0;
                             inputs.Add("d");
                             break;
-
                         }
                         case 3: {
                             GameObject.FindWithTag("rotatorStripY").transform.GetChild(0).GetComponent<Rotator>()
@@ -888,19 +863,17 @@ public class GameController : MonoBehaviour {
                             break;
                         }
                     }
+
                     hitLock = false;
                     lastRotation = random;
                 }
             }
 
-            if (inputs.Count > solved.Count && solved.Count > 0 || inputs.Count > GameObject.FindWithTag("thing").GetComponent<RotationCount>().rotationCount) {
+            if (inputs.Count > solved.Count && solved.Count > 0 ||
+                inputs.Count > GameObject.FindWithTag("thing").GetComponent<RotationCount>().rotationCount) {
                 inputs.Clear();
                 StartCoroutine(Reset());
             }
-            
         }
     }
-    
 }
-
-
