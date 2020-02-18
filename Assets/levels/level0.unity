@@ -1098,6 +1098,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugScriptableObject: {fileID: 11400000, guid: 6bb9af987d7694bdb8f77a422525fe57,
     type: 2}
+  skipSplashScreenObject: {fileID: 11400000, guid: de1dd1fb41f8707008162f888cd01f94,
+    type: 2}
   screenWipe: {fileID: 289486175}
   directionalLight: {fileID: 1760319549}
   mobileImage: {fileID: 1899725881}
@@ -1701,7 +1703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140.00012, y: 0.00062561035}
+  m_AnchoredPosition: {x: 140.00012, y: 0.00061035156}
   m_SizeDelta: {x: 200, y: -17}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1631731606
@@ -2375,7 +2377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2051627914
 RectTransform:
   m_ObjectHideFlags: 0

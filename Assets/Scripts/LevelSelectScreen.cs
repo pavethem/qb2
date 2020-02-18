@@ -23,7 +23,7 @@ public class LevelSelectScreen : MonoBehaviour
         contentTransform = buttonsTransform.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
         buttonsTransform.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(
             buttonsTransform.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta.x,
-            Screen.height/15f);
+            Mathf.Clamp(Screen.height / 15f, 25f, 30f));
         levelName = "1";
         buttonsTransform.GetComponent<Animation>().Play();
 

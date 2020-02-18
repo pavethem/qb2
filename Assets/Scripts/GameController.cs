@@ -10,9 +10,11 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour {
-    public static bool DEBUG = false;
+    public static bool DEBUG;
+    public static bool SKIPSPLASHSCREEN;
 
     public DebugObject debugScriptableObject;
+    public SkipSplashScreenObject skipSplashScreenObject;
 
     //for fading in and out when loading the level
     public GameObject screenWipe;
@@ -145,6 +147,7 @@ public class GameController : MonoBehaviour {
             mobileImageY.GetComponent<RectTransform>().offsetMin = new Vector2(0, mobileImage.GetComponent<RectTransform>().sizeDelta.y);
 
             DEBUG = debugScriptableObject.DEBUG;
+            SKIPSPLASHSCREEN = skipSplashScreenObject.SKIPSPLASHSCREEN;
 
 //            screenWipe.GetComponent<Image>().fillAmount = 1;
 //            directionalLight.GetComponent<Light>().shadowStrength = 0;
@@ -154,8 +157,11 @@ public class GameController : MonoBehaviour {
                 lastrotations = new Stack<Quaternion>();
                 skipTutorials = true;
             }
-            else {
+            else if (!SKIPSPLASHSCREEN){
                 SceneManager.LoadScene("splashScreen");
+            }
+            else if (SKIPSPLASHSCREEN) {
+                SplashScreenDone();
             }
         }
 

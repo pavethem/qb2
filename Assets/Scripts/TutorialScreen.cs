@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -61,6 +62,10 @@ public class TutorialScreen : MonoBehaviour {
     };
 
     void Start() {
+        
+        //sometimes videos need to be adjusted slightly
+        Rect uvRect = video.GetComponent<RawImage>().uvRect;
+        
         switch (GameController.currentScene) {
             case 1: {
                 if (!Application.isMobilePlatform) {
@@ -78,13 +83,18 @@ public class TutorialScreen : MonoBehaviour {
                 break;
             }
             case 2: {
-                if (Application.isMobilePlatform) {
+                if (!Application.isMobilePlatform) {
                     description.GetComponent<TextMeshProUGUI>().text = level2_pc[0];
                     currentDescription = level2_pc;
+                    video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_camera_pc");
                 }
                 else {
                     description.GetComponent<TextMeshProUGUI>().text = level2_mobile[0];
                     currentDescription = level2_mobile;
+                    video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_camera_mobile");
+                    //don't want to do the video again
+                    uvRect.y = 0.03f;
+                    video.GetComponent<RawImage>().uvRect = uvRect;
                     if (GameController.freeRotation == 1) {
                         description.GetComponent<TextMeshProUGUI>().text = level2_mobile_free[0];
                         currentDescription = level2_mobile_free;
@@ -96,26 +106,39 @@ public class TutorialScreen : MonoBehaviour {
             case 4: {
                 description.GetComponent<TextMeshProUGUI>().text = level4[0];
                 currentDescription = level4;
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_lock");
+                uvRect.y = 0.03f;
+                video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
             }
             case 6: {
                 description.GetComponent<TextMeshProUGUI>().text = level6[0];
                 currentDescription = level6;
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_key");
                 break;
             }
             case 8: {
                 description.GetComponent<TextMeshProUGUI>().text = level8[0];
                 currentDescription = level8;
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_teleporter");
+                uvRect.y = 0.03f;
+                video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
             }
             case 12: {
                 description.GetComponent<TextMeshProUGUI>().text = level12[0];
                 currentDescription = level12;
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_arrow1");
+                uvRect.y = 0.03f;
+                video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
             }
             case 19: {
                 description.GetComponent<TextMeshProUGUI>().text = level19[0];
                 currentDescription = level19;
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotator1");
+                uvRect.y = 0.03f;
+                video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
             }
             default: {
@@ -129,6 +152,9 @@ public class TutorialScreen : MonoBehaviour {
         if (currentDescription != null && currentDescription.Length == 1) {
             nextButtonText.GetComponent<TextMeshProUGUI>().text = "Finish";
         }
+        
+        //don't play on awake (but show first frame)
+        video.GetComponent<VideoPlayer>().Pause();
     }
 
     private void NextText() {
@@ -136,6 +162,23 @@ public class TutorialScreen : MonoBehaviour {
         description.GetComponent<TextMeshProUGUI>().text = currentDescription[currentDescriptionNumber];
         if ((currentDescription == level1_pc || currentDescription == level1_mobile) && !video.GetComponent<VideoPlayer>().isPlaying) {
             video.GetComponent<VideoPlayer>().Play();
+        }
+
+        if (currentDescription == level2_mobile_free) {
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_camera_free");
+            video.GetComponent<RawImage>().uvRect = new Rect(0,0,1,1);
+        }
+
+        if (currentDescription == level6) {
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_key_open");
+        }
+        
+        if (currentDescription == level12) {
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_arrow2");
+        }
+        
+        if (currentDescription == level19) {
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotator2");
         }
     }
 
@@ -148,7 +191,7 @@ public class TutorialScreen : MonoBehaviour {
                 GameController.tutorialLock = false;
                 GameController.instance.StartCoroutine("MoveInButtons");
                 if (Application.isMobilePlatform && GameController.freeRotation == 1)
-                    GameController.instance.StartCoroutine("MoveInButtons");
+                    GameController.instance.StartCoroutine("MoveInFromTheRight");
                 destroy = true;
                 //if second to last description is reached, display Finish button    
             }
@@ -169,7 +212,7 @@ public class TutorialScreen : MonoBehaviour {
         GameController.tutorialLock = false;
         GameController.instance.StartCoroutine("MoveInButtons");
         if (Application.isMobilePlatform && GameController.freeRotation == 1)
-            GameController.instance.StartCoroutine("MoveInButtons");
+            GameController.instance.StartCoroutine("MoveInFromTheRight");
         destroy = true;
     }
 
@@ -177,6 +220,11 @@ public class TutorialScreen : MonoBehaviour {
         //wait until menu is moved out and unload scene
         if (destroy && !transform.GetChild(0).GetComponent<Animation>().isPlaying) {
             SceneManager.UnloadSceneAsync("tutorialScreen");
+        }
+        //wait until screen is moved in, then play
+        if (transform.GetChild(0).GetComponent<RectTransform>().pivot.y == 0.5f && !video.GetComponent<VideoPlayer>().isPlaying && 
+            currentDescription != level1_pc && currentDescription != level1_mobile) {
+            video.GetComponent<VideoPlayer>().Play();
         }
     }
 }
