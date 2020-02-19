@@ -220,7 +220,7 @@ QualitySettings:
     name: Shadows
     pixelLightCount: 0
     shadows: 2
-    shadowResolution: 3
+    shadowResolution: 2
     shadowProjection: 1
     shadowCascades: 1
     shadowDistance: 300
@@ -230,8 +230,8 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 1
     textureQuality: 1
-    anisotropicTextures: 2
-    antiAliasing: 8
+    anisotropicTextures: 0
+    antiAliasing: 0
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
@@ -251,4 +251,7 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality: {}
+  m_PerPlatformDefaultQuality:
+    Android: 6
+    Standalone: 6
+    WebGL: 6

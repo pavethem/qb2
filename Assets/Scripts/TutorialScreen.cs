@@ -148,6 +148,10 @@ public class TutorialScreen : MonoBehaviour {
             }
         }
 
+        if (Application.platform == RuntimePlatform.WebGLPlayer) {
+            ReplaceForWebGL();
+        }
+
         //if description only has one element, display Finish button
         if (currentDescription != null && currentDescription.Length == 1) {
             nextButtonText.GetComponent<TextMeshProUGUI>().text = "Finish";
@@ -155,6 +159,11 @@ public class TutorialScreen : MonoBehaviour {
         
         //don't play on awake (but show first frame)
         video.GetComponent<VideoPlayer>().Pause();
+    }
+
+    private void ReplaceForWebGL() {
+        video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
+              video.GetComponent<VideoPlayer>().clip.name + ".ogv");
     }
 
     private void NextText() {
@@ -179,6 +188,11 @@ public class TutorialScreen : MonoBehaviour {
         
         if (currentDescription == level19) {
             video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotator2");
+        }
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            ReplaceForWebGL();
         }
     }
 

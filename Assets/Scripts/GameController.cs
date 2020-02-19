@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour {
     public static bool skipTutorials;
     private string[] tutorialLevels = {"level1", "level2", "level4", "level6", "level8", "level12", "level19"};
     public static bool tutorialLock;
+    private bool shownTutorial;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -247,11 +248,12 @@ public class GameController : MonoBehaviour {
 
         //fade in tutorial if level should display a tutorial
         tutorialLock = false;
-        if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock //&&
-            //PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1) {
-        ) {
+        if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock &&
+            PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1 && !shownTutorial) {
+        //) {
             SceneManager.LoadSceneAsync("tutorialScreen", LoadSceneMode.Additive);
             tutorialLock = true;
+            shownTutorial = true;
         }
 
         if (!tutorialLock) {
@@ -511,6 +513,7 @@ public class GameController : MonoBehaviour {
             GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(false);
             isLoadingNextLevel = true;
             gameOver = true;
+            shownTutorial = false;
 
             SceneManager.LoadScene("mainmenu");
         }
@@ -535,6 +538,7 @@ public class GameController : MonoBehaviour {
             PlayerPrefs.Save();
         }
 
+        shownTutorial = false;
         isLoadingNextLevel = true;
         currentScene++;
 

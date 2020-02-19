@@ -66,7 +66,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_TargetSettings.Array.size
-    value: 1
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_TargetSettings.Array.data[0].first
@@ -102,6 +102,42 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_TargetSettings.Array.data[0].second.spatialQuality
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].first
+    value: 7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.enableTranscoding
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.codec
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.resizeFormat
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.aspectRatio
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.customWidth
+    value: 368
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.customHeight
+    value: 360
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.bitrateMode
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TargetSettings.Array.data[1].second.spatialQuality
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
