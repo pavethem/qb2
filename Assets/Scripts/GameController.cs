@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
-    private const int LEVELCOUNT = 24;
+    private const int LEVELCOUNT = 25;
 
 
     //wait a while before rotating with keys again

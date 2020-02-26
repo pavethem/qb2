@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 0.108
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1760319550}
-  m_IndirectSpecularColor: {r: 0.20058954, g: 0.19548708, b: 0.19349256, a: 0.108}
+  m_IndirectSpecularColor: {r: 0.20051849, g: 0.19538546, b: 0.19342622, a: 0.108}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -97,7 +97,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 112000004, guid: a111663e4f2a4114998ec5af9e507134,
+  m_LightingDataAsset: {fileID: 112000004, guid: b3b850344d2e35c4e824412f399bb2e3,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -243,7 +243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 70, z: -2}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.0449219, y: 3.8183594}
+  m_AnchoredPosition: {x: -3.045044, y: 3.8183594}
   m_SizeDelta: {x: -3.4999897, y: -9.789995}
   m_Pivot: {x: 0.87, y: 0.61}
 --- !u!114 &24819279
@@ -1264,7 +1264,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -512.9625, y: -470}
-  m_SizeDelta: {x: -728.92505, y: -458.41003}
+  m_SizeDelta: {x: 299.83557, y: -323.45142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1291960770
 MonoBehaviour:
@@ -1316,8 +1316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AspectMode: 0
-  m_AspectRatio: 3.2846603
+  m_AspectMode: 2
+  m_AspectRatio: 1.82
 --- !u!1 &1328597512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0

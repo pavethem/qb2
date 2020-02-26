@@ -11,6 +11,9 @@ public class TutorialScreen : MonoBehaviour {
     public GameObject video;
     private bool destroy;
 
+    //replace webgl video, then wait 1 frame (only for level 1 tutorial)
+    private bool replaceWebgl1;
+
     private int currentDescriptionNumber = 0;
     private string[] currentDescription;
 
@@ -71,13 +74,15 @@ public class TutorialScreen : MonoBehaviour {
                 if (!Application.isMobilePlatform) {
                     description.GetComponent<TextMeshProUGUI>().text = level1_pc[0];
                     currentDescription = level1_pc;
-                    video.GetComponent<VideoPlayer>().Pause();
+                    if (Application.platform != RuntimePlatform.WebGLPlayer) 
+                        video.GetComponent<VideoPlayer>().Pause();
                 }
                 else {
                     description.GetComponent<TextMeshProUGUI>().text = level1_mobile[0];
                     currentDescription = level1_mobile;
                     video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotation_mobile");
-                    video.GetComponent<VideoPlayer>().Pause();
+                    if (Application.platform != RuntimePlatform.WebGLPlayer) 
+                        video.GetComponent<VideoPlayer>().Pause();
                 }
 
                 break;
@@ -164,6 +169,8 @@ public class TutorialScreen : MonoBehaviour {
     private void ReplaceForWebGL() {
         video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
               video.GetComponent<VideoPlayer>().clip.name + ".ogv");
+        if (GameController.currentScene == 1)
+            replaceWebgl1 = true;
     }
 
     private void NextText() {
@@ -231,6 +238,10 @@ public class TutorialScreen : MonoBehaviour {
     }
 
     private void LateUpdate() {
+        if (replaceWebgl1) {
+            video.GetComponent<VideoPlayer>().Pause();
+            replaceWebgl1 = false;
+        }
         //wait until menu is moved out and unload scene
         if (destroy && !transform.GetChild(0).GetComponent<Animation>().isPlaying) {
             SceneManager.UnloadSceneAsync("tutorialScreen");

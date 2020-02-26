@@ -97,7 +97,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 112000002, guid: a111663e4f2a4114998ec5af9e507134,
+  m_LightingDataAsset: {fileID: 112000002, guid: b3b850344d2e35c4e824412f399bb2e3,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -746,7 +746,7 @@ PrefabInstance:
     - target: {fileID: 1713942417245411102, guid: f0378f46700a185b3810daf4623ee74a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1713942417245411102, guid: f0378f46700a185b3810daf4623ee74a,
         type: 3}
@@ -4673,7 +4673,7 @@ PrefabInstance:
     - target: {fileID: 805673532858366866, guid: 6009646787b9782b2bace22e11885cae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 805673532858366866, guid: 6009646787b9782b2bace22e11885cae,
         type: 3}
@@ -6663,7 +6663,7 @@ PrefabInstance:
     - target: {fileID: 6544663598164543436, guid: d2958c2d62439bc4899729e181d7647c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6544663598164543436, guid: d2958c2d62439bc4899729e181d7647c,
         type: 3}
@@ -7728,7 +7728,7 @@ PrefabInstance:
     - target: {fileID: 1713942417245411102, guid: f0378f46700a185b3810daf4623ee74a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1713942417245411102, guid: f0378f46700a185b3810daf4623ee74a,
         type: 3}
@@ -7797,7 +7797,7 @@ PrefabInstance:
     - target: {fileID: 6544663598164543436, guid: b0c5b90e4df79e7809d1dbb593e02493,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6544663598164543436, guid: b0c5b90e4df79e7809d1dbb593e02493,
         type: 3}
@@ -9535,6 +9535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1.4
+  rotationObject: {fileID: 0}
+  skipJoint: 0
   rotationSounds:
   - {fileID: 8300000, guid: e13d35d2c9d01fe9b89eb092be612bed, type: 3}
   - {fileID: 8300000, guid: 319b5ffaa308e7ed0ae974cfbef3dcd7, type: 3}
