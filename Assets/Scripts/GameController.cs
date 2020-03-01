@@ -35,6 +35,11 @@ public class GameController : MonoBehaviour {
     private const float SCALEAMOUNT = 3;
     private const int LEVELCOUNT = 25;
 
+    //ambient colors for the alternate background
+    private static Color newSkyColor = new Color(0.05046278f,0.06603771f,0.05046278f);
+    private static Color newGroundColor = new Color(0.1356875f,0.3918137f,0.1499713f);
+    private static Color oldSkyColor;
+    private static Color oldGroundColor;
 
     //wait a while before rotating with keys again
     public static float MINKEYDOWNTIME = 0.9f;
@@ -46,6 +51,7 @@ public class GameController : MonoBehaviour {
     private string[] tutorialLevels = {"level1", "level2", "level4", "level6", "level8", "level12", "level19"};
     public static bool tutorialLock;
     private bool shownTutorial;
+    public static bool gameCompleted = false;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -55,6 +61,8 @@ public class GameController : MonoBehaviour {
     public static GameObject[] arrows;
     public static GameObject[] rotators;
     public static GameObject[] teleporters;
+
+    public GameObject skyboxCamera;
 
     //for hard mode
     public static int numberRotations;
@@ -106,6 +114,9 @@ public class GameController : MonoBehaviour {
 
     public AudioMixer mixer;
     public AudioClip transition;
+    private bool doneFadingIn;
+    private static bool changeBackgroundMusic;
+    private static bool changedBackground;
 
     //DEBUG STUFF REMOVE
     //use Z to go to last rotation
@@ -137,6 +148,9 @@ public class GameController : MonoBehaviour {
             reflectionCameraPosition = GameObject.Find("ReflectionCamera").transform.position;
             reflectionCameraRotation = GameObject.Find("ReflectionCamera").transform.rotation;
             gravity = Physics.gravity;
+
+            oldSkyColor = RenderSettings.ambientSkyColor;
+            oldGroundColor = RenderSettings.ambientGroundColor;
 
             mobileImage.GetComponent<RectTransform>().sizeDelta = new Vector2(mobileImage.GetComponent<RectTransform>().sizeDelta.x,
                 Mathf.Clamp(Screen.height / 15f, 40f, 45f));
@@ -188,7 +202,7 @@ public class GameController : MonoBehaviour {
     public static void SplashScreenDone() {
         SceneManager.LoadScene("mainmenu");
         instance.reflectionImage.SetActive(true);
-        instance.gameObject.GetComponent<AudioSource>().Play();
+        instance.gameObject.GetComponents<AudioSource>()[0].Play();
         splashScreenDone = true;
     }
 
@@ -237,6 +251,11 @@ public class GameController : MonoBehaviour {
             if (hardmode == 1)
                 GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(true);
             InitGame();
+        }
+
+        if (changedBackground) {
+            RenderSettings.ambientSkyColor = newSkyColor;
+            RenderSettings.ambientGroundColor = newGroundColor;
         }
     }
 
@@ -399,8 +418,15 @@ public class GameController : MonoBehaviour {
         }
 
         //fade in background audio
-        if (gameObject.GetComponent<AudioSource>().volume < 0.5f && splashScreenDone) {
-            gameObject.GetComponent<AudioSource>().volume += Time.deltaTime / 10;
+        if (gameObject.GetComponents<AudioSource>()[0].volume < 0.5f && splashScreenDone && !doneFadingIn) {
+            gameObject.GetComponents<AudioSource>()[0].volume += Time.deltaTime / 10;
+        }
+        else if(gameObject.GetComponents<AudioSource>()[0].volume >= 0.5f)
+            doneFadingIn = true;
+
+        //crossfade background audio
+        if (changeBackgroundMusic) {
+            StartCoroutine(nameof(ChangeBackgroundMusic));
         }
 
         //reset scene
@@ -411,6 +437,10 @@ public class GameController : MonoBehaviour {
         //DELETE THIS EVENTUALLY
         if (Input.GetKeyUp(KeyCode.L)) {
             GameOver();
+        }
+        if (Input.GetKeyUp(KeyCode.P)) {
+            StartCoroutine(ScreenShake());
+            gameObject.GetComponents<AudioSource>()[2].Play();
         }
 
         if (Input.GetKeyUp(KeyCode.K)) {
@@ -682,6 +712,101 @@ public class GameController : MonoBehaviour {
         screenWipe.GetComponent<Image>().fillAmount = 0;
         directionalLight.GetComponent<Light>().shadowStrength = 1;
         wiping = false;
+    }
+
+    //used for final level background transition
+    public IEnumerator ScreenShake() {
+        float timeCount = 0;
+        Quaternion originalRotation = skyboxCamera.transform.rotation;
+        while (timeCount < 2f) {
+            Vector3 random = Random.insideUnitSphere;
+            skyboxCamera.transform.Rotate(random,0.2f);
+            timeCount += Time.deltaTime;
+            yield return null;
+            skyboxCamera.transform.Rotate(-random,0.2f);
+        }
+
+        skyboxCamera.transform.rotation = originalRotation;
+        StartCoroutine(ChangeBackground());
+    }
+    
+    //used for final level background transition after screenshake
+    public IEnumerator ChangeBackground() {
+        reflectionImage.SetActive(false);
+        
+        float timeCount = 0;
+        Quaternion tempFrom = skyboxCamera.transform.rotation;
+        Quaternion tempTo = Quaternion.AngleAxis(90f, skyboxCamera.transform.right) * tempFrom;
+
+        Color skyColor = RenderSettings.ambientSkyColor;
+        Color groundColor = RenderSettings.ambientGroundColor;
+
+        bool changedMusic = false;
+
+        while (skyboxCamera.transform.rotation != tempTo) {
+            skyboxCamera.transform.rotation = Quaternion.Slerp(tempFrom, tempTo, timeCount);
+            RenderSettings.ambientSkyColor = Color.Lerp(skyColor, newSkyColor, timeCount);
+            RenderSettings.ambientGroundColor = Color.Lerp(groundColor, newGroundColor, timeCount);
+            if (timeCount > 0.5f && !changedMusic) {
+                StartCoroutine(ChangeBackgroundMusic());
+                changedMusic = true;
+            }
+            timeCount += Time.deltaTime/2;
+            yield return null;
+        }
+
+        changedBackground = true;
+    }
+
+    public static void ChangeBackgroundOption() {
+        if (!changedBackground) {
+            RenderSettings.ambientSkyColor = newSkyColor;
+            RenderSettings.ambientGroundColor = newGroundColor;
+            instance.skyboxCamera.transform.Rotate(90f,0,0);
+        }
+        else {
+            RenderSettings.ambientSkyColor = oldSkyColor;
+            RenderSettings.ambientGroundColor = oldGroundColor;
+            instance.skyboxCamera.transform.Rotate(-90f,0,0);
+        }
+        instance.StopCoroutine(nameof(ChangeBackgroundMusic));
+        instance.StartCoroutine(nameof(ChangeBackgroundMusic),changedBackground);
+        changedBackground = !changedBackground;
+    }
+
+    public IEnumerator ChangeBackgroundMusic(bool reverse = false) {
+        doneFadingIn = true;
+        changeBackgroundMusic = false;
+        bool changing = true;
+        while (changing) {
+            if (!reverse) {
+                if(!gameObject.GetComponents<AudioSource>()[1].isPlaying)
+                    gameObject.GetComponents<AudioSource>()[1].Play();
+                if (gameObject.GetComponents<AudioSource>()[0].volume >= 0)
+                    gameObject.GetComponents<AudioSource>()[0].volume -= Time.deltaTime / 5;
+                if (gameObject.GetComponents<AudioSource>()[1].volume < 0.5f)
+                    gameObject.GetComponents<AudioSource>()[1].volume += Time.deltaTime / 5;
+                if (gameObject.GetComponents<AudioSource>()[0].volume <= 0 && gameObject.GetComponents<AudioSource>()[1].volume >= 0.5f) {
+                    changeBackgroundMusic = false;
+                    changing = false;
+                    gameObject.GetComponents<AudioSource>()[0].Stop();
+                }
+            }
+            else {
+                if(!gameObject.GetComponents<AudioSource>()[0].isPlaying)
+                    gameObject.GetComponents<AudioSource>()[0].Play();
+                if (gameObject.GetComponents<AudioSource>()[1].volume >= 0)
+                    gameObject.GetComponents<AudioSource>()[1].volume -= Time.deltaTime / 5;
+                if (gameObject.GetComponents<AudioSource>()[0].volume < 0.5f)
+                    gameObject.GetComponents<AudioSource>()[0].volume += Time.deltaTime / 5;
+                if (gameObject.GetComponents<AudioSource>()[1].volume <= 0 && gameObject.GetComponents<AudioSource>()[0].volume >= 0.5f) {
+                    changeBackgroundMusic = false;
+                    changing = false;
+                    gameObject.GetComponents<AudioSource>()[1].Stop();
+                }
+            }
+            yield return null;
+        }
     }
 
     public static bool Compare(Vector3 lhs, Vector3 rhs) {

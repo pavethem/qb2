@@ -26,10 +26,15 @@ public class OptionsScreen : MonoBehaviour
         
         backgroundVolumeSlider.value = PlayerPrefs.GetFloat("BackgroundVolumeSlider", 1f);
         effectsVolumeSlider.value = PlayerPrefs.GetFloat("EffectsVolumeSlider", 1f);
+        backgroundVolumeSlider.GetComponent<Slider>().enabled = true;
+        effectsVolumeSlider.GetComponent<Slider>().enabled = true;
         hard = GameController.hardmode;
         freerotation = GameController.freeRotation;
-        SetHardModeText();
-        SetFreeRotationText();
+        GameObject.Find("HardModeButton").transform.Find("Panel").gameObject.SetActive(hard == 1);
+        GameObject.Find("RotationButton").transform.Find("Panel").gameObject.SetActive(freerotation == 1);
+        GameObject.Find("BackgroundButton").GetComponent<Button>().interactable = GameController.gameCompleted;
+        // SetHardModeText();
+        // SetFreeRotationText();
 //        StartCoroutine(MoveIn());
         buttonsTransform.GetComponent<Animation>().Play();
     }
@@ -46,7 +51,8 @@ public class OptionsScreen : MonoBehaviour
         GameController.hardmode = hard;
         PlayerPrefs.SetInt("HardMode",hard);
         PlayerPrefs.Save();
-        SetHardModeText();
+        GameObject.Find("HardModeButton").transform.Find("Panel").gameObject.SetActive(hard == 1);
+        // SetHardModeText();
     }
     
     public void FreeRotationButton() {
@@ -55,7 +61,15 @@ public class OptionsScreen : MonoBehaviour
         GameController.freeRotation = freerotation;
         PlayerPrefs.SetInt("FreeRotation",freerotation);
         PlayerPrefs.Save();
-        SetFreeRotationText();
+        GameObject.Find("RotationButton").transform.Find("Panel").gameObject.SetActive(freerotation == 1);
+        // SetFreeRotationText();
+    }
+
+    public void BackgroundButton() {
+        if(buttonsTransform.GetComponent<Animation>().isPlaying) return;
+        if (GameController.gameCompleted) {
+            GameController.ChangeBackgroundOption();
+        }
     }
     
     private void SetFreeRotationText() {
@@ -101,7 +115,7 @@ public class OptionsScreen : MonoBehaviour
     }
     
     public void SetEffectsVolume(float sliderValue) {
-        if(!GetComponent<AudioSource>().isPlaying)
+        if(!GetComponent<AudioSource>().isPlaying && effectsVolumeSlider.GetComponent<Slider>().enabled) 
             GetComponent<AudioSource>().Play();
         
         float volume = Mathf.Log10(sliderValue) * 20;
