@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour {
     private string[] tutorialLevels = {"level1", "level2", "level4", "level6", "level8", "level12", "level19"};
     public static bool tutorialLock;
     private bool shownTutorial;
-    public static bool gameCompleted = false;
+    public static bool gameCompleted = true;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -760,11 +760,13 @@ public class GameController : MonoBehaviour {
 
     public static void ChangeBackgroundOption() {
         if (!changedBackground) {
+            instance.reflectionImage.SetActive(false);
             RenderSettings.ambientSkyColor = newSkyColor;
             RenderSettings.ambientGroundColor = newGroundColor;
             instance.skyboxCamera.transform.Rotate(90f,0,0);
         }
         else {
+            instance.reflectionImage.SetActive(true);
             RenderSettings.ambientSkyColor = oldSkyColor;
             RenderSettings.ambientGroundColor = oldGroundColor;
             instance.skyboxCamera.transform.Rotate(-90f,0,0);
