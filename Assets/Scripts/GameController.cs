@@ -604,6 +604,7 @@ public class GameController : MonoBehaviour {
                 StartCoroutine(nameof(LoadYourAsyncScene), scene);
             } else {
                 isLoadingNextLevel = false;
+                gameCompleted = true;
                 PlayerPrefs.SetInt("gameCompleted",1);
                 PlayerPrefs.SetInt("changedBackground",1);
                 PlayerPrefs.Save();
