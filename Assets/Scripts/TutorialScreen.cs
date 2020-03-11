@@ -64,6 +64,8 @@ public class TutorialScreen : MonoBehaviour {
         "Different angles of entry will yield different results."
     };
 
+    private string[] lastlevel = {"Thank you for playing!\nBe sure to give Hard Mode a try!"};
+
     void Start() {
         
         //sometimes videos need to be adjusted slightly
@@ -147,8 +149,10 @@ public class TutorialScreen : MonoBehaviour {
                 break;
             }
             default: {
-                description.GetComponent<TextMeshProUGUI>().text = "Please align the red <color=red>Nodes</color> with the black Cubes.";
-                currentDescription = null;
+                description.GetComponent<TextMeshProUGUI>().text = lastlevel[0];
+                currentDescription = lastlevel;
+                transform.GetChild(0).Find("SkipButton").gameObject.SetActive(false);
+                video.GetComponent<RawImage>().texture = Resources.Load<Texture>("icon");
                 break;
             }
         }
@@ -207,13 +211,20 @@ public class TutorialScreen : MonoBehaviour {
         if (currentDescription != null) {
             //if last description is reached, destroy
             if (description.GetComponent<TextMeshProUGUI>().text == currentDescription[currentDescription.Length - 1]) {
-                PlayerPrefs.SetInt("seenTutorial" + GameController.currentScene, 1);
-                transform.GetChild(0).GetComponent<Animation>().Play("MainMenuOut");
-                GameController.tutorialLock = false;
-                GameController.instance.StartCoroutine("MoveInButtons");
-                if (Application.isMobilePlatform && GameController.freeRotation == 1)
-                    GameController.instance.StartCoroutine("MoveInFromTheRight");
-                destroy = true;
+                if (currentDescription != lastlevel) {
+                    PlayerPrefs.SetInt("seenTutorial" + GameController.currentScene, 1);
+                    transform.GetChild(0).GetComponent<Animation>().Play("MainMenuOut");
+                    GameController.tutorialLock = false;
+                    GameController.instance.StartCoroutine("MoveInButtons");
+                    if (Application.isMobilePlatform && GameController.freeRotation == 1)
+                        GameController.instance.StartCoroutine("MoveInFromTheRight");
+                    destroy = true;
+                }
+                else {
+                    transform.GetChild(0).GetComponent<Animation>().Play("MainMenuOut");
+                    GameController.instance.StartCoroutine(nameof(GameController.LoadMainMenu));
+                    destroy = true;
+                }
                 //if second to last description is reached, display Finish button    
             }
             else if (description.GetComponent<TextMeshProUGUI>().text == currentDescription[currentDescription.Length - 2]) {
@@ -239,6 +250,7 @@ public class TutorialScreen : MonoBehaviour {
 
     private void LateUpdate() {
         if (replaceWebgl1) {
+            video.GetComponent<VideoPlayer>().Prepare();
             video.GetComponent<VideoPlayer>().Pause();
             replaceWebgl1 = false;
         }

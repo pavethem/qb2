@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
-    private const int LEVELCOUNT = 25;
+    private const int LEVELCOUNT = 26;
 
     //ambient colors for the alternate background
     private static Color newSkyColor = new Color(0.05046278f,0.06603771f,0.05046278f);
@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour {
     private string[] tutorialLevels = {"level1", "level2", "level4", "level6", "level8", "level12", "level19"};
     public static bool tutorialLock;
     private bool shownTutorial;
-    public static bool gameCompleted = true;
+    public static bool gameCompleted;
 
     //all cubes in scene
     public static GameObject[] cubes;
@@ -191,9 +191,17 @@ public class GameController : MonoBehaviour {
         hardmode = PlayerPrefs.GetInt("HardMode", -1);
         freeRotation = PlayerPrefs.GetInt("FreeRotation", -1);
         maxScene = PlayerPrefs.GetInt("maxScene", 1);
+        changedBackground = PlayerPrefs.GetInt("changedBackground",-1) == 1;
+        gameCompleted = PlayerPrefs.GetInt("gameCompleted", -1) == 1;
+        skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
 
-        //UNCOMMENT THIS EVENTUALLY
-        // skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
+        if (changedBackground) {
+            instance.reflectionImage.SetActive(false);
+            GameObject.Find("ReflectionCamera").GetComponent<Camera>().enabled = false;
+            RenderSettings.ambientSkyColor = newSkyColor;
+            RenderSettings.ambientGroundColor = newGroundColor;
+            instance.skyboxCamera.transform.Rotate(90f,0,0);
+        }
 
         if (Application.isMobilePlatform)
             ReplaceMeshes(titleLevel);
@@ -201,7 +209,10 @@ public class GameController : MonoBehaviour {
 
     public static void SplashScreenDone() {
         SceneManager.LoadScene("mainmenu");
-        instance.reflectionImage.SetActive(true);
+        if (!changedBackground)
+            instance.reflectionImage.SetActive(true);
+        else
+            GameObject.Find("ReflectionCamera").GetComponent<Camera>().enabled = false;
         instance.gameObject.GetComponents<AudioSource>()[0].Play();
         splashScreenDone = true;
     }
@@ -587,8 +598,20 @@ public class GameController : MonoBehaviour {
                 .GetComponent<LineRenderer>().positionCount = 0;
             GameObject.FindWithTag("rotatorStrips").transform.Find("rotatorStripZ").transform.GetChild(0).gameObject
                 .GetComponent<LineRenderer>().positionCount = 0;
-            StartCoroutine(nameof(ScreenWipeIn), false);
-            StartCoroutine(nameof(LoadYourAsyncScene), scene);
+
+            if (currentScene <= LEVELCOUNT) {
+                StartCoroutine(nameof(ScreenWipeIn), false);
+                StartCoroutine(nameof(LoadYourAsyncScene), scene);
+            } else {
+                isLoadingNextLevel = false;
+                PlayerPrefs.SetInt("gameCompleted",1);
+                PlayerPrefs.SetInt("changedBackground",1);
+                PlayerPrefs.Save();
+                StartCoroutine(MoveOutButtons());
+                StartCoroutine(ScreenShake());
+                gameObject.GetComponents<AudioSource>()[2].Play();
+                tutorialLock = true;
+            }
         }
     }
 
@@ -733,6 +756,7 @@ public class GameController : MonoBehaviour {
     //used for final level background transition after screenshake
     public IEnumerator ChangeBackground() {
         reflectionImage.SetActive(false);
+        GameObject.Find("ReflectionCamera").GetComponent<Camera>().enabled = false;
         
         float timeCount = 0;
         Quaternion tempFrom = skyboxCamera.transform.rotation;
@@ -756,16 +780,23 @@ public class GameController : MonoBehaviour {
         }
 
         changedBackground = true;
+        SceneManager.LoadSceneAsync("tutorialScreen", LoadSceneMode.Additive);
     }
 
     public static void ChangeBackgroundOption() {
         if (!changedBackground) {
+            PlayerPrefs.SetInt("changedBackground",1);
+            PlayerPrefs.Save();
             instance.reflectionImage.SetActive(false);
+            GameObject.Find("ReflectionCamera").GetComponent<Camera>().enabled = false;
             RenderSettings.ambientSkyColor = newSkyColor;
             RenderSettings.ambientGroundColor = newGroundColor;
             instance.skyboxCamera.transform.Rotate(90f,0,0);
         }
         else {
+            PlayerPrefs.SetInt("changedBackground",-1);
+            PlayerPrefs.Save();
+            GameObject.Find("ReflectionCamera").GetComponent<Camera>().enabled = true;
             instance.reflectionImage.SetActive(true);
             RenderSettings.ambientSkyColor = oldSkyColor;
             RenderSettings.ambientGroundColor = oldGroundColor;

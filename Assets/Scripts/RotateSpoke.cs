@@ -28,17 +28,19 @@ public class RotateSpoke : MonoBehaviour
             Vector3 axis = spoke.transform.up;
             Transform trans = rotationObject == null ? transform : rotationObject.transform;
             
+            
             //remove parent while rotating, else it starts to skew
             lastParent = trans.parent;
             lastRotation = trans.rotation;
             lastSpoke = spoke;
             lastAxis = axis;
             trans.parent = null;
+            Vector3 forward = trans.forward;
 
 
             Quaternion tempFrom = trans.rotation;
             Quaternion tempTo = Quaternion.AngleAxis(-90f, axis) * tempFrom;
-
+            
             //rotation sound is equal to that of the rotator strips
             if (axis == GameObject.FindGameObjectWithTag("rotatorStripX").transform.up) {
                 gameObject.GetComponent<AudioSource>().PlayOneShot(rotationSounds[0]);
@@ -60,6 +62,7 @@ public class RotateSpoke : MonoBehaviour
                 timeCount += Time.fixedDeltaTime * rotationSpeed;
                 yield return new WaitForFixedUpdate();
             }
+            
 
             trans.rotation = tempTo;
             trans.parent = lastParent;
@@ -67,7 +70,9 @@ public class RotateSpoke : MonoBehaviour
             GameController.rotatingColliders.Remove(spoke);
             if(GameController.rotatingColliders.Count == 0)
                 GameController.lastRotateSpoke = null;
-            rotated++;
+            //only count rotation if it was different from before
+            if(!GameController.Compare(forward, trans.forward))
+                rotated++;
             GameController.rotatingSpoke = false;
         }
     }
