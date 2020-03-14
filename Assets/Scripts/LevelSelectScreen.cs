@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class LevelSelectScreen : MonoBehaviour
     private RectTransform buttonsTransform;
     private RectTransform contentTransform;
     private bool isMoving;
+    private bool hardModeComplete;
 
     public Texture replacementTexture;
     
@@ -34,11 +36,27 @@ public class LevelSelectScreen : MonoBehaviour
             if(PlayerPrefs.GetInt("level"+i,-1) == 1)
                 GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).GetChild(i).Find("Panel").gameObject.SetActive(true);
         }
+        if(PlayerPrefs.GetInt("level99",-1) == 1)
+            GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).Find("Bonus").Find("Panel").gameObject.SetActive(true);
 
         //replace textures with locks, when levels are not yet unlocked
         for (int i = GameController.maxScene + 1; i <= levelCount; i++) {
             GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).GetChild(i).Find("LevelImage").GetComponent<RawImage>().texture =
                 replacementTexture;
+        }
+
+        //unlock bonus level if all other levels are completed in hard mode
+        if (GameController.gameCompleted) {
+            hardModeComplete = true;
+            for (int i = 1; i <= GameController.LEVELCOUNT; i++) {
+                hardModeComplete &= PlayerPrefs.GetInt("level" + i, -1) == 1;
+            }
+
+            if (hardModeComplete) {
+                GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).Find("Bonus").Find("LevelImage").gameObject.SetActive(false);
+                GameObject.Find("Scroll View").transform.Find("Viewport").GetChild(0).Find("Bonus").Find("QuestionMark").gameObject.
+                    GetComponent<TextMeshProUGUI>().enabled = true;
+            }
         }
 
     }
@@ -62,6 +80,7 @@ public class LevelSelectScreen : MonoBehaviour
 
     public void LevelSelectButton(string buttonName) {
         if(isMoving || int.Parse(buttonName) > GameController.maxScene || buttonsTransform.GetComponent<Animation>().isPlaying) return;
+        if (buttonName == "-99" && !hardModeComplete) return;
         StartCoroutine(ResetContent());
         isLoading = true;
         levelName = buttonName;
@@ -81,7 +100,10 @@ public class LevelSelectScreen : MonoBehaviour
                 if(levelName == "back")
                     SceneManager.LoadSceneAsync("mainmenu");
                 else {
-                    GameController.currentScene = int.Parse(levelName);
+                    if (levelName == "-99")
+                        GameController.currentScene = 99;
+                    else
+                        GameController.currentScene = int.Parse(levelName);
                     PlayerPrefs.SetInt("currentScene", GameController.currentScene);
                     PlayerPrefs.Save();
                     GameController.instance.LoadCurrentScene();

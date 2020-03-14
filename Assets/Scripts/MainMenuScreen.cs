@@ -62,7 +62,7 @@ public class MainMenuScreen : MonoBehaviour {
         if (isLoading) {
             if (!buttonsTransform.GetComponent<Animation>().isPlaying) {
                 if (buttonName == "start")
-                    GameController.instance.LoadMaxScene();
+                    GameController.instance.LoadLastScene();
                 else if (buttonName == "options")
                     SceneManager.LoadScene("optionsmenu");
                 else if (buttonName == "select")

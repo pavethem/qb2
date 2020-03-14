@@ -18,6 +18,7 @@ public class TutorialScreen : MonoBehaviour {
     private string[] currentDescription;
 
     private string[] level1_pc = {
+        "Welcome to Qb²!",
         "Please align the red <smallcaps><color=red>Nodes</color></smallcaps> with the black <smallcaps>Cubes</smallcaps>.",
         "To do so, you can rotate the <b>Object</b> by dragging the mouse along any of the colored Strips surrounding the <b>Object</b>.",
         "You can also use the Q,W,E,A,S or D keys to rotate the <b>Object</b>."
@@ -63,8 +64,10 @@ public class TutorialScreen : MonoBehaviour {
         "When a <smallcaps><color=red>Node</color></smallcaps> enters a <smallcaps>Rotator</smallcaps>, one <smallcaps><alpha=#99>Spoke</color></smallcaps> will rotate around another in the direction the <smallcaps>Rotator</smallcaps> is pointing.",
         "Different angles of entry will yield different results."
     };
+    
+    private string[] bonus = {"Pretty Much Everything:\nTino Helmig\nVery Special Thanks:\nStefan Wagner\n\nThank you for playing Hard Mode as well!\nThere is nothing left to do here.\nNow, why don't you trake a stroll outside?"};
 
-    private string[] lastlevel = {"Thank you for playing!\nBe sure to give Hard Mode a try!"};
+    private string[] lastlevel = {"Thank you for playing!\nYou can now select the background in the Options.\nBe sure to give Hard Mode a try!"};
 
     void Start() {
         
@@ -148,6 +151,14 @@ public class TutorialScreen : MonoBehaviour {
                 video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
             }
+            case 99: {
+                description.GetComponent<TextMeshProUGUI>().text = bonus[0];
+                currentDescription = bonus;
+                transform.GetChild(0).Find("SkipButton").gameObject.SetActive(false);
+                video.GetComponent<RawImage>().texture = Resources.Load<Texture>("icon");
+                description.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Credits:";
+                break;
+            }
             default: {
                 description.GetComponent<TextMeshProUGUI>().text = lastlevel[0];
                 currentDescription = lastlevel;
@@ -211,7 +222,7 @@ public class TutorialScreen : MonoBehaviour {
         if (currentDescription != null) {
             //if last description is reached, destroy
             if (description.GetComponent<TextMeshProUGUI>().text == currentDescription[currentDescription.Length - 1]) {
-                if (currentDescription != lastlevel) {
+                if (currentDescription != lastlevel && currentDescription != bonus) {
                     PlayerPrefs.SetInt("seenTutorial" + GameController.currentScene, 1);
                     transform.GetChild(0).GetComponent<Animation>().Play("MainMenuOut");
                     GameController.tutorialLock = false;
@@ -249,8 +260,7 @@ public class TutorialScreen : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        if (replaceWebgl1) {
-            video.GetComponent<VideoPlayer>().Prepare();
+        if (replaceWebgl1 && transform.GetChild(0).GetComponent<RectTransform>().pivot.y >= -1) {
             video.GetComponent<VideoPlayer>().Pause();
             replaceWebgl1 = false;
         }

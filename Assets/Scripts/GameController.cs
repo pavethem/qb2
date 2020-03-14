@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 
     //amount by which to scale rotator strip colliders on mobile
     private const float SCALEAMOUNT = 3;
-    private const int LEVELCOUNT = 26;
+    public const int LEVELCOUNT = 26;
 
     //ambient colors for the alternate background
     private static Color newSkyColor = new Color(0.05046278f,0.06603771f,0.05046278f);
@@ -117,9 +117,7 @@ public class GameController : MonoBehaviour {
     private bool doneFadingIn;
     private static bool changeBackgroundMusic;
     private static bool changedBackground;
-
-    //DEBUG STUFF REMOVE
-    //use Z to go to last rotation
+    
     public static Stack<Quaternion> lastrotations;
     private float solveTimeout = 0;
     public static bool hitLock;
@@ -137,8 +135,6 @@ public class GameController : MonoBehaviour {
         if (currentScene == 0) {
             pedestalPosition = GameObject.Find("Pedestal").transform.position;
             pedestalRotation = GameObject.Find("Pedestal").transform.rotation;
-//            backgroundPosition = GameObject.Find("Background").transform.position;
-//            backgroundRotation = GameObject.Find("Background").transform.rotation;
             spotlightPosition = GameObject.Find("Spot Light").transform.position;
             spotlightRotation = GameObject.Find("Spot Light").transform.rotation;
             directionalLightPosition = GameObject.Find("Directional Light").transform.position;
@@ -164,9 +160,6 @@ public class GameController : MonoBehaviour {
             DEBUG = debugScriptableObject.DEBUG;
             SKIPSPLASHSCREEN = skipSplashScreenObject.SKIPSPLASHSCREEN;
 
-//            screenWipe.GetComponent<Image>().fillAmount = 1;
-//            directionalLight.GetComponent<Light>().shadowStrength = 0;
-
             if (DEBUG) {
                 SceneManager.LoadScene("test");
                 lastrotations = new Stack<Quaternion>();
@@ -179,7 +172,7 @@ public class GameController : MonoBehaviour {
                 SplashScreenDone();
             }
         }
-
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
     }
@@ -194,6 +187,9 @@ public class GameController : MonoBehaviour {
         changedBackground = PlayerPrefs.GetInt("changedBackground",-1) == 1;
         gameCompleted = PlayerPrefs.GetInt("gameCompleted", -1) == 1;
         skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
+
+        if (maxScene > LEVELCOUNT)
+            maxScene = LEVELCOUNT;
 
         if (changedBackground) {
             instance.reflectionImage.SetActive(false);
@@ -221,14 +217,12 @@ public class GameController : MonoBehaviour {
         Load();
         StartCoroutine(nameof(ScreenWipeIn), true);
     }
-
-    public void LoadMaxScene() {
+    
+    public void LoadLastScene() {
         Load();
-        if (maxScene <= LEVELCOUNT)
-            currentScene = maxScene;
-        else
-            currentScene = LEVELCOUNT;
-        StartCoroutine(nameof(ScreenWipeIn), true);
+        //99 means bonus level
+        if(currentScene <= LEVELCOUNT || currentScene == 99)
+            StartCoroutine(nameof(ScreenWipeIn), true);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -250,13 +244,13 @@ public class GameController : MonoBehaviour {
             Physics.gravity = gravity;
         }
 
-        if (Application.isMobilePlatform && !scene.name.StartsWith("level")) {
+        if (Application.isMobilePlatform && !scene.name.StartsWith("level") && scene.name != "bonus") {
             //change to MobileButtons for main menu
             GameObject.Find("MainCanvas").transform.Find("DesktopButtons").gameObject.SetActive(false);
             GameObject.Find("MainCanvas").transform.Find("MobileButtons").gameObject.SetActive(true);
         }
 
-        if (scene.name.StartsWith("level") && scene.name != "level0" || scene.name == "test") {
+        if (scene.name.StartsWith("level") && scene.name != "level0" || scene.name == "test" || scene.name == "bonus") {
             GameObject.Find("Canvas").transform.Find("MobileImage").Find("BackButton").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("MobileImage").Find("ResetButton").gameObject.SetActive(true);
             if (hardmode == 1)
@@ -441,24 +435,25 @@ public class GameController : MonoBehaviour {
         }
 
         //reset scene
-        if (Input.GetKeyUp(KeyCode.R) && (SceneManager.GetActiveScene().name.StartsWith("level") && !tutorialLock || DEBUG)) {
+        if (Input.GetKeyUp(KeyCode.R) && ((SceneManager.GetActiveScene().name.StartsWith("level") || SceneManager.GetActiveScene().name == "bonus") 
+            && !tutorialLock || DEBUG)) {
             StartCoroutine(Reset());
         }
 
         //DELETE THIS EVENTUALLY
-        if (Input.GetKeyUp(KeyCode.L)) {
-            GameOver();
-        }
-        if (Input.GetKeyUp(KeyCode.P)) {
-            StartCoroutine(ScreenShake());
-            gameObject.GetComponents<AudioSource>()[2].Play();
-        }
-
-        if (Input.GetKeyUp(KeyCode.K)) {
-            if (currentScene > 1)
-                currentScene -= 2;
-            GameOver();
-        }
+        // if (Input.GetKeyUp(KeyCode.L)) {
+        //     GameOver();
+        // }
+        // if (Input.GetKeyUp(KeyCode.P)) {
+        //     StartCoroutine(ScreenShake());
+        //     gameObject.GetComponents<AudioSource>()[2].Play();
+        // }
+        //
+        // if (Input.GetKeyUp(KeyCode.K)) {
+        //     if (currentScene > 1)
+        //         currentScene -= 2;
+        //     GameOver();
+        // }
 
         if (DEBUG) {
             if (Input.GetKeyUp(KeyCode.Y)) {
@@ -581,10 +576,13 @@ public class GameController : MonoBehaviour {
 
         shownTutorial = false;
         isLoadingNextLevel = true;
-        currentScene++;
+        //bonus level
+        if(currentScene!=99)
+            currentScene++;
 
-        if (maxScene < currentScene)
+        if (maxScene < currentScene && currentScene < 99) {
             maxScene = currentScene;
+        }
 
         string scene = "level" + currentScene + "_final";
         if (DEBUG)
@@ -602,6 +600,16 @@ public class GameController : MonoBehaviour {
             if (currentScene <= LEVELCOUNT) {
                 StartCoroutine(nameof(ScreenWipeIn), false);
                 StartCoroutine(nameof(LoadYourAsyncScene), scene);
+            } else if (currentScene == 99) {
+                gameCompleted = true;
+                isLoadingNextLevel = false;
+                if (hardmode == 1) {
+                    StartCoroutine(MoveOutButtons());
+                    tutorialLock = true;
+                    SceneManager.LoadSceneAsync("tutorialScreen", LoadSceneMode.Additive);
+                } else {
+                    StartCoroutine(LoadMainMenu());
+                }
             } else {
                 isLoadingNextLevel = false;
                 gameCompleted = true;
@@ -718,8 +726,12 @@ public class GameController : MonoBehaviour {
         ClearPedestal();
 
         //load scene when level or start button was pressed
-        if (levelbutton)
-            SceneManager.LoadScene("level" + currentScene + "_final");
+        if (levelbutton) {
+            if(currentScene == 99)
+                SceneManager.LoadScene("bonus");
+            else
+                SceneManager.LoadScene("level" + currentScene + "_final");
+        }
     }
 
     IEnumerator ScreenWipeOut() {
@@ -911,13 +923,20 @@ public class GameController : MonoBehaviour {
 
     private static void Save() {
         PlayerPrefs.SetInt("currentScene", currentScene);
+        if (maxScene > LEVELCOUNT)
+            maxScene = LEVELCOUNT;
         PlayerPrefs.SetInt("maxScene", maxScene);
         PlayerPrefs.Save();
     }
 
     private static void Load() {
         currentScene = PlayerPrefs.GetInt("currentScene", 1);
+        //bonus level
+        if (currentScene == 100)
+            currentScene = 99;
         maxScene = PlayerPrefs.GetInt("maxScene", 1);
+        if (maxScene >= 99)
+            maxScene = LEVELCOUNT;
     }
 
     private void Solve() {
