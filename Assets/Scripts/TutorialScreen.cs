@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -179,8 +182,13 @@ public class TutorialScreen : MonoBehaviour {
         }
 
         // if (Application.platform == RuntimePlatform.WebGLPlayer) {
-            // ReplaceForWebGL();
+        // ReplaceForWebGL();
         // }
+
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            ReplaceForAndroid();
+        }
 
         //if description only has one element, display Finish button
         if (currentDescription != null && currentDescription.Length == 1) {
@@ -198,6 +206,18 @@ public class TutorialScreen : MonoBehaviour {
         }
     }
 
+    private IEnumerator ReplaceForAndroid()
+    {
+        string videoname = video.GetComponent<VideoPlayer>().url.Substring(video.GetComponent<VideoPlayer>().url.LastIndexOf("/"));
+        UnityWebRequest request = UnityWebRequest.Get("jar:file://" + Application.dataPath + "!/assets"+ videoname);
+        yield return request.SendWebRequest();
+        byte[] bytes = request.downloadHandler.data;
+        string pathToFile = Path.Combine(Application.persistentDataPath, videoname);
+        File.WriteAllBytes(pathToFile, bytes);
+        video.GetComponent<VideoPlayer>().url = pathToFile;
+        video.GetComponent<VideoPlayer>().Prepare();
+    }
+
     private void NextText() {
         currentDescriptionNumber++;
         description.GetComponent<TextMeshProUGUI>().text = currentDescription[currentDescriptionNumber];
@@ -209,21 +229,25 @@ public class TutorialScreen : MonoBehaviour {
             video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
                 "tutorial_camera_free.ogv");
             video.GetComponent<RawImage>().uvRect = new Rect(0,0,1,1);
+            ReplaceForAndroid();
         }
 
         if (currentDescription == level6) {
             video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
                 "tutorial_key_open.ogv");
+            ReplaceForAndroid();
         }
         
         if (currentDescription == level12) {
             video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
                 "tutorial_arrow2.ogv");
+            ReplaceForAndroid();
         }
         
         if (currentDescription == level19) {
             video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
                 "tutorial_rotator2.ogv");
+            ReplaceForAndroid();
         }
         video.GetComponent<VideoPlayer>().Prepare();
         

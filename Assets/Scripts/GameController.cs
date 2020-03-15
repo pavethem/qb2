@@ -551,6 +551,7 @@ public class GameController : MonoBehaviour {
                 yield return null;
             }
 
+            GameObject.FindWithTag("curved").gameObject.GetComponent<MeshRenderer>().enabled = false;
             GameObject.Find("Canvas").transform.Find("HardModePanel").gameObject.SetActive(false);
             isLoadingNextLevel = true;
             gameOver = true;
