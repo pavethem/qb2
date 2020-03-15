@@ -275,8 +275,6 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
 
-        PlayerPrefs.SetInt("seenTutorial" + currentScene, -1);
-        skipTutorials = false;
         //fade in tutorial if level should display a tutorial
         tutorialLock = false;
         if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock &&
