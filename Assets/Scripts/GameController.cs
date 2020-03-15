@@ -85,6 +85,7 @@ public class GameController : MonoBehaviour {
 
     public static bool firstTimeLoading = true;
     public static bool gameOver;
+    private bool gameOverWorking;
     public static int freeRotation = -1;
     public static int hardmode = -1;
     private bool isLoadingNextLevel;
@@ -187,7 +188,7 @@ public class GameController : MonoBehaviour {
         changedBackground = PlayerPrefs.GetInt("changedBackground",-1) == 1;
         gameCompleted = PlayerPrefs.GetInt("gameCompleted", -1) == 1;
         skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
-
+        
         if (maxScene > LEVELCOUNT)
             maxScene = LEVELCOUNT;
 
@@ -226,6 +227,10 @@ public class GameController : MonoBehaviour {
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+
+        if (scene.name != "tutorialScreen")
+            gameOverWorking = false;
+        
         if (scene.name == "mainmenu") {
             StartCoroutine(nameof(ScreenWipeOut));
             titleLevel.SetActive(true);
@@ -274,7 +279,6 @@ public class GameController : MonoBehaviour {
         tutorialLock = false;
         if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock &&
             PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1 && !shownTutorial) {
-        //) {
             SceneManager.LoadSceneAsync("tutorialScreen", LoadSceneMode.Additive);
             tutorialLock = true;
             shownTutorial = true;
@@ -461,7 +465,7 @@ public class GameController : MonoBehaviour {
             }
         }
 
-        if (gameOver && !isLoadingNextLevel) {
+        if (gameOver && !isLoadingNextLevel && !gameOverWorking) {
             GameOver();
         }
     }
@@ -536,6 +540,7 @@ public class GameController : MonoBehaviour {
     }
 
     public IEnumerator LoadMainMenu() {
+        
         if (!isLoadingNextLevel && !resetting) {
             resetting = true;
             StartCoroutine(nameof(MoveOutButtons));
@@ -569,11 +574,14 @@ public class GameController : MonoBehaviour {
     }
 
     void GameOver() {
+
+        gameOverWorking = true;
+        
         if (hardmode == 1) {
             PlayerPrefs.SetInt("level" + currentScene, 1);
             PlayerPrefs.Save();
         }
-
+        
         shownTutorial = false;
         isLoadingNextLevel = true;
         //bonus level
@@ -611,15 +619,22 @@ public class GameController : MonoBehaviour {
                     StartCoroutine(LoadMainMenu());
                 }
             } else {
-                isLoadingNextLevel = false;
-                gameCompleted = true;
-                PlayerPrefs.SetInt("gameCompleted",1);
-                PlayerPrefs.SetInt("changedBackground",1);
-                PlayerPrefs.Save();
-                StartCoroutine(MoveOutButtons());
-                StartCoroutine(ScreenShake());
-                gameObject.GetComponents<AudioSource>()[2].Play();
-                tutorialLock = true;
+                if (!gameCompleted) {
+                    currentScene--;
+                    isLoadingNextLevel = false;
+                    gameCompleted = true;
+                    PlayerPrefs.SetInt("gameCompleted", 1);
+                    PlayerPrefs.SetInt("changedBackground", 1);
+                    PlayerPrefs.Save();
+                    Save();
+                    StartCoroutine(MoveOutButtons());
+                    StartCoroutine(ScreenShake());
+                    gameObject.GetComponents<AudioSource>()[2].Play();
+                    tutorialLock = true;
+                } else {
+                    isLoadingNextLevel = false;
+                    StartCoroutine(LoadMainMenu());
+                }
             }
         }
     }
@@ -934,6 +949,8 @@ public class GameController : MonoBehaviour {
         //bonus level
         if (currentScene == 100)
             currentScene = 99;
+        if (currentScene > LEVELCOUNT && currentScene != 99)
+            currentScene = LEVELCOUNT;
         maxScene = PlayerPrefs.GetInt("maxScene", 1);
         if (maxScene >= 99)
             maxScene = LEVELCOUNT;
