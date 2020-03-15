@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.IO;
+﻿﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -82,16 +79,13 @@ public class TutorialScreen : MonoBehaviour {
                 if (!Application.isMobilePlatform) {
                     description.GetComponent<TextMeshProUGUI>().text = level1_pc[0];
                     currentDescription = level1_pc;
-                    video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                        "tutorial_rotation_pc.ogv");
                     if (Application.platform != RuntimePlatform.WebGLPlayer) 
                         video.GetComponent<VideoPlayer>().Pause();
                 }
                 else {
                     description.GetComponent<TextMeshProUGUI>().text = level1_mobile[0];
                     currentDescription = level1_mobile;
-                    video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                        "tutorial_rotation_mobile.ogv");
+                    video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotation_mobile");
                     if (Application.platform != RuntimePlatform.WebGLPlayer) 
                         video.GetComponent<VideoPlayer>().Pause();
                 }
@@ -102,14 +96,12 @@ public class TutorialScreen : MonoBehaviour {
                 if (!Application.isMobilePlatform) {
                     description.GetComponent<TextMeshProUGUI>().text = level2_pc[0];
                     currentDescription = level2_pc;
-                    video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                        "tutorial_camera_pc.ogv");
+                    video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_camera_pc");
                 }
                 else {
                     description.GetComponent<TextMeshProUGUI>().text = level2_mobile[0];
                     currentDescription = level2_mobile;
-                    video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                        "tutorial_camera_mobile.ogv");
+                    video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_camera_mobile");
                     //don't want to do the video again
                     uvRect.y = 0.03f;
                     video.GetComponent<RawImage>().uvRect = uvRect;
@@ -124,8 +116,7 @@ public class TutorialScreen : MonoBehaviour {
             case 4: {
                 description.GetComponent<TextMeshProUGUI>().text = level4[0];
                 currentDescription = level4;
-                video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                    "tutorial_lock.ogv");
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_lock");
                 uvRect.y = 0.03f;
                 video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
@@ -133,15 +124,13 @@ public class TutorialScreen : MonoBehaviour {
             case 6: {
                 description.GetComponent<TextMeshProUGUI>().text = level6[0];
                 currentDescription = level6;
-                video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                    "tutorial_key.ogv");
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_key");
                 break;
             }
             case 8: {
                 description.GetComponent<TextMeshProUGUI>().text = level8[0];
                 currentDescription = level8;
-                video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                    "tutorial_teleporter.ogv");
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_teleporter");
                 uvRect.y = 0.03f;
                 video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
@@ -149,8 +138,7 @@ public class TutorialScreen : MonoBehaviour {
             case 12: {
                 description.GetComponent<TextMeshProUGUI>().text = level12[0];
                 currentDescription = level12;
-                video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                    "tutorial_arrow1.ogv");
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_arrow1");
                 uvRect.y = 0.03f;
                 video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
@@ -158,8 +146,7 @@ public class TutorialScreen : MonoBehaviour {
             case 19: {
                 description.GetComponent<TextMeshProUGUI>().text = level19[0];
                 currentDescription = level19;
-                video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                    "tutorial_rotator1.ogv");
+                video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotator1");
                 uvRect.y = 0.03f;
                 video.GetComponent<RawImage>().uvRect = uvRect;
                 break;
@@ -181,41 +168,36 @@ public class TutorialScreen : MonoBehaviour {
             }
         }
 
-        // if (Application.platform == RuntimePlatform.WebGLPlayer) {
-        // ReplaceForWebGL();
-        // }
-
-        if(Application.platform == RuntimePlatform.Android)
-        {
-            ReplaceForAndroid();
+        if (Application.platform == RuntimePlatform.WebGLPlayer) {
+            ReplaceForWebGL();
         }
-
-        //if description only has one element, display Finish button
-        if (currentDescription != null && currentDescription.Length == 1) {
-            nextButtonText.GetComponent<TextMeshProUGUI>().text = "Finish";
-        }
-
+        
         if (currentDescription == lastlevel || currentDescription == bonus) {
             video.GetComponent<VideoPlayer>().enabled = false;
         } else {
             video.GetComponent<VideoPlayer>().Prepare();
             //don't play on awake (but show first frame)
             video.GetComponent<VideoPlayer>().Pause();
-            //just toggling loop does not work for some reason
             video.GetComponent<VideoPlayer>().loopPointReached += OnloopPointReached;
+
+        }
+
+        //if description only has one element, display Finish button
+        if (currentDescription != null && currentDescription.Length == 1) {
+            nextButtonText.GetComponent<TextMeshProUGUI>().text = "Finish";
         }
     }
+    
+    private void OnloopPointReached(VideoPlayer source) {
+        video.GetComponent<VideoPlayer>().frame = 0;
+        video.GetComponent<VideoPlayer>().Play();
+    }
 
-    private IEnumerator ReplaceForAndroid()
-    {
-        string videoname = video.GetComponent<VideoPlayer>().url.Substring(video.GetComponent<VideoPlayer>().url.LastIndexOf("/"));
-        UnityWebRequest request = UnityWebRequest.Get("jar:file://" + Application.dataPath + "!/assets"+ videoname);
-        yield return request.SendWebRequest();
-        byte[] bytes = request.downloadHandler.data;
-        string pathToFile = Path.Combine(Application.persistentDataPath, videoname);
-        File.WriteAllBytes(pathToFile, bytes);
-        video.GetComponent<VideoPlayer>().url = pathToFile;
-        video.GetComponent<VideoPlayer>().Prepare();
+    private void ReplaceForWebGL() {
+        video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
+              video.GetComponent<VideoPlayer>().clip.name + ".ogv");
+        if (GameController.currentScene == 1)
+            replaceWebgl1 = true;
     }
 
     private void NextText() {
@@ -226,36 +208,24 @@ public class TutorialScreen : MonoBehaviour {
         }
 
         if (currentDescription == level2_mobile_free) {
-            video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                "tutorial_camera_free.ogv");
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_camera_free");
             video.GetComponent<RawImage>().uvRect = new Rect(0,0,1,1);
-            ReplaceForAndroid();
         }
 
         if (currentDescription == level6) {
-            video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                "tutorial_key_open.ogv");
-            ReplaceForAndroid();
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_key_open");
         }
         
         if (currentDescription == level12) {
-            video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                "tutorial_arrow2.ogv");
-            ReplaceForAndroid();
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_arrow2");
         }
         
         if (currentDescription == level19) {
-            video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
-                "tutorial_rotator2.ogv");
-            ReplaceForAndroid();
+            video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotator2");
         }
-        video.GetComponent<VideoPlayer>().Prepare();
-        
-    }
 
-    private void OnloopPointReached(VideoPlayer source) {
-        video.GetComponent<VideoPlayer>().frame = 0;
-        video.GetComponent<VideoPlayer>().Play();
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+            ReplaceForWebGL();
     }
 
     public void NextButton() {
@@ -300,7 +270,6 @@ public class TutorialScreen : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        
         if (replaceWebgl1 && transform.GetChild(0).GetComponent<RectTransform>().pivot.y >= -1) {
             video.GetComponent<VideoPlayer>().Pause();
             replaceWebgl1 = false;
