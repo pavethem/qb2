@@ -11,9 +11,6 @@ public class TutorialScreen : MonoBehaviour {
     public GameObject video;
     private bool destroy;
 
-    //replace webgl video, then wait 1 frame (only for level 1 tutorial)
-    private bool replaceWebgl1;
-
     private int currentDescriptionNumber = 0;
     private string[] currentDescription;
 
@@ -81,7 +78,9 @@ public class TutorialScreen : MonoBehaviour {
                     currentDescription = level1_pc;
                     if (Application.platform != RuntimePlatform.WebGLPlayer) 
                         video.GetComponent<VideoPlayer>().Pause();
-                }
+                    else
+                        video.GetComponent<VideoPlayer>().clip = Resources.Load<VideoClip>("tutorial_rotation_pc");
+                    }
                 else {
                     description.GetComponent<TextMeshProUGUI>().text = level1_mobile[0];
                     currentDescription = level1_mobile;
@@ -196,8 +195,6 @@ public class TutorialScreen : MonoBehaviour {
     private void ReplaceForWebGL() {
         video.GetComponent<VideoPlayer>().url = System.IO.Path.Combine(Application.streamingAssetsPath,
               video.GetComponent<VideoPlayer>().clip.name + ".ogv");
-        if (GameController.currentScene == 1)
-            replaceWebgl1 = true;
     }
 
     private void NextText() {
@@ -270,10 +267,6 @@ public class TutorialScreen : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        if (replaceWebgl1 && transform.GetChild(0).GetComponent<RectTransform>().pivot.y >= -1) {
-            video.GetComponent<VideoPlayer>().Pause();
-            replaceWebgl1 = false;
-        }
         //wait until menu is moved out and unload scene
         if (destroy && !transform.GetChild(0).GetComponent<Animation>().isPlaying) {
             SceneManager.UnloadSceneAsync("tutorialScreen");
@@ -281,6 +274,11 @@ public class TutorialScreen : MonoBehaviour {
         //wait until screen is moved in, then play
         if (transform.GetChild(0).GetComponent<RectTransform>().pivot.y == 0.5f && !video.GetComponent<VideoPlayer>().isPlaying && 
             currentDescription != level1_pc && currentDescription != level1_mobile) {
+            video.GetComponent<VideoPlayer>().Play();
+        }
+        if(Application.platform == RuntimePlatform.WebGLPlayer && (currentDescription == level1_pc || currentDescription == level1_mobile) &&
+            transform.GetChild(0).GetComponent<RectTransform>().pivot.y >= 0.5f && !video.GetComponent<VideoPlayer>().isPlaying)
+        {
             video.GetComponent<VideoPlayer>().Play();
         }
     }
