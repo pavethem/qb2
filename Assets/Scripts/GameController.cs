@@ -176,7 +176,7 @@ public class GameController : MonoBehaviour {
                 SplashScreenDone();
             }
         }
-
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
     }
@@ -293,13 +293,12 @@ public class GameController : MonoBehaviour {
         StopAllCoroutines();
         StartCoroutine(nameof(ScreenWipeOut));
 
-        PlayerPrefs.SetInt("seenTutorial" + currentScene, -1);
-        skipTutorials = false;
         //fade in tutorial if level should display a tutorial
         tutorialLock = false;
         if (tutorialLevels.Contains("level" + currentScene) && !skipTutorials && !tutorialLock &&
-            PlayerPrefs.GetInt("seenTutorial" + currentScene,-1) != 1 && !shownTutorial) {
-            SceneManager.LoadSceneAsync("tutorialScreen", LoadSceneMode.Additive);
+            PlayerPrefs.GetInt("seenTutorial" + currentScene, -1) != 1 && !shownTutorial)
+        {
+            SceneManager.LoadScene("tutorialScreen", LoadSceneMode.Additive);
             tutorialLock = true;
             shownTutorial = true;
         }
@@ -618,7 +617,7 @@ public class GameController : MonoBehaviour {
 
         string scene = "level" + currentScene + "_final";
         if (DEBUG)
-            StartCoroutine(nameof(LoadYourAsyncScene), "test");
+            StartCoroutine(nameof(LoadNextSceneAsync), "test");
         else {
             Save();
             GameObject.FindWithTag("curved").gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -631,7 +630,7 @@ public class GameController : MonoBehaviour {
 
             if (currentScene <= LEVELCOUNT) {
                 StartCoroutine(nameof(ScreenWipeIn), false);
-                StartCoroutine(nameof(LoadYourAsyncScene), scene);
+                StartCoroutine(nameof(LoadNextSceneAsync), scene);
             } else if (currentScene == 99) {
                 gameCompleted = true;
                 isLoadingNextLevel = false;
@@ -663,7 +662,18 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    IEnumerator LoadYourAsyncScene(string scene) {
+    IEnumerator AsyncLoad(string scene)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+        IEnumerator LoadNextSceneAsync(string scene) {
         if (currentScene > 1) {
 //            yield return new WaitForSeconds(2.1f);
             while (!wipingIn) {
@@ -766,10 +776,20 @@ public class GameController : MonoBehaviour {
 
         //load scene when level or start button was pressed
         if (levelbutton) {
-            if(currentScene == 99)
-                SceneManager.LoadScene("bonus");
-            else
-                SceneManager.LoadScene("level" + currentScene + "_final");
+            bool levelLoaded = false;
+            for(int i =0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i).name == "bonus" || SceneManager.GetSceneAt(i).name == "level" + currentScene + "_final")
+                    levelLoaded = true;
+            }
+            //sometimes the level gets loaded twice for some reason
+            if (!levelLoaded)
+            {
+                if (currentScene == 99)
+                    StartCoroutine(nameof(AsyncLoad), "bonus");
+                else
+                    StartCoroutine(nameof(AsyncLoad), "level" + currentScene + "_final");
+            }
         }
     }
 
