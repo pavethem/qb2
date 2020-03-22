@@ -316,9 +316,9 @@ public class GameController : MonoBehaviour {
 
         if (Application.isMobilePlatform) {
             //change image for rotating the game world
-            mobileImage.GetComponent<RawImage>().enabled = true;
+            mobileImage.GetComponent<Image>().enabled = true;
             mobileImage.GetComponent<GameRotator>().enabled = true;
-            mobileImageY.GetComponent<RawImage>().enabled = true;
+            mobileImageY.GetComponent<Image>().enabled = true;
             mobileImageY.GetComponent<GameRotator>().enabled = true;
             GameObject.Find("Canvas").transform.Find("DesktopImage").gameObject.SetActive(false);
 
