@@ -1241,7 +1241,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3232765087617526841, guid: a8cb080b970ece01f87520f72d4871fd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: e94f7013349dcfe91aae93018c8794c4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 99fe863132d28f72599f6978d5756ed8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
@@ -2205,7 +2205,7 @@ Light:
   m_InnerSpotAngle: 21.802082
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: 2
     m_CustomResolution: -1
     m_Strength: 1

@@ -90,6 +90,7 @@ public class GameController : MonoBehaviour {
     public static int hardmode = -1;
     private bool isLoadingNextLevel;
     private bool resetting;
+    public static bool fpsTestFailed;
 
     //do not rotate while the lock is falling (after the game rotation change)
     public static bool rotating;
@@ -133,6 +134,8 @@ public class GameController : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        Application.targetFrameRate = 60;
+
         if (currentScene == 0) {
             pedestalPosition = GameObject.Find("Pedestal").transform.position;
             pedestalRotation = GameObject.Find("Pedestal").transform.rotation;
@@ -173,7 +176,7 @@ public class GameController : MonoBehaviour {
                 SplashScreenDone();
             }
         }
-        
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
     }
@@ -227,6 +230,21 @@ public class GameController : MonoBehaviour {
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+
+        if (scene.name == "splashScreen") {
+            float fps = 1.0f / Time.deltaTime;
+            if (fps < 30f) {
+                fpsTestFailed = true;
+                Debug.Log("test failed");
+                directionalLight.GetComponent<Light>().shadows = LightShadows.Hard;
+                int index = -1;
+                for (int i = 0; i < QualitySettings.names.Length; i++) {
+                    if (QualitySettings.names[i] == "Shadows")
+                        index = i;
+                }
+                QualitySettings.SetQualityLevel(index,true);
+            }
+        }
 
         if (scene.name != "tutorialScreen")
             gameOverWorking = false;
@@ -333,23 +351,26 @@ public class GameController : MonoBehaviour {
                     += new Vector3(0, SCALEAMOUNT, 0);
                 GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").Find("collider").transform.localScale
                     += new Vector3(0, SCALEAMOUNT, 0);
-                //change models to their respective low poly versions
-                foreach (var r in rotators) {
-                    r.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("arrowCW_lowpoly");
+                if (fpsTestFailed) {
+                    //change models to their respective low poly versions
+                    foreach (var r in rotators) {
+                        r.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("arrowCW_lowpoly");
+                    }
+
+                    foreach (var l in locks) {
+                        l.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("lock_lowpoly");
+                    }
+
+
+                    GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponent<MeshFilter>().sharedMesh =
+                        Resources.Load<Mesh>("rotatorStrip_lowpoly");
+                    GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponent<MeshFilter>().sharedMesh =
+                        Resources.Load<Mesh>("rotatorStrip_lowpoly");
+                    GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponent<MeshFilter>().sharedMesh =
+                        Resources.Load<Mesh>("rotatorStrip_lowpoly");
+
+                    ReplaceMeshes(GameObject.FindWithTag("thing"));
                 }
-
-                foreach (var l in locks) {
-                    l.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("lock_lowpoly");
-                }
-
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripX").GetComponent<MeshFilter>().sharedMesh =
-                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripY").GetComponent<MeshFilter>().sharedMesh =
-                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
-                GameObject.Find("rotatorStrips").transform.Find("rotatorStripZ").GetComponent<MeshFilter>().sharedMesh =
-                    Resources.Load<Mesh>("rotatorStrip_lowpoly");
-
-                ReplaceMeshes(GameObject.FindWithTag("thing"));
             }
             catch (NullReferenceException e) {
             }
@@ -879,62 +900,64 @@ public class GameController : MonoBehaviour {
 
     //replace all spoke meshes in thing, where appropriate
     private static void ReplaceMeshes(GameObject g) {
-        if (g.GetComponent<MeshFilter>() == null && g.transform.childCount == 0)
-            return;
+        if (fpsTestFailed) {
+            if (g.GetComponent<MeshFilter>() == null && g.transform.childCount == 0)
+                return;
 
-        if (g.GetComponent<MeshFilter>() != null) {
-            string bla = g.GetComponent<MeshFilter>().sharedMesh.name;
+            if (g.GetComponent<MeshFilter>() != null) {
+                string bla = g.GetComponent<MeshFilter>().sharedMesh.name;
 
-            if (bla == "Sphere")
-                g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("sphere_lowpoly");
+                if (bla == "Sphere")
+                    g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("sphere_lowpoly");
 
-            int last = bla.LastIndexOf("_", StringComparison.Ordinal);
-            if (last != -1) {
-                string name = bla.Substring(0, last);
-                switch (name) {
-                    case "spoke_corner_flat": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_flat_lowpoly");
-                        break;
-                    }
-                    case "spoke_corner_flat_small": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_flat_small_lowpoly");
-                        break;
-                    }
-                    case "spoke_corner": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_lowpoly");
-                        break;
-                    }
-                    case "spoke_end": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_end_lowpoly");
-                        break;
-                    }
-                    case "spoke_end_small": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_end_small_lowpoly");
-                        break;
-                    }
-                    case "spoke": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_lowpoly");
-                        break;
-                    }
-                    case "spoke_threeway_flat": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_flat_lowpoly");
-                        break;
-                    }
-                    case "spoke_threeway_flat_small": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_flat_small_lowpoly");
-                        break;
-                    }
-                    case "spoke_threeway_small": {
-                        g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_small_lowpoly");
-                        break;
+                int last = bla.LastIndexOf("_", StringComparison.Ordinal);
+                if (last != -1) {
+                    string name = bla.Substring(0, last);
+                    switch (name) {
+                        case "spoke_corner_flat": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_flat_lowpoly");
+                            break;
+                        }
+                        case "spoke_corner_flat_small": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_flat_small_lowpoly");
+                            break;
+                        }
+                        case "spoke_corner": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_corner_lowpoly");
+                            break;
+                        }
+                        case "spoke_end": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_end_lowpoly");
+                            break;
+                        }
+                        case "spoke_end_small": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_end_small_lowpoly");
+                            break;
+                        }
+                        case "spoke": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_lowpoly");
+                            break;
+                        }
+                        case "spoke_threeway_flat": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_flat_lowpoly");
+                            break;
+                        }
+                        case "spoke_threeway_flat_small": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_flat_small_lowpoly");
+                            break;
+                        }
+                        case "spoke_threeway_small": {
+                            g.GetComponent<MeshFilter>().sharedMesh = Resources.Load<Mesh>("spoke_threeway_small_lowpoly");
+                            break;
+                        }
                     }
                 }
             }
-        }
 
-        if (g.transform.childCount != 0) {
-            foreach (Transform child in g.transform) {
-                ReplaceMeshes(child.gameObject);
+            if (g.transform.childCount != 0) {
+                foreach (Transform child in g.transform) {
+                    ReplaceMeshes(child.gameObject);
+                }
             }
         }
     }
