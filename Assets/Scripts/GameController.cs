@@ -90,6 +90,7 @@ public class GameController : MonoBehaviour {
     public static int hardmode = -1;
     private bool isLoadingNextLevel;
     private bool resetting;
+    private bool fpstested;
     public static bool fpsTestFailed;
 
     //do not rotate while the lock is falling (after the game rotation change)
@@ -203,11 +204,12 @@ public class GameController : MonoBehaviour {
             instance.skyboxCamera.transform.Rotate(90f,0,0);
         }
 
-        if (Application.isMobilePlatform)
+        if (Application.isMobilePlatform && fpsTestFailed)
             ReplaceMeshes(titleLevel);
     }
 
     public static void SplashScreenDone() {
+
         SceneManager.LoadScene("mainmenu");
         if (!changedBackground)
             instance.reflectionImage.SetActive(true);
@@ -230,21 +232,6 @@ public class GameController : MonoBehaviour {
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-
-        if (scene.name == "splashScreen") {
-            float fps = 1.0f / Time.deltaTime;
-            if (fps < 30f) {
-                fpsTestFailed = true;
-                Debug.Log("test failed");
-                directionalLight.GetComponent<Light>().shadows = LightShadows.Hard;
-                int index = -1;
-                for (int i = 0; i < QualitySettings.names.Length; i++) {
-                    if (QualitySettings.names[i] == "Shadows")
-                        index = i;
-                }
-                QualitySettings.SetQualityLevel(index,true);
-            }
-        }
 
         if (scene.name != "tutorialScreen")
             gameOverWorking = false;
@@ -430,6 +417,28 @@ public class GameController : MonoBehaviour {
     void Update() {
         if (Debug.isDebugBuild && DEBUG)
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+
+        if (SceneManager.GetActiveScene().name == "splashScreen" && !fpstested && Time.time >= 1f)
+        {
+            fpstested = true;
+            float fps = 1.0f / Time.deltaTime;
+            if (fps < 40f)
+            {
+                fpsTestFailed = true;
+                directionalLight.GetComponent<Light>().shadows = LightShadows.Hard;
+                int index = -1;
+                for (int i = 0; i < QualitySettings.names.Length; i++)
+                {
+                    if (QualitySettings.names[i] == "Shadows")
+                        index = i;
+                }
+                if(index != -1)
+                    QualitySettings.SetQualityLevel(index, true);
+
+                if (Application.isMobilePlatform)
+                    ReplaceMeshes(titleLevel);
+            }
+        }
     }
 
     void LateUpdate() {
@@ -921,6 +930,7 @@ public class GameController : MonoBehaviour {
     //replace all spoke meshes in thing, where appropriate
     private static void ReplaceMeshes(GameObject g) {
         if (fpsTestFailed) {
+
             if (g.GetComponent<MeshFilter>() == null && g.transform.childCount == 0)
                 return;
 
