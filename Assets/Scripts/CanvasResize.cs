@@ -6,7 +6,8 @@ public class CanvasResize : MonoBehaviour {
 
     protected void OnRectTransformDimensionsChange() {
 
-        float adjustment = 1 + (((Screen.currentResolution.width - 1920) / 1920) * 2);
+        //adjust this for resolutions higher than hd
+        float adjustment = 1 + (((Screen.width - 1920f) / 1920f) * 2f);
         
         //resize canvas, but only up to a point (scalefactor of 0 means fullscreen)
         if (Screen.width > 1100 * adjustment) {
