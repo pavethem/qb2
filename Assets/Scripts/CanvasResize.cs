@@ -8,6 +8,9 @@ public class CanvasResize : MonoBehaviour {
 
         //adjust this for resolutions higher than hd
         float adjustment = 1 + (((Screen.width - 1920f) / 1920f) * 2f);
+
+        if (adjustment < 1)
+            adjustment = 1;
         
         //resize canvas, but only up to a point (scalefactor of 0 means fullscreen)
         if (Screen.width > 1100 * adjustment) {
