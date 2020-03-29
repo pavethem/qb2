@@ -135,7 +135,7 @@ public class GameController : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
 
         if (currentScene == 0) {
             pedestalPosition = GameObject.Find("Pedestal").transform.position;
@@ -192,7 +192,8 @@ public class GameController : MonoBehaviour {
         changedBackground = PlayerPrefs.GetInt("changedBackground",-1) == 1;
         gameCompleted = PlayerPrefs.GetInt("gameCompleted", -1) == 1;
         skipTutorials = PlayerPrefs.GetInt("skipTutorials",-1) == 1;
-        
+        gameCompleted = true;
+
         if (maxScene > LEVELCOUNT)
             maxScene = LEVELCOUNT;
 
@@ -394,6 +395,7 @@ public class GameController : MonoBehaviour {
 //        GameObject.Find("Background").transform.rotation = backgroundRotation;
 //        GameObject.Find("Background").transform.position = backgroundPosition;
         Physics.gravity = gravity;
+        
     }
 
     //shows fps
@@ -709,15 +711,15 @@ public class GameController : MonoBehaviour {
     }
 
     IEnumerator MoveInButtons() {
-        float step = 0;
-        float y = mobileImage.GetComponent<RectTransform>().anchoredPosition.y;
-        while (mobileImage.GetComponent<RectTransform>().anchoredPosition.y < 0) {
-            mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, Mathf.Lerp(y, 0, step));
-            step += Time.deltaTime * 2f;
+        // float step = 0;
+        // float y = mobileImage.GetComponent<RectTransform>().anchoredPosition.y;
+        // while (mobileImage.GetComponent<RectTransform>().anchoredPosition.y < 0) {
+        //     mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, Mathf.Lerp(y, 0, step));
+        //     step += Time.deltaTime * 2f;
             yield return null;
-        }
-
-        mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        // }
+        //
+        // mobileImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     }
 
     //for moving mobileimageY
@@ -803,6 +805,10 @@ public class GameController : MonoBehaviour {
     }
 
     IEnumerator ScreenWipeOut() {
+        if (currentScene == 1) {
+            yield return new WaitForSeconds(1f);
+        }
+
         wipingIn = false;
         wiping = true;
         float timeStep = 0;
@@ -816,6 +822,9 @@ public class GameController : MonoBehaviour {
         screenWipe.GetComponent<Image>().fillAmount = 0;
         directionalLight.GetComponent<Light>().shadowStrength = 1;
         wiping = false;
+        if(SceneManager.GetActiveScene().name.StartsWith("level") && SceneManager.GetActiveScene().name != "level0" || SceneManager.GetActiveScene().name == "test" || SceneManager.GetActiveScene().name == "bonus")
+            GameObject.Find("Canvas").transform.Find("DesktopImage").GetComponent<GameRotator>().StartCoroutine(nameof(GameRotator.Rotate));
+
     }
 
     //used for final level background transition

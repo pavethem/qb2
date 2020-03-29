@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca0d5432158cb6b2b3bb2e13a5a4f83, type: 3}
   m_Name: SKIPSPLASHSCREEN
   m_EditorClassIdentifier: 
-  SKIPSPLASHSCREEN: 0
+  SKIPSPLASHSCREEN: 1

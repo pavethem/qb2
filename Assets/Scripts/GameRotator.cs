@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameRotator : MonoBehaviour, IDragHandler {
     
@@ -14,6 +16,71 @@ public class GameRotator : MonoBehaviour, IDragHandler {
 
     private void Start() {
         ADJUST_FACTOR = 5 * (float) Screen.width / Screen.height;
+    }
+
+    public IEnumerator Rotate() {
+        float angle = 0f;
+        float adjust = Mathf.Pow(2f, GameController.currentScene / 10f);
+        float rotateby = -2f * adjust;
+        
+        while (angle < 360f) {
+            Camera.main.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+            directionalLight.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+            spotLight.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+
+            pedestal.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+            reflectionCamera.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+            angle += -rotateby;
+            yield return null;
+
+        }
+
+        if (GameController.currentScene < GameController.LEVELCOUNT) {
+
+            // GameController.instance.StartCoroutine("AsyncLoad","level" + GameController.currentScene + "_final");
+            Scene scene = SceneManager.GetSceneByName("level" + GameController.currentScene + "_final");
+            foreach (var go in scene.GetRootGameObjects()) {
+                if (go.name != "rotatorStrips") {
+                    go.SetActive(false);
+                    Destroy(go);
+                }
+            }
+
+            GameController.currentScene++;
+
+            SceneManager.LoadScene("level" + GameController.currentScene + "_final", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        }
+        else {
+            GameController.ChangeBackgroundOption();
+            StartCoroutine(KeepRotating());
+        }
+
+    }
+
+    public IEnumerator KeepRotating() {
+        float angle = 0f;
+        float rotateby = -1f;
+        
+        while (angle < 3600f) {
+            Camera.main.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+            directionalLight.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+            spotLight.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+
+            pedestal.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+
+            reflectionCamera.transform.RotateAround(Vector3.zero, Vector3.up, rotateby);
+            angle += -rotateby;
+            yield return null;
+
+        }
     }
 
     //rotate the background objects around the puzzle
