@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 5
+  m_CurrentQuality: 4
   m_QualitySettings:
   - serializedVersion: 2
     name: Fastest
@@ -13,8 +13,8 @@ QualitySettings:
     shadowResolution: 3
     shadowProjection: 1
     shadowCascades: 1
-    shadowDistance: 15
-    shadowNearPlaneOffset: 3
+    shadowDistance: 300
+    shadowNearPlaneOffset: 299
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
@@ -48,8 +48,8 @@ QualitySettings:
     shadowResolution: 3
     shadowProjection: 1
     shadowCascades: 1
-    shadowDistance: 20
-    shadowNearPlaneOffset: 3
+    shadowDistance: 300
+    shadowNearPlaneOffset: 299
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
@@ -83,8 +83,8 @@ QualitySettings:
     shadowResolution: 3
     shadowProjection: 1
     shadowCascades: 1
-    shadowDistance: 20
-    shadowNearPlaneOffset: 3
+    shadowDistance: 300
+    shadowNearPlaneOffset: 299
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
@@ -118,8 +118,8 @@ QualitySettings:
     shadowResolution: 3
     shadowProjection: 1
     shadowCascades: 2
-    shadowDistance: 40
-    shadowNearPlaneOffset: 3
+    shadowDistance: 300
+    shadowNearPlaneOffset: 299
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
@@ -153,8 +153,8 @@ QualitySettings:
     shadowResolution: 3
     shadowProjection: 1
     shadowCascades: 2
-    shadowDistance: 70
-    shadowNearPlaneOffset: 3
+    shadowDistance: 300
+    shadowNearPlaneOffset: 299
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
